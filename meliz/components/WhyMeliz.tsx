@@ -47,7 +47,7 @@ export default function WhyMeliz() {
 
       {/* Sub-text parallax spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <ParallaxStrip words={["A New", "Premium", "Format"]} fontSize="clamp(2rem, 7vw, 8rem)" speed={110} />
+        <ParallaxStrip words={["A New", "Premium", "Format"]} fontSize="clamp(1rem, 6vw, 8rem)" speed={110} />
       </div>
 
       {/* Center body text */}

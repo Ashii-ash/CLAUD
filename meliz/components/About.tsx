@@ -77,7 +77,7 @@ export default function About() {
 
       {/* Row 4: Three-word parallax spread */}
       <div className="border-t border-black/8 overflow-hidden">
-        <ParallaxStrip words={["A New", "Premium", "Standard"]} fontSize="clamp(1.6rem, 6vw, 7.5rem)" speed={100} />
+        <ParallaxStrip words={["A New", "Premium", "Standard"]} fontSize="clamp(1rem, 5.5vw, 7.5rem)" speed={100} />
       </div>
 
       {/* Row 5: Stats */}

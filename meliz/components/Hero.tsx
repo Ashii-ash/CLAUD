@@ -5,9 +5,9 @@ import { useEffect } from "react";
 
 const letters = ["M", "E", "L", "I", "Z"];
 
-const THRESHOLD = 380;
+const THRESHOLD = 400;
 const NAVBAR_H  = 60;
-const END_FONT  = 22; // compact px size — still legible in navbar
+const END_FONT  = 26;
 
 export default function Hero() {
   const vpW = useMotionValue(1440);
@@ -24,7 +24,7 @@ export default function Hero() {
   const smooth = useSpring(scrollY, { stiffness: 160, damping: 28 });
   const progress = useTransform(smooth, [0, THRESHOLD], [0, 1], { clamp: true });
 
-  // Font size only — spacing stays as justify-between (always edge-to-edge)
+  // Font size px: large → compact
   const fontSizePx = useTransform(
     [progress, vpW] as const,
     ([p, w]: number[]) => {
@@ -34,7 +34,11 @@ export default function Hero() {
   );
   const fontSize = useMotionTemplate`${fontSizePx}px`;
 
-  // Y: center of viewport → center of navbar
+  // Letter spacing: spread wide → tight (letters come together)
+  const letterSpacingEm = useTransform(progress, [0, 1], [0.52, -0.02]);
+  const letterSpacing = useMotionTemplate`${letterSpacingEm}em`;
+
+  // Y: vertically centered in viewport → center of navbar
   const y = useTransform(
     [progress, vpW, vpH] as const,
     ([p, w, h]: number[]) => {
@@ -115,10 +119,10 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* MELIZ — justify-between always, only font-size + y animate */}
+        {/* MELIZ — centered, comes together into navbar on scroll */}
         <motion.div
-          style={{ y, fontSize }}
-          className="absolute top-0 inset-x-0 flex items-baseline justify-between px-4 lg:px-6 select-none"
+          style={{ y, fontSize, letterSpacing }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 whitespace-nowrap leading-none select-none"
         >
           {letters.map((letter, i) => (
             <motion.span
@@ -126,7 +130,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.4, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="display-text text-[#0A0A0A] leading-none"
+              className="display-text text-[#0A0A0A] inline-block"
             >
               {letter}
             </motion.span>

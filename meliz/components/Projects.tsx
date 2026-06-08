@@ -50,7 +50,7 @@ export default function Projects() {
 
       {/* Sub-headline parallax spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <ParallaxStrip words={["Spaces", "Transformed", "By Light"]} fontSize="clamp(1.8rem, 6vw, 7rem)" speed={90} />
+        <ParallaxStrip words={["Spaces", "Transformed", "By Light"]} fontSize="clamp(1rem, 5.5vw, 7rem)" speed={90} />
       </div>
 
       {/* Small centered body text */}

@@ -21,7 +21,7 @@ export function ParallaxWord({
   return (
     <motion.span
       style={{ x, fontSize }}
-      className="display-text text-[#0A0A0A]"
+      className="display-text text-[#0A0A0A] whitespace-nowrap"
     >
       {children}
     </motion.span>
