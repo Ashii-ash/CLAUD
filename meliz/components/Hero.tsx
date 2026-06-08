@@ -2,6 +2,9 @@
 
 import { motion, useScroll, useSpring, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const CrystalScene = dynamic(() => import("./CrystalScene"), { ssr: false });
 
 const THRESHOLD = 420;
 const NAVBAR_H  = 60;
@@ -97,24 +100,15 @@ export default function Hero() {
       {/* Fixed overlay */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 45 }}>
 
-        {/* Crystal */}
+        {/* 3D Crystal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.6, delay: 0.3 }}
           style={{ y: crystalY, opacity: crystalOpacity }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0"
         >
-          <div className="relative w-[min(400px,58vw)] h-[min(400px,58vw)]">
-            <div className="absolute inset-0 border border-[#C6A36A]/15 rotate-12 scale-110" />
-            <div className="absolute inset-0 border border-black/4 rotate-6" />
-            <div className="absolute inset-[12%] bg-gradient-to-br from-[#f8f6f2] via-[#f0ece4] to-[#e8e2d8] rotate-12 shadow-[0_20px_80px_rgba(0,0,0,0.05)]" />
-            <div className="absolute inset-[20%] bg-gradient-to-tl from-[#ede8df] via-[#f5f1ea] to-white rotate-6 shadow-[0_10px_40px_rgba(198,163,106,0.08)]" />
-            <div className="absolute inset-[28%] bg-gradient-to-br from-white via-[#faf8f4] to-[#f0ece4] shadow-[inset_0_2px_20px_rgba(198,163,106,0.12),0_4px_20px_rgba(0,0,0,0.04)]" />
-            <div className="absolute inset-[36%] bg-gradient-to-tl from-[#C6A36A]/12 via-[#C6A36A]/4 to-white rotate-45" />
-            <div className="absolute top-1/2 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-[#C6A36A]/25 to-transparent" />
-            <div className="absolute left-1/2 top-[12%] bottom-[12%] w-px bg-gradient-to-b from-transparent via-[#C6A36A]/18 to-transparent" />
-          </div>
+          <CrystalScene />
         </motion.div>
 
         {/* MELIZ — single centered text, letter-spacing drives spread → converge */}
