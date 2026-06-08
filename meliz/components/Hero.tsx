@@ -5,7 +5,11 @@ import { useEffect } from "react";
 
 const letters = ["M", "E", "L", "I", "Z"];
 
-const THRESHOLD = 400;
+// How far each letter sits from the container center (as fraction of viewport width)
+// Negative = left of center, positive = right of center
+const SPREAD_X = [-0.43, -0.25, 0, 0.20, 0.44];
+
+const THRESHOLD = 420;
 const NAVBAR_H  = 60;
 const END_FONT  = 26;
 
@@ -24,7 +28,15 @@ export default function Hero() {
   const smooth = useSpring(scrollY, { stiffness: 160, damping: 28 });
   const progress = useTransform(smooth, [0, THRESHOLD], [0, 1], { clamp: true });
 
-  // Font size px: large → compact
+  // Each letter physically travels from its edge position → 0 (converges at center)
+  const xM = useTransform([progress, vpW] as const, ([p, w]: number[]) => SPREAD_X[0] * w * (1 - p));
+  const xE = useTransform([progress, vpW] as const, ([p, w]: number[]) => SPREAD_X[1] * w * (1 - p));
+  const xL = useTransform([progress, vpW] as const, ([p, w]: number[]) => SPREAD_X[2] * w * (1 - p));
+  const xI = useTransform([progress, vpW] as const, ([p, w]: number[]) => SPREAD_X[3] * w * (1 - p));
+  const xZ = useTransform([progress, vpW] as const, ([p, w]: number[]) => SPREAD_X[4] * w * (1 - p));
+  const letterX = [xM, xE, xL, xI, xZ];
+
+  // Font shrinks as letters converge
   const fontSizePx = useTransform(
     [progress, vpW] as const,
     ([p, w]: number[]) => {
@@ -34,12 +46,8 @@ export default function Hero() {
   );
   const fontSize = useMotionTemplate`${fontSizePx}px`;
 
-  // Letter spacing: spread wide → tight (letters come together)
-  const letterSpacingEm = useTransform(progress, [0, 1], [0.52, -0.02]);
-  const letterSpacing = useMotionTemplate`${letterSpacingEm}em`;
-
-  // Y: vertically centered in viewport → center of navbar
-  const y = useTransform(
+  // Container y: viewport center → navbar center
+  const containerY = useTransform(
     [progress, vpW, vpH] as const,
     ([p, w, h]: number[]) => {
       const startFont = Math.max(w * 0.17, 60);
@@ -65,8 +73,7 @@ export default function Hero() {
           className="absolute top-[80px] left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none"
         >
           <p className="body-label leading-loose">
-            The Art of Crystal<br />
-            & Architectural Glass
+            The Art of Crystal<br />& Architectural Glass
           </p>
         </motion.div>
 
@@ -119,18 +126,19 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* MELIZ — centered, comes together into navbar on scroll */}
+        {/* MELIZ — each letter travels from edge to center */}
         <motion.div
-          style={{ y, fontSize, letterSpacing }}
-          className="absolute top-0 left-1/2 -translate-x-1/2 whitespace-nowrap leading-none select-none"
+          style={{ y: containerY }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 flex items-end whitespace-nowrap leading-none select-none"
         >
           {letters.map((letter, i) => (
             <motion.span
               key={letter}
+              style={{ x: letterX[i], fontSize }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.4, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="display-text text-[#0A0A0A] inline-block"
+              className="display-text text-[#0A0A0A] inline-block leading-none"
             >
               {letter}
             </motion.span>
