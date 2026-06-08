@@ -19,75 +19,73 @@ export default function Collections() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="collections" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
+    <section id="collections" ref={ref} className="min-h-screen flex flex-col bg-white overflow-hidden">
 
-      {/* Section headline */}
-      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "110%" }}
-              animate={inView ? { y: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="display-text"
-              style={{ fontSize: "clamp(3rem, 10vw, 11rem)" }}
-            >
-              Our Collections
-            </motion.h2>
-          </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="body-label max-w-[220px] lg:text-right"
+      {/* Headline row (~20%) */}
+      <div className="flex-shrink-0 border-b border-black/8 px-5 lg:px-8 py-12 lg:py-16 flex items-end justify-between">
+        <div className="overflow-hidden">
+          <motion.h2
+            initial={{ y: "110%" }}
+            animate={inView ? { y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="display-text"
+            style={{ fontSize: "clamp(2.5rem, 8vw, 9rem)" }}
           >
-            Each collection represents a distinct mastery of material, form, and light.
-          </motion.p>
+            Our Collections
+          </motion.h2>
         </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4 }}
+          className="body-label max-w-[200px] text-right hidden lg:block"
+        >
+          Each collection represents a distinct mastery of material, form, and light.
+        </motion.p>
       </div>
 
-      {/* Full-bleed image between headline and collection rows */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="relative w-full aspect-[16/9] overflow-hidden"
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&auto=format&fit=crop"
-          alt="Luxury white interior"
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-      </motion.div>
+      {/* Full-bleed image with 3-col overlay at bottom */}
+      <div className="relative flex-1 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&auto=format&fit=crop"
+            alt="Luxury white interior"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </motion.div>
 
-      {/* Collection rows */}
-      <div>
-        {cols.map((c, i) => (
-          <motion.div
-            key={c.n}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 + i * 0.07 }}
-            onMouseEnter={() => setActive(i)}
-            onMouseLeave={() => setActive(null)}
-            className={`border-b border-black/8 px-5 lg:px-8 py-14 lg:py-20 flex items-start lg:items-center gap-6 lg:gap-16 cursor-default transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "bg-white"}`}
-          >
-            <span className="body-label w-8 flex-shrink-0 mt-0.5 lg:mt-0">{c.n}</span>
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-            <h3
-              className={`display-text flex-shrink-0 lg:w-[380px] transition-colors duration-300 ${active === i ? "text-[#C6A36A]" : "text-[#0A0A0A]"}`}
-              style={{ fontSize: "clamp(1.4rem, 3.5vw, 3.2rem)" }}
+        {/* 3 collection names overlaid at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 border-t border-white/10">
+          {cols.slice(0, 3).map((c, i) => (
+            <motion.div
+              key={c.n}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+              onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
+              className={`border-r border-white/10 last:border-r-0 px-5 lg:px-8 py-8 cursor-default transition-colors duration-300 ${active === i ? "bg-white/10" : ""}`}
             >
-              {c.title}
-            </h3>
-
-            <p className="body-label leading-relaxed hidden lg:block flex-1 max-w-[500px]">{c.desc}</p>
-
-            <div className={`ml-auto flex-shrink-0 text-sm transition-all duration-300 ${active === i ? "opacity-100 text-[#C6A36A]" : "opacity-0"}`}>→</div>
-          </motion.div>
-        ))}
+              <div className="body-label text-[#C6A36A] mb-2">{c.n}</div>
+              <div
+                className={`display-text transition-colors duration-300 ${active === i ? "text-[#C6A36A]" : "text-white"}`}
+                style={{ fontSize: "clamp(1rem, 2.2vw, 2rem)" }}
+              >
+                {c.title}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

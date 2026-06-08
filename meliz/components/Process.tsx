@@ -16,52 +16,50 @@ export default function Process() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="process" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
+    <section id="process" ref={ref} className="min-h-screen flex flex-col bg-white overflow-hidden">
 
-      {/* Headline */}
-      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "110%" }}
-              animate={inView ? { y: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="display-text"
-              style={{ fontSize: "clamp(3rem, 10vw, 11rem)" }}
-            >
-              The Process
-            </motion.h2>
-          </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="body-label max-w-[220px] lg:text-right"
+      {/* Headline row (~15%) */}
+      <div className="flex-shrink-0 overflow-hidden py-10 lg:py-14 px-5 lg:px-8 border-b border-black/8 flex items-end justify-between">
+        <div className="overflow-hidden">
+          <motion.h2
+            initial={{ y: "110%" }}
+            animate={inView ? { y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="display-text"
+            style={{ fontSize: "clamp(2.5rem, 8vw, 9rem)" }}
           >
-            From vision to reality — a methodical journey dedicated to your creation.
-          </motion.p>
+            The Process
+          </motion.h2>
         </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4 }}
+          className="body-label max-w-[200px] text-right hidden lg:block"
+        >
+          From vision to reality — a methodical journey dedicated to your creation.
+        </motion.p>
       </div>
 
-      {/* Steps */}
-      <div>
+      {/* Steps: flex-1 shared equally */}
+      <div className="flex-1 flex flex-col">
         {steps.map((s, i) => (
           <motion.div
             key={s.n}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
-            className="border-b border-black/8 px-5 lg:px-8 py-16 lg:py-24 flex items-start lg:items-center gap-6 lg:gap-16 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="flex-1 flex items-center gap-8 lg:gap-16 px-5 lg:px-8 border-b border-black/8 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
             <span
-              className="display-text text-[#0A0A0A]/10 group-hover:text-[#C6A36A]/30 transition-colors duration-300 flex-shrink-0 leading-none"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 7rem)" }}
+              className="display-text text-[#C6A36A] flex-shrink-0 leading-none"
+              style={{ fontSize: "clamp(1.5rem, 3vw, 3rem)" }}
             >
               {s.n}
             </span>
             <h3
               className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 flex-shrink-0 lg:w-[380px] leading-tight"
-              style={{ fontSize: "clamp(1.4rem, 3vw, 3rem)" }}
+              style={{ fontSize: "clamp(1.2rem, 2.5vw, 2.5rem)" }}
             >
               {s.title}
             </h3>
