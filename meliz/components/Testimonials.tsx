@@ -18,7 +18,7 @@ export default function Testimonials() {
     <section id="testimonials" ref={ref} className="min-h-screen flex flex-col bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline (~15%) */}
-      <div className="flex-shrink-0 overflow-hidden pt-[60px] pb-12 lg:pb-16 px-5 lg:px-8 border-b border-black/8 flex items-end justify-between">
+      <div className="flex-shrink-0 pt-[60px] pb-12 lg:pb-16 px-5 lg:px-8 border-b border-black/8 flex items-end justify-between">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
