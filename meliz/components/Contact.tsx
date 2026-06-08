@@ -21,7 +21,7 @@ export default function Contact() {
     <section id="contact" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline */}
-      <div className="overflow-hidden py-20 lg:py-32 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2

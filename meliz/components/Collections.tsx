@@ -21,7 +21,7 @@ export default function Collections() {
     <section id="collections" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Section headline — spread across full width */}
-      <div className="overflow-hidden py-20 lg:py-32 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2
@@ -55,7 +55,7 @@ export default function Collections() {
             transition={{ duration: 0.6, delay: 0.1 + i * 0.07 }}
             onMouseEnter={() => setActive(i)}
             onMouseLeave={() => setActive(null)}
-            className={`border-b border-black/8 px-5 lg:px-8 py-8 lg:py-10 flex items-start lg:items-center gap-6 lg:gap-12 cursor-default transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "bg-white"}`}
+            className={`border-b border-black/8 px-5 lg:px-8 py-10 lg:py-14 flex items-start lg:items-center gap-6 lg:gap-16 cursor-default transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "bg-white"}`}
           >
             <span className="body-label w-8 flex-shrink-0 mt-0.5 lg:mt-0">{c.n}</span>
 

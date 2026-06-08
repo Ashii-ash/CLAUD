@@ -21,7 +21,7 @@ export default function Projects() {
     <section id="projects" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Section headline */}
-      <div className="overflow-hidden py-20 lg:py-32 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2
@@ -70,7 +70,7 @@ export default function Projects() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.5 }}
-        className="flex justify-center py-16 lg:py-24 px-8"
+        className="flex justify-center py-20 lg:py-32 px-8"
       >
         <p className="body-label text-center max-w-[300px] leading-[2]">
           Each project is a testament to our belief that extraordinary spaces deserve extraordinary materials.

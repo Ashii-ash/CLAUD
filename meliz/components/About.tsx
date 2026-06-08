@@ -39,7 +39,7 @@ export default function About() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3 }}
-        className="flex justify-center py-20 lg:py-32 px-8"
+        className="flex justify-center py-24 lg:py-40 px-8"
       >
         <p className="body-label text-center max-w-[340px] leading-[2]">
           MELIZ is born from the manufacturing excellence and decades of expertise behind ATATC — Al Tabaa Advertising Materials LLC — a name that has defined quality in the UAE for over twenty years. We create bespoke crystal and architectural glass for spaces that demand the extraordinary.
@@ -53,7 +53,7 @@ export default function About() {
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="px-5 lg:px-8 py-16 lg:py-24"
+          className="px-5 lg:px-8 py-20 lg:py-32"
         >
           <p
             className="display-text text-[#0A0A0A] leading-[1]"
@@ -107,7 +107,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 + i * 0.07 }}
-            className="border-r border-black/8 last:border-r-0 px-6 lg:px-10 py-10 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="border-r border-black/8 last:border-r-0 px-6 lg:px-12 py-14 lg:py-16 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
             <div
               className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-2"

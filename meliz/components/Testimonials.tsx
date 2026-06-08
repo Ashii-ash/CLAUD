@@ -18,7 +18,7 @@ export default function Testimonials() {
     <section ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline */}
-      <div className="overflow-hidden py-20 lg:py-32 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
