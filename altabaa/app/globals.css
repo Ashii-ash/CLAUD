@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #FFFFFF;
+  --warm-gray: #F7F7F5;
+  --black: #111111;
+  --gold: #C8A96A;
+  --bronze: #8E6A3B;
+  --border: #ECECEC;
+  --font-serif: var(--font-playfair), "Georgia", serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  overflow-x: clip;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #fff; }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+::selection { background: rgba(200,169,106,0.2); }
+
+/* Editorial heading — serif, large, tight */
+.heading-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+/* Uppercase tracked label */
+.label {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888;
+  line-height: 1.8;
+}
+
+/* Body text */
+.body-text {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* Gold accent */
+.text-gold { color: var(--gold); }
+.bg-gold { background-color: var(--gold); }
+.border-gold { border-color: var(--gold); }
+
+/* Thin border utility */
+.border-subtle { border-color: var(--border); }
+.bg-warm { background-color: var(--warm-gray); }
+
+/* Section reveal utility */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.reveal-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Clip mask for image reveal */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.clip-reveal.revealed {
+  clip-path: inset(0 0% 0 0);
+}
