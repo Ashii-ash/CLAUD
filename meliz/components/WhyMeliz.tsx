@@ -46,7 +46,7 @@ export default function WhyMeliz() {
 
       {/* Sub-text spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-6 gap-2">
+        <div className="flex items-baseline justify-between px-5 lg:px-8 py-16 lg:py-24 gap-2">
           {["A New", "Premium", "Format"].map((w, i) => (
             <motion.span
               key={w}

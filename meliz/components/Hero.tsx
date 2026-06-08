@@ -50,19 +50,19 @@ export default function Hero() {
         <p className="body-label">Luxury Division<br /><span className="text-[#C6A36A]">ATATC Group</span></p>
       </motion.div>
 
-      {/* Bottom: full MELIZ letters entering one by one from left */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 flex items-end overflow-hidden pointer-events-none select-none">
+      {/* Bottom: full MELIZ letters centered, entering one by one from left with fade */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 flex items-end justify-center overflow-hidden pointer-events-none select-none">
         {letters.map((letter, i) => (
           <motion.span
             key={letter}
-            initial={{ x: "-100%", opacity: 0 }}
+            initial={{ x: "-60%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{
-              duration: 0.7,
-              delay: 0.5 + i * 0.1,
+              duration: 1.2,
+              delay: 0.6 + i * 0.15,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="display-text leading-none text-[#0A0A0A] flex-1 text-center"
+            className="display-text leading-none text-[#0A0A0A]"
             style={{ fontSize: "clamp(5rem, 18vw, 22rem)" }}
           >
             {letter}

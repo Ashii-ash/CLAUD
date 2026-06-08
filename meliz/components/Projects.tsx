@@ -49,7 +49,7 @@ export default function Projects() {
 
       {/* Sub-headline spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-8 gap-4">
+        <div className="flex items-baseline justify-between px-5 lg:px-8 py-16 lg:py-24 gap-4">
           {["Spaces", "Transformed", "By Light"].map((w, i) => (
             <motion.span
               key={w}
