@@ -5,12 +5,12 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 
 const projects = [
-  { title: "Elite Gifting", location: "Bespoke Luxury Experiences", cat: "Elite", year: "2024", photo: "photo-1549465220-1a8b9238cd48" },
-  { title: "Corporate Gifts", location: "Tailored for Organisations", cat: "Corporate", year: "2024", photo: "photo-1607344645866-009c320b63e0" },
-  { title: "Luxury Gift Sets", location: "Curated Collections", cat: "Luxury", year: "2024", photo: "photo-1583394293214-0e313fe3c27d" },
-  { title: "Signature Gifts", location: "One-of-a-Kind Creations", cat: "Signature", year: "2024", photo: "photo-1528825871115-3581a5387919" },
-  { title: "Gift Hampers", location: "Premium Curated Hampers", cat: "Hampers", year: "2024", photo: "photo-1512389142860-9c449e58a543" },
-  { title: "Premium Packaging", location: "Artisan Presentation", cat: "Packaging", year: "2024", photo: "photo-1558618047-3c8c76ca7d13" },
+  { title: "Elite Gifting", location: "Bespoke Luxury Experiences", cat: "Elite", year: "2024", photo: "photo-1513201099705-a9746e1e201f" },
+  { title: "Corporate Gifts", location: "Tailored for Organisations", cat: "Corporate", year: "2024", photo: "photo-1549465220-1a8b9238cd48" },
+  { title: "Luxury Gift Sets", location: "Curated Collections", cat: "Luxury", year: "2024", photo: "photo-1571781926291-c477ebfd024b" },
+  { title: "Signature Gifts", location: "One-of-a-Kind Creations", cat: "Signature", year: "2024", photo: "photo-1607082348824-0a96f2a4b9da" },
+  { title: "Gift Hampers", location: "Premium Curated Hampers", cat: "Hampers", year: "2024", photo: "photo-1547496502-affa22d38842" },
+  { title: "Premium Packaging", location: "Artisan Presentation", cat: "Packaging", year: "2024", photo: "photo-1558769132-cb1aea458c5e" },
 ];
 
 export default function Projects() {

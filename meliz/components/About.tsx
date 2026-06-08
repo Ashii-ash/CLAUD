@@ -15,7 +15,7 @@ export default function About() {
       {/* Top 60%: full-bleed image with headline overlay */}
       <div className="flex-1 relative overflow-hidden border-t border-black/8">
         <Image
-          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1920&q=85&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1920&q=85&auto=format&fit=crop"
           alt="Luxury gifting"
           fill
           priority

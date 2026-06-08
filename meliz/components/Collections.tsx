@@ -53,7 +53,7 @@ export default function Collections() {
           className="absolute inset-0"
         >
           <Image
-            src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=1920&q=85&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=1920&q=85&auto=format&fit=crop"
             alt="Luxury gifting collection"
             fill
             className="object-cover"
