@@ -5,12 +5,11 @@ import { useEffect } from "react";
 
 const letters = ["M", "E", "L", "I", "Z"];
 
-const THRESHOLD = 380;   // px of scroll to complete transition
-const NAVBAR_H  = 60;    // navbar height in px
-const END_FONT  = 28;    // compact font size in px
+const THRESHOLD = 380;
+const NAVBAR_H  = 60;
+const END_FONT  = 22; // compact px size — still legible in navbar
 
 export default function Hero() {
-  // Reactive viewport dimensions as MotionValues so transforms update on resize
   const vpW = useMotionValue(1440);
   const vpH = useMotionValue(800);
 
@@ -25,7 +24,7 @@ export default function Hero() {
   const smooth = useSpring(scrollY, { stiffness: 160, damping: 28 });
   const progress = useTransform(smooth, [0, THRESHOLD], [0, 1], { clamp: true });
 
-  // Font size: spread hero size → compact navbar size (px)
+  // Font size only — spacing stays as justify-between (always edge-to-edge)
   const fontSizePx = useTransform(
     [progress, vpW] as const,
     ([p, w]: number[]) => {
@@ -35,31 +34,25 @@ export default function Hero() {
   );
   const fontSize = useMotionTemplate`${fontSizePx}px`;
 
-  // Letter spacing stays constant — letters keep their spread as they move up
-  const letterSpacing = "0.65em";
-
-  // Y offset: letters start centered in viewport, end centered in navbar
+  // Y: center of viewport → center of navbar
   const y = useTransform(
     [progress, vpW, vpH] as const,
     ([p, w, h]: number[]) => {
       const startFont = Math.max(w * 0.17, 60);
-      const yStart = h / 2 - startFont / 2;       // vertically centered
-      const yEnd   = NAVBAR_H / 2 - END_FONT / 2; // centered in navbar
+      const yStart = h / 2 - startFont / 2;
+      const yEnd   = NAVBAR_H / 2 - END_FONT / 2;
       return yStart + (yEnd - yStart) * p;
     }
   );
 
-  // Crystal fades and rises as you scroll
   const crystalOpacity = useTransform(smooth, [0, 280], [1, 0]);
   const crystalY       = useTransform(smooth, [0, 500], [0, -70]);
   const labelOpacity   = useTransform(smooth, [0, 180], [1, 0]);
 
   return (
     <>
-      {/* Hero scroll zone — defines the 100vh space */}
+      {/* Hero scroll zone */}
       <div className="h-screen min-h-[650px] bg-white relative overflow-hidden">
-
-        {/* Top center subtitle */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,7 +66,6 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        {/* Bottom-right metadata */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -84,7 +76,6 @@ export default function Hero() {
           <p className="body-label">Luxury Division<br /><span className="text-[#C6A36A]">ATATC Group</span></p>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -101,10 +92,10 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ─── Fixed overlay: crystal + MELIZ ─── */}
+      {/* Fixed overlay */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 45 }}>
 
-        {/* Crystal shape */}
+        {/* Crystal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -124,10 +115,10 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* MELIZ — scroll-driven spread → compact */}
+        {/* MELIZ — justify-between always, only font-size + y animate */}
         <motion.div
-          style={{ y, fontSize, letterSpacing }}
-          className="absolute top-0 left-1/2 -translate-x-1/2 whitespace-nowrap leading-none select-none"
+          style={{ y, fontSize }}
+          className="absolute top-0 inset-x-0 flex items-baseline justify-between px-4 lg:px-6 select-none"
         >
           {letters.map((letter, i) => (
             <motion.span
@@ -135,7 +126,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.4, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="display-text text-[#0A0A0A] inline-block"
+              className="display-text text-[#0A0A0A] leading-none"
             >
               {letter}
             </motion.span>
