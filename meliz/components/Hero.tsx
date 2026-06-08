@@ -55,7 +55,7 @@ export default function Hero() {
   return (
     <>
       {/* Hero scroll zone */}
-      <div className="h-screen min-h-[650px] bg-white relative overflow-hidden">
+      <section className="h-screen min-h-[650px] bg-white relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function Hero() {
             className="w-px h-8 bg-black/30 origin-top"
           />
         </motion.div>
-      </div>
+      </section>
 
       {/* Fixed overlay */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 45 }}>

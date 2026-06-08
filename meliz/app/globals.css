@@ -2,14 +2,24 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-snap-type: y proximity;
+}
 
 body {
   background: #ffffff;
   color: #0A0A0A;
   font-family: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Each section snaps into view as you scroll */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 ::-webkit-scrollbar { width: 2px; }
