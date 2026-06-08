@@ -35,9 +35,8 @@ export default function Hero() {
   );
   const fontSize = useMotionTemplate`${fontSizePx}px`;
 
-  // Letter spacing: simulates justify-between spread → tight
-  const letterSpacingEm = useTransform(progress, [0, 1], [0.65, -0.02]);
-  const letterSpacing = useMotionTemplate`${letterSpacingEm}em`;
+  // Letter spacing stays constant — letters keep their spread as they move up
+  const letterSpacing = "0.65em";
 
   // Y offset: letters start centered in viewport, end centered in navbar
   const y = useTransform(
