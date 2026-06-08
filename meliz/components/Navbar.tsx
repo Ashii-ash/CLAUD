@@ -36,7 +36,7 @@ export default function Navbar() {
           className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
         >
           <p className="body-label hidden md:block leading-tight">
-            Crafted Beyond Glass<br />
+            Luxury Gifting<br />
             <span className="text-[#C6A36A]">Dubai, UAE</span>
           </p>
           <p className="body-label md:hidden text-[0.55rem]">MELIZ · Dubai</p>
@@ -44,7 +44,7 @@ export default function Navbar() {
 
         {/* Right: CTA */}
         <a
-          href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
+          href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20gifting%20order."
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 border border-[#0A0A0A] text-[#0A0A0A] px-4 lg:px-6 py-2.5 text-[0.6rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#0A0A0A] hover:text-white transition-all duration-300 group"
@@ -63,7 +63,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-40 bg-white flex flex-col justify-center px-8 lg:px-20"
+            className="fixed inset-0 z-40 bg-white flex flex-col justify-center px-8 lg:px-20 pt-[60px]"
           >
             {[
               { label: "About", href: "#about" },
