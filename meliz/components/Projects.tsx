@@ -22,7 +22,7 @@ export default function Projects() {
     <section id="projects" ref={ref} className="min-h-screen flex flex-col bg-white overflow-hidden">
 
       {/* Headline row */}
-      <div className="flex-shrink-0 border-b border-black/8 px-5 lg:px-8 py-10 lg:py-14 flex items-end justify-between">
+      <div className="flex-shrink-0 border-b border-black/8 px-5 lg:px-8 pt-[60px] pb-10 lg:pb-14 flex items-end justify-between">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}

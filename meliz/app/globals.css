@@ -6,6 +6,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: clip;
   scroll-snap-type: y proximity;
+  scroll-padding-top: 60px;
 }
 
 body {

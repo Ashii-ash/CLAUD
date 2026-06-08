@@ -22,7 +22,7 @@ export default function Collections() {
     <section id="collections" ref={ref} className="min-h-screen flex flex-col bg-white overflow-hidden">
 
       {/* Headline row (~20%) */}
-      <div className="flex-shrink-0 border-b border-black/8 px-5 lg:px-8 py-12 lg:py-16 flex items-end justify-between">
+      <div className="flex-shrink-0 border-b border-black/8 px-5 lg:px-8 pt-[60px] pb-12 lg:pb-16 flex items-end justify-between">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
