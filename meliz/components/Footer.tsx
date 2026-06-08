@@ -61,7 +61,7 @@ export default function Footer() {
       </motion.div>
 
       <div className="px-5 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="body-label">© 2024 MELIZ — Al Tabaa Advertising Materials LLC. All rights reserved.</div>
+        <div className="body-label">© 2026 MELIZ — Al Tabaa Advertising Materials LLC. All rights reserved.</div>
         <div className="body-label">www.meliz.ae</div>
       </div>
     </footer>
