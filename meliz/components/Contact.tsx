@@ -50,7 +50,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="px-5 lg:px-8 py-10 lg:py-14 border-b lg:border-b-0 lg:border-r border-black/8 flex flex-col justify-between"
+          className="px-5 lg:px-8 py-10 lg:py-14 border-b lg:border-b-0 lg:border-r border-black/8 flex flex-col justify-start gap-10"
         >
           <div className="space-y-10">
             {[
@@ -84,7 +84,7 @@ export default function Contact() {
           initial={{ opacity: 0, x: 20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="px-5 lg:px-8 py-10 lg:py-14 flex flex-col justify-between"
+          className="px-5 lg:px-8 py-10 lg:py-14 flex flex-col justify-start"
         >
           <div className="space-y-8">
             {[
@@ -101,7 +101,7 @@ export default function Contact() {
             ))}
             <div className="border-b border-black/10 pb-5 focus-within:border-[#C6A36A] transition-colors duration-300">
               <label className="body-label block mb-4 text-[#C6A36A]">Project Brief</label>
-              <textarea name="message" rows={3} placeholder="Describe your project, space, and vision..."
+              <textarea name="message" rows={6} placeholder="Describe your project, space, and vision..."
                 value={form.message} onChange={change}
                 className="w-full bg-transparent body-label text-[#0A0A0A] placeholder-black/20 focus:outline-none resize-none text-sm tracking-wide" />
             </div>
