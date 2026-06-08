@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const testimonials = [
   { quote: "MELIZ transformed our Palm Jumeirah villa with a bespoke crystal installation that simply cannot be replicated. The craftsmanship, the service — extraordinary on every level.", name: "Private Client", role: "Villa Owner, Palm Jumeirah" },
@@ -13,6 +13,13 @@ export default function Testimonials() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive(p => (p + 1) % testimonials.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="testimonials" ref={ref} className="min-h-screen flex flex-col bg-white border-t border-black/8 overflow-hidden">
