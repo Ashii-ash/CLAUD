@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 const cols = [
   { n: "01", title: "Bespoke Crystal", desc: "Hand-crafted crystal sculptures, chandeliers, and ornamental pieces conceived as singular works of art for private residences and landmark interiors." },
@@ -44,6 +45,22 @@ export default function Collections() {
           </motion.p>
         </div>
       </div>
+
+      {/* Full-bleed image between headline and collection rows */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="relative w-full aspect-[16/9] overflow-hidden"
+      >
+        <Image
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&auto=format&fit=crop"
+          alt="Luxury white interior"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </motion.div>
 
       {/* Collection rows */}
       <div>

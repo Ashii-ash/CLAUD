@@ -2,15 +2,16 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { ParallaxStrip } from "./ScrollReveal";
 
 const projects = [
-  { title: "Crystal Staircase", location: "Palm Jumeirah Villa, Dubai", cat: "Residential", year: "2024", tall: true },
-  { title: "Hotel Lobby Installation", location: "Downtown Dubai", cat: "Hospitality", year: "2023", tall: false },
-  { title: "Architectural Glass Facade", location: "DIFC Headquarters", cat: "Commercial", year: "2024", tall: false },
-  { title: "Private Crystal Chandelier", location: "Abu Dhabi Residence", cat: "Residential", year: "2023", tall: true },
-  { title: "Government Feature Wall", location: "Sharjah Cultural Centre", cat: "Government", year: "2023", tall: false },
-  { title: "Signature Mirror Installation", location: "Luxury Boutique, Dubai", cat: "Retail", year: "2024", tall: false },
+  { title: "Crystal Staircase", location: "Palm Jumeirah Villa, Dubai", cat: "Residential", year: "2024", tall: true, photo: "photo-1558618666-fcd25c85cd64" },
+  { title: "Hotel Lobby Installation", location: "Downtown Dubai", cat: "Hospitality", year: "2023", tall: false, photo: "photo-1616486338812-3dadae4b4ace" },
+  { title: "Architectural Glass Facade", location: "DIFC Headquarters", cat: "Commercial", year: "2024", tall: false, photo: "photo-1497366216548-37526070297c" },
+  { title: "Private Crystal Chandelier", location: "Abu Dhabi Residence", cat: "Residential", year: "2023", tall: true, photo: "photo-1565193566173-7a0ee3dbe261" },
+  { title: "Government Feature Wall", location: "Sharjah Cultural Centre", cat: "Government", year: "2023", tall: false, photo: "photo-1631679706909-1844bbd07221" },
+  { title: "Signature Mirror Installation", location: "Luxury Boutique, Dubai", cat: "Retail", year: "2024", tall: false, photo: "photo-1582407947304-fd86f028f716" },
 ];
 
 export default function Projects() {
@@ -78,15 +79,19 @@ export default function Projects() {
             className="relative border-r border-b border-black/8 last:border-r-0 overflow-hidden group cursor-default"
             style={{ aspectRatio: p.tall ? "3/4" : "4/3" }}
           >
-            <div className={`absolute inset-0 transition-colors duration-500 ${hovered === i ? "bg-[#f0ece4]" : "bg-[#f7f5f1]"}`} />
-            <div className="absolute top-4 left-4 body-label text-black/30">{String(i + 1).padStart(2, "0")}</div>
+            <Image
+              src={`https://images.unsplash.com/${p.photo}?w=800&q=80&auto=format&fit=crop`}
+              alt={p.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
+            <div className="absolute top-4 left-4 body-label text-white/70">{String(i + 1).padStart(2, "0")}</div>
             <div className={`absolute bottom-0 left-0 right-0 p-5 transition-all duration-400 ${hovered === i ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
               <div className="body-label text-[#C6A36A] mb-1">{p.cat} · {p.year}</div>
-              <div className="display-text text-[#0A0A0A]" style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.8rem)" }}>{p.title}</div>
-              <div className="body-label mt-1 text-black/40">{p.location}</div>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-30">
-              <span className="body-label text-[0.5rem]">Photography Placeholder</span>
+              <div className="display-text text-white" style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.8rem)" }}>{p.title}</div>
+              <div className="body-label mt-1 text-white/70">{p.location}</div>
             </div>
           </motion.div>
         ))}

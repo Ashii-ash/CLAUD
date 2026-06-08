@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { ParallaxStrip } from "./ScrollReveal";
 
 export default function About() {
@@ -11,14 +12,23 @@ export default function About() {
   return (
     <section id="about" ref={ref} className="bg-white overflow-hidden">
 
-      {/* Row 1: headline */}
-      <div className="overflow-hidden border-t border-black/8 pt-28 lg:pt-48 pb-28 lg:pb-48 px-5 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-4 lg:gap-8">
+      {/* Row 1: Full-bleed image with headline overlaid at bottom-left */}
+      <div className="relative w-full aspect-[16/9] lg:aspect-[21/9] overflow-hidden border-t border-black/8">
+        <Image
+          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=85&auto=format&fit=crop"
+          alt="Luxury interior"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute bottom-8 left-5 lg:bottom-16 lg:left-8 overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="display-text"
+            className="display-text text-white"
             style={{ fontSize: "clamp(3rem, 11vw, 13rem)" }}
           >
             The Momentum
@@ -27,7 +37,7 @@ export default function About() {
             initial={{ y: "110%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-            className="display-text lg:text-right"
+            className="display-text text-white"
             style={{ fontSize: "clamp(3rem, 11vw, 13rem)" }}
           >
             Of Craft
@@ -47,7 +57,7 @@ export default function About() {
         </p>
       </motion.div>
 
-      {/* Row 3: large text left + image right */}
+      {/* Row 3: large text LEFT + real image RIGHT */}
       <div className="grid lg:grid-cols-2 items-end border-t border-black/8">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -67,11 +77,15 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className="relative aspect-[4/3] lg:aspect-auto lg:h-[560px] bg-gradient-to-br from-[#f0ece4] via-[#e8e2d8] to-[#ddd5c8] overflow-hidden"
+          className="relative aspect-[4/3] lg:aspect-auto lg:h-[560px] overflow-hidden"
         >
-          <div className="absolute inset-0 flex items-end p-8">
-            <p className="body-label">Atelier Photography · Coming Soon</p>
-          </div>
+          <Image
+            src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80&auto=format&fit=crop"
+            alt="Crystal chandelier"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </motion.div>
       </div>
 
