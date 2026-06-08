@@ -67,7 +67,7 @@ export default function Hero() {
           className="absolute top-[80px] left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none"
         >
           <p className="body-label leading-loose">
-            The Art of Crystal<br />& Architectural Glass
+            Dubai&apos;s Premier<br />Luxury Gifting Brand
           </p>
         </motion.div>
 
@@ -78,7 +78,7 @@ export default function Hero() {
           style={{ opacity: labelOpacity }}
           className="absolute bottom-10 right-8 lg:right-10 text-right z-10 pointer-events-none"
         >
-          <p className="body-label">Luxury Division<br /><span className="text-[#C6A36A]">ATATC Group</span></p>
+          <p className="body-label">Elite Gifting<br /><span className="text-[#C6A36A]">Dubai, UAE</span></p>
         </motion.div>
 
         <motion.div

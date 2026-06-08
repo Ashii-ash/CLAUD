@@ -5,12 +5,12 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 
 const projects = [
-  { title: "Crystal Staircase", location: "Palm Jumeirah Villa, Dubai", cat: "Residential", year: "2024", photo: "photo-1558618666-fcd25c85cd64" },
-  { title: "Hotel Lobby Installation", location: "Downtown Dubai", cat: "Hospitality", year: "2023", photo: "photo-1616486338812-3dadae4b4ace" },
-  { title: "Architectural Glass Facade", location: "DIFC Headquarters", cat: "Commercial", year: "2024", photo: "photo-1497366216548-37526070297c" },
-  { title: "Private Crystal Chandelier", location: "Abu Dhabi Residence", cat: "Residential", year: "2023", photo: "photo-1565193566173-7a0ee3dbe261" },
-  { title: "Government Feature Wall", location: "Sharjah Cultural Centre", cat: "Government", year: "2023", photo: "photo-1631679706909-1844bbd07221" },
-  { title: "Signature Mirror Installation", location: "Luxury Boutique, Dubai", cat: "Retail", year: "2024", photo: "photo-1582407947304-fd86f028f716" },
+  { title: "Elite Gifting", location: "Bespoke Luxury Experiences", cat: "Elite", year: "2024", photo: "photo-1549465220-1a8b9238cd48" },
+  { title: "Corporate Gifts", location: "Tailored for Organisations", cat: "Corporate", year: "2024", photo: "photo-1607344645866-009c320b63e0" },
+  { title: "Luxury Gift Sets", location: "Curated Collections", cat: "Luxury", year: "2024", photo: "photo-1583394293214-0e313fe3c27d" },
+  { title: "Signature Gifts", location: "One-of-a-Kind Creations", cat: "Signature", year: "2024", photo: "photo-1528825871115-3581a5387919" },
+  { title: "Gift Hampers", location: "Premium Curated Hampers", cat: "Hampers", year: "2024", photo: "photo-1512389142860-9c449e58a543" },
+  { title: "Premium Packaging", location: "Artisan Presentation", cat: "Packaging", year: "2024", photo: "photo-1558618047-3c8c76ca7d13" },
 ];
 
 export default function Projects() {

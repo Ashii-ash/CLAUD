@@ -5,12 +5,12 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 
 const cols = [
-  { n: "01", title: "Bespoke Crystal", desc: "Hand-crafted crystal sculptures, chandeliers, and ornamental pieces conceived as singular works of art for private residences and landmark interiors." },
-  { n: "02", title: "Luxury Glass", desc: "Precision-engineered luxury glass surfaces, panels, and architectural elements that redefine the relationship between light, space, and material." },
-  { n: "03", title: "Decorative Installations", desc: "Large-scale decorative glass and crystal installations designed to define a space — from hotel lobbies to executive boardrooms." },
-  { n: "04", title: "Architectural Features", desc: "Structural and semi-structural glass features — partitions, facades, staircases — where engineering meets aesthetic mastery." },
-  { n: "05", title: "Premium Mirrors", desc: "Bespoke mirror compositions with artisan frames, bevelling, and custom gilding for spaces that demand refined reflections." },
-  { n: "06", title: "Signature Commissions", desc: "Fully bespoke commissions for clients who require a creation that exists nowhere else in the world. The ultimate expression of individual luxury." },
+  { n: "01", title: "Elite Gifting", desc: "Exclusive gifting experiences crafted for those who demand nothing less than extraordinary — where every detail is a statement of refinement." },
+  { n: "02", title: "Elegant Gifting", desc: "Graceful, understated luxury gifts that speak volumes without saying a word. Timeless elegance for every occasion." },
+  { n: "03", title: "Luxury Gift Sets", desc: "Meticulously curated gift sets combining the finest products, thoughtfully assembled in stunning presentation." },
+  { n: "04", title: "Corporate Gifts", desc: "Sophisticated corporate gifting solutions tailored to your brand — leaving a lasting impression on every client and partner." },
+  { n: "05", title: "Signature Gifts", desc: "Fully personalised, one-of-a-kind creations for clients who require a gift that exists nowhere else in the world." },
+  { n: "06", title: "Occasion Gifts", desc: "From weddings to milestones — bespoke gifts designed to mark life's most meaningful moments with enduring luxury." },
 ];
 
 export default function Collections() {
@@ -40,7 +40,7 @@ export default function Collections() {
           transition={{ delay: 0.4 }}
           className="body-label max-w-[200px] text-right hidden lg:block"
         >
-          Each collection represents a distinct mastery of material, form, and light.
+          Each collection represents a distinct expression of luxury, elegance, and thoughtful gifting.
         </motion.p>
       </div>
 
@@ -53,8 +53,8 @@ export default function Collections() {
           className="absolute inset-0"
         >
           <Image
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&auto=format&fit=crop"
-            alt="Luxury white interior"
+            src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=1920&q=85&auto=format&fit=crop"
+            alt="Luxury gifting collection"
             fill
             className="object-cover"
             sizes="100vw"

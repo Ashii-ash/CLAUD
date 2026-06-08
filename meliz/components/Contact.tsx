@@ -69,7 +69,7 @@ export default function Contact() {
           </div>
 
           <a
-            href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
+            href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20gifting%20order."
             target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#0A0A0A] text-white px-8 py-5 body-label font-semibold hover:bg-[#C6A36A] transition-colors duration-300 mt-10 lg:mt-0 self-start"
           >

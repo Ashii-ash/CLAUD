@@ -15,8 +15,8 @@ export default function About() {
       {/* Top 60%: full-bleed image with headline overlay */}
       <div className="flex-1 relative overflow-hidden border-t border-black/8">
         <Image
-          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=85&auto=format&fit=crop"
-          alt="Luxury interior"
+          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1920&q=85&auto=format&fit=crop"
+          alt="Luxury gifting"
           fill
           priority
           className="object-cover"
@@ -31,7 +31,7 @@ export default function About() {
             className="display-text text-white leading-none"
             style={{ fontSize: "clamp(2.5rem, 8vw, 10rem)" }}
           >
-            The Momentum
+            The Art of
           </motion.h2>
           <motion.h2
             initial={{ y: "110%" }}
@@ -40,7 +40,7 @@ export default function About() {
             className="display-text text-white leading-none"
             style={{ fontSize: "clamp(2.5rem, 8vw, 10rem)" }}
           >
-            Of Craft
+            Gifting
           </motion.h2>
         </div>
       </div>
@@ -55,17 +55,17 @@ export default function About() {
           className="px-5 lg:px-8 py-8 border-r border-black/8 flex items-center"
         >
           <p className="body-label leading-[2]">
-            MELIZ is born from ATATC&apos;s manufacturing excellence — over twenty years defining quality in the UAE. We create bespoke crystal and architectural glass for spaces that demand the extraordinary.
+            MELIZ is Dubai&apos;s premier luxury gifting brand — where every gift is an experience. From elite corporate gifting to bespoke personal creations, we craft moments of extraordinary generosity for those who demand nothing less.
           </p>
         </motion.div>
 
         {/* Stats */}
         <div className="flex">
           {[
-            { v: "20+", l: "Years of Expertise" },
-            { v: "500+", l: "Luxury Projects" },
-            { v: "12", l: "Countries Served" },
-            { v: "100%", l: "Bespoke Creations" },
+            { v: "20+", l: "Years of Excellence" },
+            { v: "5000+", l: "Gifts Delivered" },
+            { v: "UAE", l: "Based in Dubai" },
+            { v: "100%", l: "Bespoke Gifting" },
           ].map((s, i) => (
             <motion.div
               key={s.l}

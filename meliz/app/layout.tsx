@@ -10,14 +10,28 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "MELIZ — Crafted Beyond Glass",
-  description: "Bespoke crystal and luxury architectural creations designed for extraordinary spaces. MELIZ is the luxury division of ATATC, Dubai.",
-  keywords: ["luxury crystal", "architectural glass", "bespoke interiors", "Dubai luxury", "crystal installations"],
+  title: "MELIZ — Luxury Gifting Dubai | Elite & Bespoke Gifts UAE",
+  description: "MELIZ is Dubai's premier luxury gifting brand. We specialise in elite gifting, corporate gifts, luxury gift sets, signature gifts, gift hampers, and premium packaging — crafted for those who demand the extraordinary.",
+  keywords: ["luxury gifting Dubai", "corporate gifts UAE", "bespoke gift sets", "elite gifting", "luxury hampers Dubai", "personalised gifts UAE", "premium packaging", "signature gifts", "occasion gifts Dubai", "MELIZ gifting"],
   openGraph: {
-    title: "MELIZ — Crafted Beyond Glass",
-    description: "Bespoke crystal and luxury architectural creations designed for extraordinary spaces.",
+    title: "MELIZ — Luxury Gifting Dubai | Elite & Bespoke Gifts UAE",
+    description: "Dubai's premier luxury gifting brand. Elite gifting, corporate gifts, luxury gift sets, signature gifts and premium packaging — crafted for the extraordinary.",
     type: "website",
     locale: "en_AE",
+    siteName: "MELIZ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MELIZ — Luxury Gifting Dubai",
+    description: "Elite gifting, corporate gifts, luxury gift sets and bespoke hampers in Dubai, UAE.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: "https://meliz-luxury.vercel.app",
   },
 };
 

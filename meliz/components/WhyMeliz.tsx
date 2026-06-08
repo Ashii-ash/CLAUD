@@ -4,12 +4,12 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const pillars = [
-  { n: "01", title: "Bespoke Crystal", desc: "Hand-crafted crystal sculptures and chandeliers conceived as singular works of art for landmark interiors." },
-  { n: "02", title: "Luxury Glass", desc: "Precision-engineered glass surfaces and architectural elements that redefine light, space, and material." },
-  { n: "03", title: "Decorative Installations", desc: "Large-scale glass and crystal installations designed to define a space — lobbies to boardrooms." },
-  { n: "04", title: "Architectural Features", desc: "Structural glass features — partitions, facades, staircases — where engineering meets aesthetic mastery." },
-  { n: "05", title: "Premium Mirrors", desc: "Bespoke mirror compositions with artisan frames, bevelling, and custom gilding for refined spaces." },
-  { n: "06", title: "Signature Commissions", desc: "Fully bespoke commissions for clients who require a creation that exists nowhere else in the world." },
+  { n: "01", title: "Elite Gifting", desc: "Exclusive gifting experiences crafted for those who demand nothing less than extraordinary." },
+  { n: "02", title: "Corporate Gifts", desc: "Sophisticated corporate gifting solutions that leave a lasting impression on every recipient." },
+  { n: "03", title: "Luxury Gift Sets", desc: "Meticulously curated gift sets combining the finest products in stunning presentation." },
+  { n: "04", title: "Signature Gifts", desc: "One-of-a-kind creations personalised to perfection — gifts that exist nowhere else in the world." },
+  { n: "05", title: "Gift Hampers", desc: "Premium hampers filled with handpicked luxury goods, beautifully arranged for any occasion." },
+  { n: "06", title: "Premium Packaging", desc: "Artisan packaging and presentation that elevates every gift into an unforgettable unboxing moment." },
 ];
 
 export default function WhyMeliz() {
@@ -38,7 +38,7 @@ export default function WhyMeliz() {
           transition={{ delay: 0.4 }}
           className="body-label max-w-[200px] text-right hidden lg:block"
         >
-          A standard without compromise. Backed by 20+ years of UAE manufacturing excellence.
+          A standard without compromise. Dubai&apos;s most trusted luxury gifting brand.
         </motion.p>
       </div>
 

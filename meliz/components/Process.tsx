@@ -4,11 +4,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
-  { n: "01", title: "Consultation", desc: "We begin with an in-depth understanding of your space, vision, and aspirations." },
-  { n: "02", title: "Concept Design", desc: "Our designers translate your vision into precise concepts exploring form, light, and material." },
-  { n: "03", title: "Material Selection", desc: "We source only the finest crystals and specialty glass from the world's most respected producers." },
-  { n: "04", title: "Production", desc: "Our master craftsmen bring the approved design to life with traditional technique and precision engineering." },
-  { n: "05", title: "Installation", desc: "Our specialist installation team delivers every element with care, matching the original vision exactly." },
+  { n: "01", title: "Consultation", desc: "We begin with a deep understanding of your recipient, occasion, and the impression you wish to create." },
+  { n: "02", title: "Curation", desc: "Our gifting specialists handpick and assemble the perfect combination of luxury products for your brief." },
+  { n: "03", title: "Personalisation", desc: "We add bespoke touches — custom messaging, monogramming, and signature details unique to your gift." },
+  { n: "04", title: "Artisan Packaging", desc: "Every gift is dressed in premium packaging, crafted to make the unboxing moment as memorable as the gift itself." },
+  { n: "05", title: "Delivery", desc: "White-glove delivery ensures your gift arrives in perfect condition, exactly when and where it needs to be." },
 ];
 
 export default function Process() {
