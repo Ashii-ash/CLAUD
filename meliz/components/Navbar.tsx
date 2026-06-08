@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-5 lg:px-8 h-[60px] bg-white/95 backdrop-blur-sm">
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center gap-3 bg-[#0A0A0A] text-white px-4 py-2.5 text-[0.6rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#C6A36A] transition-colors duration-300"
+          className="flex items-center gap-3 bg-[#0A0A0A] text-white px-5 py-3 text-[0.7rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#C6A36A] transition-colors duration-300"
         >
           <span className="flex flex-col gap-[4px]">
             <span className={`block w-4 h-px bg-current transition-all duration-300 ${open ? "rotate-45 translate-y-[5px]" : ""}`} />
@@ -43,7 +43,7 @@ export default function Navbar() {
           href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20gifting%20order."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 border border-[#0A0A0A] text-[#0A0A0A] px-4 lg:px-6 py-2.5 text-[0.6rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#0A0A0A] hover:text-white transition-all duration-300 group"
+          className="flex items-center gap-3 border-2 border-[#0A0A0A] text-[#0A0A0A] px-5 lg:px-7 py-3 text-[0.7rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#0A0A0A] hover:text-white transition-all duration-300 group"
         >
           <span className="hidden sm:inline">Begin a Project</span>
           <span className="sm:hidden">Enquire</span>
