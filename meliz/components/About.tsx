@@ -11,7 +11,7 @@ export default function About() {
     <section id="about" ref={ref} className="bg-white overflow-hidden">
 
       {/* Row 1: headline */}
-      <div className="overflow-hidden border-t border-black/8 pt-20 lg:pt-40 pb-20 lg:pb-32 px-5 lg:px-8">
+      <div className="overflow-hidden border-t border-black/8 pt-28 lg:pt-48 pb-28 lg:pb-48 px-5 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-4 lg:gap-8">
           <motion.h2
             initial={{ y: "110%" }}
@@ -34,12 +34,12 @@ export default function About() {
         </div>
       </div>
 
-      {/* Row 2: centered body text — spacious */}
+      {/* Row 2: centered body text */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3 }}
-        className="flex justify-center py-20 lg:py-36 px-8 border-t border-black/8"
+        className="flex justify-center py-28 lg:py-48 px-8 border-t border-black/8"
       >
         <p className="body-label text-center max-w-[340px] leading-[2.2]">
           MELIZ is born from the manufacturing excellence and decades of expertise behind ATATC — Al Tabaa Advertising Materials LLC — a name that has defined quality in the UAE for over twenty years. We create bespoke crystal and architectural glass for spaces that demand the extraordinary.
@@ -52,7 +52,7 @@ export default function About() {
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="px-5 lg:px-8 py-16 lg:py-32"
+          className="px-5 lg:px-8 py-24 lg:py-40"
         >
           <p
             className="display-text text-[#0A0A0A] leading-[1.1]"
@@ -66,7 +66,7 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className="relative aspect-[4/3] lg:aspect-auto lg:h-[520px] bg-gradient-to-br from-[#f0ece4] via-[#e8e2d8] to-[#ddd5c8] overflow-hidden"
+          className="relative aspect-[4/3] lg:aspect-auto lg:h-[560px] bg-gradient-to-br from-[#f0ece4] via-[#e8e2d8] to-[#ddd5c8] overflow-hidden"
         >
           <div className="absolute inset-0 flex items-end p-8">
             <p className="body-label">Atelier Photography · Coming Soon</p>
@@ -74,9 +74,9 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Row 4: Three-word spread — generous padding */}
+      {/* Row 4: Three-word spread */}
       <div className="border-t border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-16 lg:py-24 gap-2">
+        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-2">
           {["A New", "Premium", "Standard"].map((word, i) => (
             <motion.span
               key={word}
@@ -105,10 +105,10 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 + i * 0.07 }}
-            className="border-r border-b lg:border-b-0 border-black/8 last:border-r-0 px-5 lg:px-10 py-10 lg:py-16 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="border-r border-b lg:border-b-0 border-black/8 last:border-r-0 px-5 lg:px-10 py-16 lg:py-24 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
             <div
-              className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-3"
+              className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-4"
               style={{ fontSize: "clamp(2.2rem, 5vw, 5rem)" }}
             >
               {s.v}

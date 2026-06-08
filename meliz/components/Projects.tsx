@@ -21,7 +21,7 @@ export default function Projects() {
     <section id="projects" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Section headline */}
-      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2
@@ -49,7 +49,7 @@ export default function Projects() {
 
       {/* Sub-headline spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-16 lg:py-24 gap-4">
+        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-4">
           {["Spaces", "Transformed", "By Light"].map((w, i) => (
             <motion.span
               key={w}
@@ -70,14 +70,14 @@ export default function Projects() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.5 }}
-        className="flex justify-center py-20 lg:py-32 px-8"
+        className="flex justify-center py-28 lg:py-44 px-8"
       >
         <p className="body-label text-center max-w-[300px] leading-[2]">
           Each project is a testament to our belief that extraordinary spaces deserve extraordinary materials.
         </p>
       </motion.div>
 
-      {/* Project grid — full bleed */}
+      {/* Project grid */}
       <div className="grid grid-cols-2 lg:grid-cols-3 border-t border-black/8">
         {projects.map((p, i) => (
           <motion.div
@@ -90,25 +90,13 @@ export default function Projects() {
             className="relative border-r border-b border-black/8 last:border-r-0 overflow-hidden group cursor-default"
             style={{ aspectRatio: p.tall ? "3/4" : "4/3" }}
           >
-            {/* Placeholder bg */}
             <div className={`absolute inset-0 transition-colors duration-500 ${hovered === i ? "bg-[#f0ece4]" : "bg-[#f7f5f1]"}`} />
-
-            {/* Index */}
             <div className="absolute top-4 left-4 body-label text-black/30">{String(i + 1).padStart(2, "0")}</div>
-
-            {/* Info — slides up */}
             <div className={`absolute bottom-0 left-0 right-0 p-5 transition-all duration-400 ${hovered === i ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
               <div className="body-label text-[#C6A36A] mb-1">{p.cat} · {p.year}</div>
-              <div
-                className="display-text text-[#0A0A0A]"
-                style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.8rem)" }}
-              >
-                {p.title}
-              </div>
+              <div className="display-text text-[#0A0A0A]" style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.8rem)" }}>{p.title}</div>
               <div className="body-label mt-1 text-black/40">{p.location}</div>
             </div>
-
-            {/* Photography label */}
             <div className="absolute inset-0 flex items-center justify-center opacity-30">
               <span className="body-label text-[0.5rem]">Photography Placeholder</span>
             </div>

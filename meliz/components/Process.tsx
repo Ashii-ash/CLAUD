@@ -19,7 +19,7 @@ export default function Process() {
     <section id="process" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline */}
-      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2
@@ -51,7 +51,7 @@ export default function Process() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
-            className="border-b border-black/8 px-5 lg:px-8 py-12 lg:py-16 flex items-start lg:items-center gap-6 lg:gap-16 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="border-b border-black/8 px-5 lg:px-8 py-16 lg:py-24 flex items-start lg:items-center gap-6 lg:gap-16 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
             <span
               className="display-text text-[#0A0A0A]/10 group-hover:text-[#C6A36A]/30 transition-colors duration-300 flex-shrink-0 leading-none"
@@ -66,7 +66,7 @@ export default function Process() {
               {s.title}
             </h3>
             <p className="body-label leading-relaxed hidden lg:block max-w-[400px]">{s.desc}</p>
-            <div className={`ml-auto body-label text-[#C6A36A] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0`}>→</div>
+            <div className="ml-auto body-label text-[#C6A36A] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0">→</div>
           </motion.div>
         ))}
       </div>

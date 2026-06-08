@@ -18,7 +18,7 @@ export default function Testimonials() {
     <section ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline */}
-      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
@@ -40,7 +40,7 @@ export default function Testimonials() {
         className="grid lg:grid-cols-[1fr_300px] border-b border-black/8"
       >
         {/* Quote */}
-        <div className="px-5 lg:px-8 py-16 lg:py-24 border-r border-black/8">
+        <div className="px-5 lg:px-8 py-20 lg:py-32 border-r border-black/8">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={active}
@@ -61,7 +61,7 @@ export default function Testimonials() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="mt-10"
+              className="mt-12"
             >
               <div className="body-label text-[#C6A36A]">{testimonials[active].name}</div>
               <div className="body-label mt-1">{testimonials[active].role}</div>
@@ -73,8 +73,8 @@ export default function Testimonials() {
         <div className="flex flex-row lg:flex-col border-t lg:border-t-0 border-black/8">
           {testimonials.map((t, i) => (
             <button key={i} onClick={() => setActive(i)}
-              className={`flex-1 lg:flex-none px-6 py-8 text-left border-b border-black/8 last:border-b-0 transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "hover:bg-[#faf8f4]/50"}`}>
-              <div className={`w-5 h-px mb-4 transition-all duration-300 ${active === i ? "bg-[#C6A36A]" : "bg-black/15"}`} />
+              className={`flex-1 lg:flex-none px-6 py-10 text-left border-b border-black/8 last:border-b-0 transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "hover:bg-[#faf8f4]/50"}`}>
+              <div className={`w-5 h-px mb-5 transition-all duration-300 ${active === i ? "bg-[#C6A36A]" : "bg-black/15"}`} />
               <div className="body-label text-[#C6A36A] mb-1 hidden lg:block">{t.role}</div>
               <div className="body-label text-[#0A0A0A] font-semibold hidden lg:block">{t.name}</div>
               <div className="body-label lg:hidden">{String(i + 1).padStart(2, "0")}</div>

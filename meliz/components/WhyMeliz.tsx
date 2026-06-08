@@ -20,7 +20,7 @@ export default function WhyMeliz() {
     <section id="why" ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
 
       {/* Headline */}
-      <div className="overflow-hidden py-24 lg:py-40 px-5 lg:px-8 border-b border-black/8">
+      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="overflow-hidden">
             <motion.h2
@@ -46,7 +46,7 @@ export default function WhyMeliz() {
 
       {/* Sub-text spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-16 lg:py-24 gap-2">
+        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-2">
           {["A New", "Premium", "Format"].map((w, i) => (
             <motion.span
               key={w}
@@ -67,7 +67,7 @@ export default function WhyMeliz() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.5 }}
-        className="flex justify-center py-20 lg:py-32 px-8"
+        className="flex justify-center py-28 lg:py-44 px-8"
       >
         <p className="body-label text-center max-w-[320px] leading-[2]">
           MELIZ is not only a luxury crystal house but also a strong architectural statement, bringing world-class design and craftsmanship to the UAE and beyond.
@@ -82,11 +82,11 @@ export default function WhyMeliz() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 + i * 0.08 }}
-            className="border-r border-b border-black/8 p-6 lg:p-10 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="border-r border-b border-black/8 p-10 lg:p-16 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
-            <div className="body-label mb-5 text-[#C6A36A]">{p.n}</div>
+            <div className="body-label mb-6 text-[#C6A36A]">{p.n}</div>
             <h3
-              className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-4 leading-tight"
+              className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-5 leading-tight"
               style={{ fontSize: "clamp(1.1rem, 2.5vw, 2rem)" }}
             >
               {p.title}
