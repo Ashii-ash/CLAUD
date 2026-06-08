@@ -15,32 +15,40 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
 
   return (
-    <section ref={ref} className="bg-white border-t border-black/8 overflow-hidden">
+    <section id="testimonials" ref={ref} className="min-h-screen flex flex-col bg-white border-t border-black/8 overflow-hidden">
 
-      {/* Headline */}
-      <div className="overflow-hidden py-28 lg:py-48 px-5 lg:px-8 border-b border-black/8">
+      {/* Headline (~15%) */}
+      <div className="flex-shrink-0 overflow-hidden py-12 lg:py-16 px-5 lg:px-8 border-b border-black/8 flex items-end justify-between">
         <div className="overflow-hidden">
           <motion.h2
             initial={{ y: "110%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="display-text"
-            style={{ fontSize: "clamp(3rem, 10vw, 11rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 8vw, 9rem)" }}
           >
             Client Voices
           </motion.h2>
         </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4 }}
+          className="body-label max-w-[200px] text-right hidden lg:block"
+        >
+          Words from those who have experienced the MELIZ difference.
+        </motion.p>
       </div>
 
-      {/* Quote area */}
+      {/* Quote area: flex-1 */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.3 }}
-        className="grid lg:grid-cols-[1fr_300px] border-b border-black/8"
+        className="flex-1 grid lg:grid-cols-[1fr_200px] border-b border-black/8"
       >
         {/* Quote */}
-        <div className="px-5 lg:px-8 py-20 lg:py-32 border-r border-black/8">
+        <div className="px-5 lg:px-8 py-10 lg:py-16 border-r border-black/8 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={active}
@@ -49,7 +57,7 @@ export default function Testimonials() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.4 }}
               className="display-text text-[#0A0A0A] leading-[1.15] max-w-[700px]"
-              style={{ fontSize: "clamp(1.5rem, 3.5vw, 3.5rem)" }}
+              style={{ fontSize: "clamp(1.3rem, 2.8vw, 2.8rem)" }}
             >
               &ldquo;{testimonials[active].quote}&rdquo;
             </motion.blockquote>
@@ -61,7 +69,7 @@ export default function Testimonials() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="mt-12"
+              className="mt-10"
             >
               <div className="body-label text-[#C6A36A]">{testimonials[active].name}</div>
               <div className="body-label mt-1">{testimonials[active].role}</div>
@@ -73,8 +81,8 @@ export default function Testimonials() {
         <div className="flex flex-row lg:flex-col border-t lg:border-t-0 border-black/8">
           {testimonials.map((t, i) => (
             <button key={i} onClick={() => setActive(i)}
-              className={`flex-1 lg:flex-none px-6 py-10 text-left border-b border-black/8 last:border-b-0 transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "hover:bg-[#faf8f4]/50"}`}>
-              <div className={`w-5 h-px mb-5 transition-all duration-300 ${active === i ? "bg-[#C6A36A]" : "bg-black/15"}`} />
+              className={`flex-1 lg:flex-none px-6 py-8 text-left border-b border-black/8 last:border-b-0 transition-colors duration-300 ${active === i ? "bg-[#faf8f4]" : "hover:bg-[#faf8f4]/50"}`}>
+              <div className={`w-5 h-px mb-4 transition-all duration-300 ${active === i ? "bg-[#C6A36A]" : "bg-black/15"}`} />
               <div className="body-label text-[#C6A36A] mb-1 hidden lg:block">{t.role}</div>
               <div className="body-label text-[#0A0A0A] font-semibold hidden lg:block">{t.name}</div>
               <div className="body-label lg:hidden">{String(i + 1).padStart(2, "0")}</div>
