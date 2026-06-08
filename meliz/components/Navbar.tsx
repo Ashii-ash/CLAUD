@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { scrollY } = useScroll();
+  // Fade out center tagline as MELIZ scrolls in to take its place
+  const taglineOpacity = useTransform(scrollY, [80, 280], [1, 0]);
 
   const go = (href: string) => {
     setOpen(false);
@@ -27,14 +30,17 @@ export default function Navbar() {
           <span className="hidden sm:inline">Menu</span>
         </button>
 
-        {/* Center: tagline */}
-        <div className="absolute left-1/2 -translate-x-1/2 text-center">
+        {/* Center: tagline fades out as MELIZ scrolls in */}
+        <motion.div
+          style={{ opacity: taglineOpacity }}
+          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+        >
           <p className="body-label hidden md:block leading-tight">
             Crafted Beyond Glass<br />
             <span className="text-[#C6A36A]">Dubai, UAE</span>
           </p>
           <p className="body-label md:hidden text-[0.55rem]">MELIZ · Dubai</p>
-        </div>
+        </motion.div>
 
         {/* Right: CTA */}
         <a
