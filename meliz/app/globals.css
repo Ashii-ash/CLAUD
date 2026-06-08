@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
-  background-color: #080808;
-  color: #ffffff;
+  background: #ffffff;
+  color: #0A0A0A;
+  font-family: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 300;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-track { background: #fff; }
 ::-webkit-scrollbar-thumb { background: #C6A36A; }
 
-::selection { background: rgba(198,163,106,0.2); color: white; }
+::selection { background: rgba(198,163,106,0.25); }
 
-.font-display { font-family: 'Playfair Display', Georgia, serif; }
+/* The key class — massive display text */
+.display-text {
+  font-family: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+}
 
-/* Luxury placeholder base */
-.luxury-placeholder {
-  background: linear-gradient(135deg, #141414 0%, #111111 50%, #0d0d0d 100%);
-  position: relative;
-  overflow: hidden;
+.body-label {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+  line-height: 1.7;
 }

@@ -1,87 +1,87 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Collections", href: "#collections" },
-  { label: "Projects", href: "#projects" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
-];
-
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   const go = (href: string) => {
-    setMenuOpen(false);
+    setOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-          scrolled ? "bg-[#080808]/90 backdrop-blur-sm" : ""
-        }`}
-      >
-        <div className="px-8 lg:px-16 flex items-center justify-between h-[72px]">
-          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="group flex flex-col">
-            <span className="text-white text-sm tracking-[0.4em] font-light uppercase group-hover:text-[#C6A36A] transition-colors duration-500">MELIZ</span>
-            <span className="text-[#C6A36A] text-[0.5rem] tracking-[0.6em] uppercase mt-0.5 font-light">Crystal & Glass</span>
-          </button>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 lg:px-8 h-[60px] bg-white/95 backdrop-blur-sm">
+        {/* Left: hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-3 bg-[#0A0A0A] text-white px-4 py-2.5 text-[0.6rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#C6A36A] transition-colors duration-300"
+        >
+          <span className="flex flex-col gap-[4px]">
+            <span className={`block w-4 h-px bg-current transition-all duration-300 ${open ? "rotate-45 translate-y-[5px]" : ""}`} />
+            <span className={`block w-4 h-px bg-current transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block w-4 h-px bg-current transition-all duration-300 ${open ? "-rotate-45 -translate-y-[5px]" : ""}`} />
+          </span>
+          <span className="hidden sm:inline">Menu</span>
+        </button>
 
-          <div className="hidden lg:flex items-center gap-12">
-            {navLinks.map((l) => (
-              <button key={l.label} onClick={() => go(l.href)}
-                className="text-[0.6rem] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors duration-400 font-light">
-                {l.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="hidden lg:block">
-            <a href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
-              target="_blank" rel="noopener noreferrer"
-              className="text-[0.6rem] tracking-[0.35em] uppercase text-[#C6A36A] border-b border-[#C6A36A]/40 pb-px hover:border-[#C6A36A] transition-all duration-300 font-light">
-              Begin a Project →
-            </a>
-          </div>
-
-          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden flex flex-col gap-[5px] p-2">
-            <span className={`block h-px bg-white transition-all duration-400 ${menuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
-            <span className={`block h-px bg-[#C6A36A] transition-all duration-400 ${menuOpen ? "opacity-0 w-4" : "w-4"}`} />
-            <span className={`block h-px bg-white transition-all duration-400 ${menuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-6"}`} />
-          </button>
+        {/* Center: tagline */}
+        <div className="absolute left-1/2 -translate-x-1/2 text-center">
+          <p className="body-label hidden md:block leading-tight">
+            Crafted Beyond Glass<br />
+            <span className="text-[#C6A36A]">Dubai, UAE</span>
+          </p>
+          <p className="body-label md:hidden text-[0.55rem]">MELIZ · Dubai</p>
         </div>
-      </motion.nav>
 
+        {/* Right: CTA */}
+        <a
+          href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 border border-[#0A0A0A] text-[#0A0A0A] px-4 lg:px-6 py-2.5 text-[0.6rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#0A0A0A] hover:text-white transition-all duration-300 group"
+        >
+          <span className="hidden sm:inline">Begin a Project</span>
+          <span className="sm:hidden">Enquire</span>
+          <span className="text-base leading-none group-hover:translate-x-1 transition-transform duration-300">→</span>
+        </a>
+      </nav>
+
+      {/* Full-screen menu */}
       <AnimatePresence>
-        {menuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-[#080808] flex flex-col justify-end pb-16 px-10 lg:hidden">
-            <div className="space-y-8">
-              {navLinks.map((l, i) => (
-                <motion.button key={l.label} onClick={() => go(l.href)}
-                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  className="block text-left text-3xl font-light text-white hover:text-[#C6A36A] transition-colors tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  {l.label}
-                </motion.button>
-              ))}
-            </div>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-40 bg-white flex flex-col justify-center px-8 lg:px-20"
+          >
+            {[
+              { label: "About", href: "#about" },
+              { label: "Collections", href: "#collections" },
+              { label: "Projects", href: "#projects" },
+              { label: "Process", href: "#process" },
+              { label: "Contact", href: "#contact" },
+            ].map((l, i) => (
+              <motion.button
+                key={l.label}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 + i * 0.07 }}
+                onClick={() => go(l.href)}
+                className="display-text text-[clamp(3rem,10vw,9rem)] text-[#0A0A0A] text-left hover:text-[#C6A36A] transition-colors duration-300 border-b border-black/5 py-3 block"
+              >
+                {l.label}
+              </motion.button>
+            ))}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}
+              className="mt-10 flex items-center gap-8">
+              <a href="tel:+971503458369" className="body-label hover:text-[#C6A36A] transition-colors">+971 50 345 8369</a>
+              <a href="mailto:info@meliz.ae" className="body-label hover:text-[#C6A36A] transition-colors">info@meliz.ae</a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

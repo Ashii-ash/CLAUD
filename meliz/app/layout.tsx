@@ -1,42 +1,30 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Barlow } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-barlow",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "MELIZ — Crafted Beyond Glass",
-  description: "Bespoke crystal and luxury architectural creations designed for extraordinary spaces. MELIZ is the luxury division of ATATC, bringing 20+ years of craftsmanship to premium interiors.",
-  keywords: ["luxury crystal", "architectural glass", "bespoke interiors", "luxury UAE", "crystal installations", "decorative glass Dubai"],
+  description: "Bespoke crystal and luxury architectural creations designed for extraordinary spaces. MELIZ is the luxury division of ATATC, Dubai.",
+  keywords: ["luxury crystal", "architectural glass", "bespoke interiors", "Dubai luxury", "crystal installations"],
   openGraph: {
     title: "MELIZ — Crafted Beyond Glass",
     description: "Bespoke crystal and luxury architectural creations designed for extraordinary spaces.",
     type: "website",
     locale: "en_AE",
-    siteName: "MELIZ",
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-full bg-[#111111] text-white antialiased">{children}</body>
+    <html lang="en" className={`${barlow.variable} h-full`}>
+      <body className="min-h-full bg-white text-[#0A0A0A] antialiased overflow-x-hidden">{children}</body>
     </html>
   );
 }
