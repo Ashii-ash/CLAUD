@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 60px;
+}
+
+body {
+  background: #ffffff;
+  color: #0A0A0A;
+  font-family: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Each section snaps into view as you scroll */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #fff; }
+::-webkit-scrollbar-thumb { background: #C6A36A; }
+
+::selection { background: rgba(198,163,106,0.25); }
+
+/* The key class — massive display text */
+.display-text {
+  font-family: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+}
+
+.body-label {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+  line-height: 1.7;
+}
