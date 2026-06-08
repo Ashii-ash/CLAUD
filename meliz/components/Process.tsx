@@ -4,130 +4,83 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
-  {
-    number: "01",
-    title: "Consultation",
-    description: "We begin with an in-depth understanding of your space, vision, and aspirations. Our design consultants listen before they speak.",
-  },
-  {
-    number: "02",
-    title: "Concept Design",
-    description: "Our designers translate your vision into precise concepts — exploring form, light, and material before a single piece is made.",
-  },
-  {
-    number: "03",
-    title: "Material Selection",
-    description: "We source only the finest crystals and specialty glass from the world's most respected producers, chosen specifically for your project.",
-  },
-  {
-    number: "04",
-    title: "Production",
-    description: "Our master craftsmen bring the approved design to life using a combination of traditional technique and precision engineering.",
-  },
-  {
-    number: "05",
-    title: "Installation",
-    description: "Our specialist installation team delivers and places every element with care, ensuring the finished result matches the original vision exactly.",
-  },
+  { n: "01", title: "Consultation", desc: "We begin with a deep understanding of your space, vision, and aspirations. Our consultants listen before they speak." },
+  { n: "02", title: "Concept Design", desc: "Our designers translate your vision into precise concepts — exploring form, light, and material before a single piece is made." },
+  { n: "03", title: "Material Selection", desc: "We source only the finest crystals and specialty glass from the world's most respected producers, chosen specifically for your project." },
+  { n: "04", title: "Production", desc: "Our master craftsmen bring the approved design to life using a combination of traditional technique and precision engineering." },
+  { n: "05", title: "Installation", desc: "Our specialists deliver and place every element with care, ensuring the finished result matches the original vision exactly." },
 ];
 
 export default function Process() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="process" ref={ref} className="py-32 lg:py-40 bg-[#111111] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-32 items-start">
-          {/* Left: Header + Visual */}
+    <section id="process" ref={ref} className="relative bg-[#060606] py-32 lg:py-48 overflow-hidden">
+      <div className="absolute top-16 right-8 lg:right-16 text-[0.5rem] tracking-[0.5em] uppercase text-white/10 font-light">05</div>
+
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-16 lg:gap-32 items-start">
+          {/* Left sticky */}
           <div className="lg:sticky lg:top-32">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-4 mb-8"
-            >
-              <div className="w-8 h-px bg-[#C6A36A]" />
-              <span className="text-[0.6rem] tracking-[0.45em] uppercase text-[#C6A36A] font-medium">
-                Our Process
-              </span>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }} className="flex items-center gap-4 mb-8">
+              <div className="w-6 h-px bg-[#C6A36A]" />
+              <span className="text-[0.5rem] tracking-[0.55em] uppercase text-[#C6A36A] font-light">The Process</span>
             </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-[clamp(2.2rem,5vw,3.8rem)] font-light text-white leading-[1.1] mb-8"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              From Vision
-              <br />
-              <span className="italic text-[#C6A36A]">to Reality.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/45 text-sm leading-relaxed mb-12"
-            >
+            <div className="overflow-hidden mb-3">
+              <motion.h2 initial={{ y: "100%" }} animate={inView ? { y: 0 } : {}}
+                transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2.4rem,5.5vw,5rem)] font-light text-white leading-[1.0] tracking-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}>
+                From Vision
+              </motion.h2>
+            </div>
+            <div className="overflow-hidden mb-12">
+              <motion.h2 initial={{ y: "100%" }} animate={inView ? { y: 0 } : {}}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2.4rem,5.5vw,5rem)] font-semibold italic text-[#C6A36A] leading-[1.0] tracking-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}>
+                to Reality.
+              </motion.h2>
+            </div>
+            <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.4 }}
+              className="text-white/30 text-[0.8rem] leading-relaxed font-light max-w-[320px] mb-16">
               A MELIZ project is a journey — methodical, considered, and entirely dedicated to realising your vision with unwavering precision.
             </motion.p>
 
-            {/* Process visual placeholder */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
+            {/* Process visual — tall narrow placeholder */}
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, delay: 0.3 }}
-              className="luxury-placeholder aspect-[3/4] max-w-sm relative"
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <div className="w-10 h-px bg-[#C6A36A]/30" />
-                <span className="text-[0.5rem] tracking-[0.4em] uppercase text-[#C6A36A]/40 mt-2">
-                  Process Photography
-                </span>
-                <div className="w-10 h-px bg-[#C6A36A]/30 mt-2" />
+              className="relative aspect-[2/3] max-w-[200px] bg-gradient-to-b from-[#141414] to-[#0d0d0d] overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center flex-col gap-2">
+                <div className="w-6 h-px bg-[#C6A36A]/20" />
+                <span className="text-[0.4rem] tracking-[0.4em] uppercase text-white/10">Studio</span>
+                <div className="w-6 h-px bg-[#C6A36A]/20" />
               </div>
-              <div className="absolute top-4 left-4 w-5 h-5 border-t border-l border-[#C6A36A]/25" />
-              <div className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-[#C6A36A]/25" />
+              <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#C6A36A]/15" />
+              <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[#C6A36A]/15" />
             </motion.div>
           </div>
 
-          {/* Right: Steps */}
-          <div className="space-y-0">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, x: 30 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
+          {/* Right: steps */}
+          <div className="mt-0 lg:pt-4">
+            {steps.map((s, i) => (
+              <motion.div key={s.n}
+                initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.2 + i * 0.12 }}
-                className="group"
-              >
-                <div className="flex gap-8 py-10 border-b border-white/8 group-hover:border-[#C6A36A]/25 transition-colors duration-400">
-                  {/* Step number */}
-                  <div className="flex-shrink-0 flex flex-col items-center">
-                    <div
-                      className="font-display text-3xl font-light text-white/15 group-hover:text-[#C6A36A]/40 transition-colors duration-400"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
-                    >
-                      {step.number}
-                    </div>
-                    {i < steps.length - 1 && (
-                      <div className="w-px flex-1 mt-4 bg-gradient-to-b from-white/10 to-transparent min-h-8" />
-                    )}
+                className="group border-b border-white/[0.06] py-10 last:border-0 hover:border-[#C6A36A]/20 transition-colors duration-400">
+                <div className="flex gap-8">
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <span className="text-[0.45rem] tracking-[0.4em] text-[#C6A36A]/40 font-light">{s.n}</span>
+                    {i < steps.length - 1 && <div className="w-px flex-1 bg-gradient-to-b from-white/[0.06] to-transparent mt-4 min-h-[40px]" />}
                   </div>
-
-                  {/* Content */}
-                  <div className="pt-1">
-                    <h3
-                      className="font-display text-xl font-medium text-white mb-3 group-hover:text-[#C6A36A] transition-colors duration-300"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
-                    >
-                      {step.title}
+                  <div>
+                    <h3 className="text-xl font-light text-white mb-3 group-hover:text-[#C6A36A] transition-colors duration-400"
+                      style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {s.title}
                     </h3>
-                    <p className="text-white/45 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
+                    <p className="text-white/30 text-[0.8rem] leading-relaxed font-light">{s.desc}</p>
                   </div>
                 </div>
               </motion.div>

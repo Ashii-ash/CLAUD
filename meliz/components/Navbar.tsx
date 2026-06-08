@@ -16,121 +16,72 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (href: string) => {
+  const go = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#111111]/95 backdrop-blur-md border-b border-white/5"
-            : "bg-transparent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+          scrolled ? "bg-[#080808]/90 backdrop-blur-sm" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="#" className="flex flex-col leading-none group">
-            <span
-              className="font-display text-2xl font-semibold tracking-[0.15em] text-white transition-colors group-hover:text-[#C6A36A]"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              MELIZ
-            </span>
-            <span className="text-[0.55rem] tracking-[0.35em] text-[#C6A36A] uppercase font-medium mt-0.5">
-              Luxury Division
-            </span>
-          </a>
+        <div className="px-8 lg:px-16 flex items-center justify-between h-[72px]">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="group flex flex-col">
+            <span className="text-white text-sm tracking-[0.4em] font-light uppercase group-hover:text-[#C6A36A] transition-colors duration-500">MELIZ</span>
+            <span className="text-[#C6A36A] text-[0.5rem] tracking-[0.6em] uppercase mt-0.5 font-light">Crystal & Glass</span>
+          </button>
 
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                onClick={() => handleNav(link.href)}
-                className="text-[0.7rem] tracking-[0.25em] uppercase text-white/70 hover:text-[#C6A36A] transition-colors duration-300 font-medium"
-              >
-                {link.label}
+          <div className="hidden lg:flex items-center gap-12">
+            {navLinks.map((l) => (
+              <button key={l.label} onClick={() => go(l.href)}
+                className="text-[0.6rem] tracking-[0.35em] uppercase text-white/40 hover:text-white transition-colors duration-400 font-light">
+                {l.label}
               </button>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[0.65rem] tracking-[0.25em] uppercase font-semibold bg-[#C6A36A] text-[#111111] px-6 py-2.5 hover:bg-[#b5935a] transition-colors duration-300"
-            >
-              Enquire Now
+          <div className="hidden lg:block">
+            <a href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
+              target="_blank" rel="noopener noreferrer"
+              className="text-[0.6rem] tracking-[0.35em] uppercase text-[#C6A36A] border-b border-[#C6A36A]/40 pb-px hover:border-[#C6A36A] transition-all duration-300 font-light">
+              Begin a Project →
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`block w-6 h-px bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-            />
-            <span
-              className={`block w-4 h-px bg-[#C6A36A] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block w-6 h-px bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-            />
+          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden flex flex-col gap-[5px] p-2">
+            <span className={`block h-px bg-white transition-all duration-400 ${menuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
+            <span className={`block h-px bg-[#C6A36A] transition-all duration-400 ${menuOpen ? "opacity-0 w-4" : "w-4"}`} />
+            <span className={`block h-px bg-white transition-all duration-400 ${menuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-6"}`} />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 bg-[#111111] flex flex-col justify-center items-center gap-8 lg:hidden"
-          >
-            {navLinks.map((link, i) => (
-              <motion.button
-                key={link.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.07 }}
-                onClick={() => handleNav(link.href)}
-                className="text-2xl tracking-[0.2em] uppercase text-white hover:text-[#C6A36A] transition-colors font-display"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                {link.label}
-              </motion.button>
-            ))}
-            <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              href="https://wa.me/971503458369?text=Hello%20MELIZ%2C%20I%20would%20like%20to%20discuss%20a%20luxury%20crystal%20or%20glass%20project."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[0.75rem] tracking-[0.3em] uppercase font-semibold bg-[#C6A36A] text-[#111111] px-10 py-4 mt-4"
-            >
-              Enquire Now
-            </motion.a>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-40 bg-[#080808] flex flex-col justify-end pb-16 px-10 lg:hidden">
+            <div className="space-y-8">
+              {navLinks.map((l, i) => (
+                <motion.button key={l.label} onClick={() => go(l.href)}
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                  className="block text-left text-3xl font-light text-white hover:text-[#C6A36A] transition-colors tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  {l.label}
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

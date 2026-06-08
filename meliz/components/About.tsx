@@ -1,137 +1,113 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const stats = [
-  { value: "20+", label: "Years of Excellence" },
+  { value: "20+", label: "Years of Expertise" },
   { value: "500+", label: "Luxury Projects" },
-  { value: "12", label: "Countries Served" },
-  { value: "100%", label: "Bespoke Creations" },
+  { value: "12", label: "Countries" },
+  { value: "100%", label: "Bespoke" },
 ];
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-15%" });
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <section id="about" ref={ref} className="py-32 lg:py-40 bg-[#111111] relative overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,rgba(198,163,106,0.03)_0%,transparent_70%)] pointer-events-none" />
+    <section id="about" ref={sectionRef} className="relative bg-[#080808] overflow-hidden">
+      {/* Large section number */}
+      <div className="absolute top-16 right-8 lg:right-16 text-[0.5rem] tracking-[0.5em] uppercase text-white/10 font-light">01</div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-32 items-center">
-          {/* Left: Text */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-4 mb-8"
-            >
-              <div className="w-8 h-px bg-[#C6A36A]" />
-              <span className="text-[0.6rem] tracking-[0.45em] uppercase text-[#C6A36A] font-medium">
-                Our Story
-              </span>
-            </motion.div>
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 py-32 lg:py-48" ref={ref}>
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-0 items-start">
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-[clamp(2.2rem,5vw,3.8rem)] font-light leading-[1.1] text-white mb-8"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Where Craftsmanship
-              <br />
-              <span className="italic text-[#C6A36A]">Meets Luxury.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/55 leading-relaxed text-[0.95rem] mb-6"
-            >
-              MELIZ is the luxury division of ATATC — Al Tabaa Advertising Materials LLC — a name that has defined manufacturing excellence in the UAE for over two decades. Born from an unwavering commitment to quality, MELIZ distils this legacy into something rarer: bespoke crystal and architectural glass experiences created for those who accept nothing less than extraordinary.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-white/55 leading-relaxed text-[0.95rem] mb-10"
-            >
-              Behind every MELIZ creation is a complete production ecosystem: design consultants, master craftsmen, precision fabricators, and installation specialists — all under one roof. From an intimate villa commission to a landmark architectural installation, we command every detail from concept to completion.
-            </motion.p>
-
-            <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              href="#collections"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#collections")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.3em] uppercase font-semibold text-[#C6A36A] hover:gap-5 transition-all duration-300"
-            >
-              Discover Collections
-              <span className="text-lg leading-none">→</span>
-            </motion.a>
-          </div>
-
-          {/* Right: Stats + Visual */}
-          <div className="space-y-8">
-            {/* Large placeholder */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="luxury-placeholder aspect-[4/3] w-full relative"
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
-                <div className="w-12 h-px bg-[#C6A36A]/40" />
-                <span className="text-[0.55rem] tracking-[0.4em] uppercase text-[#C6A36A]/50 mt-2">
-                  Atelier Photography
-                </span>
-                <span className="text-[0.5rem] tracking-[0.3em] uppercase text-white/20 mt-1">
-                  Coming Soon
-                </span>
-                <div className="w-12 h-px bg-[#C6A36A]/40 mt-2" />
+          {/* Left: image + stats */}
+          <div className="relative">
+            {/* Main image placeholder — tall architectural format */}
+            <motion.div style={{ y: imgY }}
+              className="relative w-full lg:w-[90%] aspect-[3/4] overflow-hidden bg-gradient-to-br from-[#141414] via-[#111111] to-[#0d0d0d]">
+              <div className="absolute inset-0 flex items-center justify-center flex-col gap-2">
+                <div className="w-10 h-px bg-[#C6A36A]/20" />
+                <span className="text-[0.45rem] tracking-[0.5em] uppercase text-white/15">Atelier Photography</span>
+                <div className="w-10 h-px bg-[#C6A36A]/20" />
               </div>
-              {/* Decorative corners */}
-              <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#C6A36A]/30" />
-              <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#C6A36A]/30" />
-              <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[#C6A36A]/30" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#C6A36A]/30" />
+              {/* Corner marks */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#C6A36A]/20" />
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#C6A36A]/20" />
+              {/* Gold overlay gradient */}
+              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#080808] to-transparent" />
             </motion.div>
 
-            {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-                  className="border border-white/8 p-6 hover:border-[#C6A36A]/30 transition-colors duration-400 group"
-                >
-                  <div
-                    className="font-display text-3xl font-light text-[#C6A36A] mb-1 group-hover:text-white transition-colors duration-300"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-[0.65rem] tracking-[0.2em] uppercase text-white/40 font-medium">
-                    {stat.label}
-                  </div>
+            {/* Stats — overlapping bottom of image */}
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="relative lg:absolute lg:bottom-[-2rem] lg:right-[-2rem] grid grid-cols-2 gap-px bg-white/5 w-full lg:w-[280px] mt-8 lg:mt-0">
+              {stats.map((s, i) => (
+                <motion.div key={s.label} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+                  transition={{ delay: 0.6 + i * 0.1 }}
+                  className="bg-[#0e0e0e] p-6 group hover:bg-[#131313] transition-colors duration-300">
+                  <div className="text-2xl font-light text-[#C6A36A] mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>{s.value}</div>
+                  <div className="text-[0.5rem] tracking-[0.3em] uppercase text-white/30 font-light">{s.label}</div>
                 </motion.div>
               ))}
+            </motion.div>
+          </div>
+
+          {/* Right: text — offset down on desktop */}
+          <div className="lg:pt-32 lg:pl-16 mt-16 lg:mt-0">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-4 mb-10">
+              <div className="w-6 h-px bg-[#C6A36A]" />
+              <span className="text-[0.5rem] tracking-[0.55em] uppercase text-[#C6A36A] font-light">Our Story</span>
+            </motion.div>
+
+            <div className="overflow-hidden mb-3">
+              <motion.h2 initial={{ y: "100%" }} animate={inView ? { y: 0 } : {}}
+                transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2.4rem,5.5vw,5rem)] font-light text-white leading-[1.0] tracking-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}>
+                Where Craft
+              </motion.h2>
             </div>
+            <div className="overflow-hidden mb-12">
+              <motion.h2 initial={{ y: "100%" }} animate={inView ? { y: 0 } : {}}
+                transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2.4rem,5.5vw,5rem)] font-semibold italic text-[#C6A36A] leading-[1.0] tracking-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}>
+                Meets Luxury.
+              </motion.h2>
+            </div>
+
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-white/40 text-[0.85rem] leading-[1.9] mb-6 font-light max-w-[420px]">
+              MELIZ is the luxury division of ATATC — Al Tabaa Advertising Materials LLC — a name that has defined manufacturing excellence in the UAE for over two decades. Born from an unwavering commitment to quality, MELIZ distils this legacy into bespoke crystal and architectural glass experiences.
+            </motion.p>
+
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-white/30 text-[0.85rem] leading-[1.9] mb-12 font-light max-w-[420px]">
+              Behind every MELIZ creation is a complete production ecosystem — design consultants, master craftsmen, precision fabricators, and installation specialists — all under one roof.
+            </motion.p>
+
+            <motion.button initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              onClick={() => document.querySelector("#collections")?.scrollIntoView({ behavior: "smooth" })}
+              className="flex items-center gap-4 text-[0.6rem] tracking-[0.35em] uppercase text-white/40 hover:text-[#C6A36A] transition-all duration-400 group font-light">
+              <span>Explore Collections</span>
+              <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-sm">→</motion.span>
+            </motion.button>
           </div>
         </div>
       </div>
+
+      {/* Bottom divider line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent mx-8 lg:mx-16" />
     </section>
   );
 }
