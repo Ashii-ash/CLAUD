@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ParallaxStrip } from "./ScrollReveal";
 
 export default function About() {
   const ref = useRef(null);
@@ -74,22 +75,9 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Row 4: Three-word spread */}
+      {/* Row 4: Three-word parallax spread */}
       <div className="border-t border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-2">
-          {["A New", "Premium", "Standard"].map((word, i) => (
-            <motion.span
-              key={word}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.5 + i * 0.08 }}
-              className="display-text text-[#0A0A0A]"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 7.5rem)" }}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </div>
+        <ParallaxStrip words={["A New", "Premium", "Standard"]} fontSize="clamp(1.6rem, 6vw, 7.5rem)" speed={100} />
       </div>
 
       {/* Row 5: Stats */}

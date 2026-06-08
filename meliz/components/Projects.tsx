@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { ParallaxStrip } from "./ScrollReveal";
 
 const projects = [
   { title: "Crystal Staircase", location: "Palm Jumeirah Villa, Dubai", cat: "Residential", year: "2024", tall: true },
@@ -47,22 +48,9 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Sub-headline spread */}
+      {/* Sub-headline parallax spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-4">
-          {["Spaces", "Transformed", "By Light"].map((w, i) => (
-            <motion.span
-              key={w}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 + i * 0.08 }}
-              className="display-text text-[#0A0A0A]"
-              style={{ fontSize: "clamp(1.8rem, 6vw, 7rem)" }}
-            >
-              {w}
-            </motion.span>
-          ))}
-        </div>
+        <ParallaxStrip words={["Spaces", "Transformed", "By Light"]} fontSize="clamp(1.8rem, 6vw, 7rem)" speed={90} />
       </div>
 
       {/* Small centered body text */}

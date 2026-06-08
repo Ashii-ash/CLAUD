@@ -1,18 +1,28 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const letters = ["M", "E", "L", "I", "Z"];
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+
+  const crystalY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const crystalOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const lettersY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const labelOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
   return (
-    <section className="relative w-full h-screen min-h-[650px] bg-white overflow-hidden flex flex-col pt-[60px]">
+    <section ref={ref} className="relative w-full h-screen min-h-[650px] bg-white overflow-hidden flex flex-col pt-[60px]">
 
       {/* Top center label */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
+        style={{ opacity: labelOpacity }}
         className="absolute top-[80px] left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none"
       >
         <p className="body-label leading-loose">
@@ -21,11 +31,12 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* Center: Crystal sculpture */}
+      {/* Center: Crystal sculpture with parallax */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        style={{ y: crystalY, opacity: crystalOpacity }}
         className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none"
       >
         <div className="relative w-[min(400px,58vw)] h-[min(400px,58vw)]">
@@ -45,13 +56,17 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 1.6 }}
+        style={{ opacity: labelOpacity }}
         className="absolute bottom-10 right-8 lg:right-10 text-right z-20"
       >
         <p className="body-label">Luxury Division<br /><span className="text-[#C6A36A]">ATATC Group</span></p>
       </motion.div>
 
-      {/* Center: MELIZ letters spread full-width like reference — each letter at its position */}
-      <div className="absolute inset-0 z-10 flex items-center justify-between px-4 lg:px-6 pointer-events-none select-none overflow-hidden">
+      {/* MELIZ letters — spread full-width, parallax on scroll */}
+      <motion.div
+        style={{ y: lettersY }}
+        className="absolute inset-0 z-10 flex items-center justify-between px-4 lg:px-6 pointer-events-none select-none overflow-hidden"
+      >
         {letters.map((letter, i) => (
           <motion.span
             key={letter}
@@ -68,22 +83,24 @@ export default function Hero() {
             {letter}
           </motion.span>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Scroll down arrow */}
+      {/* Scroll indicator */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
+        style={{ opacity: labelOpacity }}
         onClick={() => document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })}
-        className="absolute bottom-8 right-8 z-20 w-10 h-10 border border-black/15 flex items-center justify-center hover:border-[#C6A36A] hover:text-[#C6A36A] transition-colors duration-300 pointer-events-auto"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-auto"
         aria-label="Scroll down"
       >
-        <motion.span
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-base leading-none"
-        >↓</motion.span>
+        <span className="body-label">Scroll</span>
+        <motion.div
+          animate={{ scaleY: [0, 1, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px h-8 bg-black/30 origin-top"
+        />
       </motion.button>
     </section>
   );

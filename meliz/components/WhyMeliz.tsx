@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ParallaxStrip } from "./ScrollReveal";
 
 const pillars = [
   { n: "01", title: "20+ Years of Expertise", desc: "Backed by ATATC's two decades of manufacturing excellence in the UAE." },
@@ -44,22 +45,9 @@ export default function WhyMeliz() {
         </div>
       </div>
 
-      {/* Sub-text spread */}
+      {/* Sub-text parallax spread */}
       <div className="border-b border-black/8 overflow-hidden">
-        <div className="flex items-baseline justify-between px-5 lg:px-8 py-28 lg:py-40 gap-2">
-          {["A New", "Premium", "Format"].map((w, i) => (
-            <motion.span
-              key={w}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 + i * 0.08 }}
-              className="display-text"
-              style={{ fontSize: "clamp(2rem, 7vw, 8rem)" }}
-            >
-              {w}
-            </motion.span>
-          ))}
-        </div>
+        <ParallaxStrip words={["A New", "Premium", "Format"]} fontSize="clamp(2rem, 7vw, 8rem)" speed={110} />
       </div>
 
       {/* Center body text */}
