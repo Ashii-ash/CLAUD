@@ -46,8 +46,8 @@ export default function Projects() {
         </motion.a>
       </div>
 
-      {/* Photo grid: 3 cols × 2 rows filling flex-1 */}
-      <div className="flex-1 grid grid-cols-3 grid-rows-2">
+      {/* Photo grid: 1 col mobile → 2 col tablet → 3 col desktop */}
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p, i) => (
           <motion.div
             key={p.title}
@@ -56,14 +56,14 @@ export default function Projects() {
             transition={{ duration: 0.7, delay: 0.2 + i * 0.08 }}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
-            className="relative overflow-hidden group cursor-default border-r border-b border-black/8"
+            className="relative overflow-hidden group cursor-default border-r border-b border-black/8 min-h-[260px] sm:min-h-[300px] lg:min-h-0"
           >
             <Image
               src={`https://images.unsplash.com/${p.photo}?w=800&q=80&auto=format&fit=crop`}
               alt={p.title}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="33vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/45 transition-colors duration-500" />
             <div className="absolute top-4 left-4 body-label text-white/70">{String(i + 1).padStart(2, "0")}</div>

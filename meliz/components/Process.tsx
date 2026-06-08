@@ -49,7 +49,7 @@ export default function Process() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
-            className="flex-1 flex items-center gap-8 lg:gap-16 px-5 lg:px-8 border-b border-black/8 group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="flex-1 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-16 px-5 lg:px-8 py-6 lg:py-0 border-b border-black/8 group hover:bg-[#faf8f4] transition-colors duration-300"
           >
             <span
               className="display-text text-[#C6A36A] flex-shrink-0 leading-none"
@@ -63,7 +63,7 @@ export default function Process() {
             >
               {s.title}
             </h3>
-            <p className="body-label leading-relaxed hidden lg:block max-w-[400px]">{s.desc}</p>
+            <p className="body-label leading-relaxed max-w-[400px]">{s.desc}</p>
             <div className="ml-auto body-label text-[#C6A36A] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0">→</div>
           </motion.div>
         ))}

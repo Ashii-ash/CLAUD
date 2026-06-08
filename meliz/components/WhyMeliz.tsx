@@ -43,25 +43,25 @@ export default function WhyMeliz() {
       </div>
 
       {/* Pillars grid: 2 cols × 3 rows on mobile, 3 cols × 2 rows on desktop */}
-      <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 grid-rows-3 lg:grid-rows-2">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p, i) => (
           <motion.div
             key={p.n}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 + i * 0.08 }}
-            className="border-r border-b border-black/8 p-6 lg:p-8 flex flex-col justify-between group hover:bg-[#faf8f4] transition-colors duration-300"
+            className="border-r border-b border-black/8 p-6 lg:p-8 flex flex-col justify-between group hover:bg-[#faf8f4] transition-colors duration-300 min-h-[160px] lg:min-h-0"
           >
             <div>
-              <div className="body-label mb-4 text-[#C6A36A]">{p.n}</div>
+              <div className="body-label mb-3 text-[#C6A36A]">{p.n}</div>
               <h3
                 className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 leading-tight"
-                style={{ fontSize: "clamp(1rem, 2.2vw, 1.8rem)" }}
+                style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.8rem)" }}
               >
                 {p.title}
               </h3>
             </div>
-            <p className="body-label leading-relaxed hidden lg:block mt-4">{p.desc}</p>
+            <p className="body-label leading-relaxed mt-4">{p.desc}</p>
           </motion.div>
         ))}
       </div>

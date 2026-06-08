@@ -46,21 +46,21 @@ export default function About() {
       </div>
 
       {/* Bottom row: body text left + stats right */}
-      <div className="flex-shrink-0 grid grid-cols-2 lg:grid-cols-[1fr_3fr] border-t border-black/8">
-        {/* Body text */}
+      <div className="flex-shrink-0 border-t border-black/8">
+        {/* Body text — full width on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="px-5 lg:px-8 py-8 border-r border-black/8 flex items-center"
+          className="px-5 lg:px-8 py-6 border-b border-black/8"
         >
           <p className="body-label leading-[2]">
             MELIZ is Dubai&apos;s premier luxury gifting brand — where every gift is an experience. From elite corporate gifting to bespoke personal creations, we craft moments of extraordinary generosity for those who demand nothing less.
           </p>
         </motion.div>
 
-        {/* Stats */}
-        <div className="flex">
+        {/* Stats — 2×2 on mobile, 4 cols on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4">
           {[
             { v: "20+", l: "Years of Excellence" },
             { v: "5000+", l: "Gifts Delivered" },
@@ -72,11 +72,11 @@ export default function About() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.45 + i * 0.07 }}
-              className="flex-1 border-l border-black/8 px-6 py-8 group hover:bg-[#faf8f4] transition-colors duration-300"
+              className="border-r border-b border-black/8 px-5 lg:px-8 py-7 group hover:bg-[#faf8f4] transition-colors duration-300"
             >
               <div
                 className="display-text text-[#0A0A0A] group-hover:text-[#C6A36A] transition-colors duration-300 mb-2"
-                style={{ fontSize: "clamp(2rem, 4vw, 4rem)" }}
+                style={{ fontSize: "clamp(1.8rem, 4vw, 4rem)" }}
               >
                 {s.v}
               </div>

@@ -52,10 +52,10 @@ export default function Testimonials() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ delay: 0.3 }}
-        className="flex-1 grid lg:grid-cols-[1fr_200px] border-b border-black/8"
+        className="flex-1 flex flex-col lg:grid lg:grid-cols-[1fr_200px] border-b border-black/8"
       >
         {/* Quote */}
-        <div className="px-5 lg:px-8 py-10 lg:py-16 border-r border-black/8 flex flex-col justify-center">
+        <div className="flex-1 px-5 lg:px-8 py-8 lg:py-16 border-b lg:border-b-0 lg:border-r border-black/8 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={active}

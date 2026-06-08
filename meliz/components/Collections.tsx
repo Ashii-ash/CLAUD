@@ -65,7 +65,7 @@ export default function Collections() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
         {/* 3 collection names overlaid at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 border-t border-white/10">
+        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 sm:grid-cols-3 border-t border-white/10">
           {cols.slice(0, 3).map((c, i) => (
             <motion.div
               key={c.n}
