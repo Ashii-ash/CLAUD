@@ -6,11 +6,11 @@ import Icon from '../components/Icon.astro';
 import Visit from '../components/Visit.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Scene3D from '../components/Scene3D.astro';
-import { services, processSteps, details, work, testimonials } from '../data/content';
+import { services, processSteps, details, lookbook, testimonials } from '../data/content';
 import { site, whatsappLink } from '../data/site';
 
 const [suits, wedding, everyday] = services;
-const featured = work.slice(0, 5);
+const featured = lookbook;
 ---
 <Base
   title="Tex N Tailor | Bespoke Tailor in Al Nahda, Dubai. Custom Suits & Wedding Attire"
@@ -167,8 +167,9 @@ const featured = work.slice(0, 5);
     <div class="wrap">
       <div class="work__head">
         <div>
-          <Tape label="From the studio" />
-          <h2 id="work-title" class="display h-lg" data-reveal>Our work</h2>
+          <Tape label="The lookbook" />
+          <h2 id="work-title" class="display h-lg" data-reveal>Looks we make <span class="soft">for our clients.</span></h2>
+          <p class="muted work__note" data-reveal>Illustrations of the kind of work we do. For finished pieces, see our portfolio.</p>
         </div>
         <a class="link-arrow" href="/work/" data-reveal>See the portfolio</a>
       </div>
@@ -311,6 +312,8 @@ const featured = work.slice(0, 5);
   /* WORK: bento */
   .work__head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(2rem, 4vw, 3rem); }
   .work__head :global(.eyebrow) { margin-bottom: 1rem; }
+  .work__head h2 { max-width: 16ch; }
+  .work__note { margin: 1rem 0 0; font-size: 0.95rem; }
   .work__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(0.6rem, 1.4vw, 1rem); grid-template-rows: repeat(2, clamp(230px, 30vw, 440px)); }
   .work__item { margin: 0; position: relative; min-height: 0; }
   .work__item :global(.frame) { height: 100%; }

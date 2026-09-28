@@ -44,14 +44,14 @@ export const services: Service[] = [
       'Tell us where the suit will be worn, whether that is the boardroom, a client dinner or a week of travel. We will help you choose a cloth and a cut that suit both you and the occasion.',
     ],
     decisions: ['Cloth and colour', 'Single or double-breasted', 'Lapel style and width', 'Buttons and lining', 'Trouser cut and finish'],
-    hero: {
-      alt: 'A finished navy custom suit by Tex N Tailor, photographed on a client in the studio',
+    hero: { photo: 'render-suit.webp',
+      alt: 'Illustration of the Tex N Tailor gentleman in a navy two-piece suit with a claret tie',
       brief: 'Finished suit on a client, three-quarter length, studio daylight',
       weave: 'pinstripe',
       tone: 'navy',
     },
-    detail: {
-      alt: 'Close-up of a jacket lapel and buttonhole',
+    detail: { photo: 'render-buttons.webp',
+      alt: 'Illustration of mother-of-pearl and horn suit buttons on navy twill cloth',
       brief: 'Macro: lapel roll and buttonhole',
       weave: 'herringbone',
       tone: 'charcoal',
@@ -69,14 +69,14 @@ export const services: Service[] = [
       'Start early and bring your plans with you: the date, the setting, the colours. We will talk you through cloth, cut and finishing so the result feels like you on the day it matters most.',
     ],
     decisions: ['The look for the ceremony and the evening', 'Cloth, colour and texture', 'Cut and silhouette', 'Finishing details', 'Timing of fittings around your date'],
-    hero: {
-      alt: 'Wedding attire tailored by Tex N Tailor, worn by a groom',
+    hero: { photo: 'render-wedding.webp',
+      alt: 'Illustration of the gentleman in an ivory dinner jacket, black trousers and bow tie',
       brief: 'Groom in finished wedding attire, full length, warm light',
       weave: 'birdseye',
       tone: 'ivory',
     },
-    detail: {
-      alt: 'Detail of fabric and finishing on wedding attire',
+    detail: { photo: 'render-lining.webp',
+      alt: 'Illustration of navy cloth draped to show a claret lining',
       brief: 'Detail: cloth texture and finishing on the wedding garment',
       weave: 'twill',
       tone: 'claret',
@@ -94,14 +94,14 @@ export const services: Service[] = [
       'Bring a favourite garment, a photo of something you like, or simply an idea. We will measure you and make it to fit.',
     ],
     decisions: ['Relaxed or structured fit', 'Cloth for Dubai weather', 'Collars, cuffs and pockets', 'Length and proportion'],
-    hero: {
-      alt: 'Casual tailored clothing by Tex N Tailor worn in the city',
+    hero: { photo: 'render-everyday.webp',
+      alt: 'Illustration of the gentleman in a tailored shirt and chinos beside folded cloth',
       brief: 'Client in relaxed tailored clothing, outdoors, natural light',
       weave: 'linen',
       tone: 'sand',
     },
-    detail: {
-      alt: 'Close-up of a shirt collar and cuff',
+    detail: { photo: 'render-swatches.webp',
+      alt: 'Illustration of folded suiting and shirting cloth with a tape measure',
       brief: 'Macro: collar and cuff on a casual garment',
       weave: 'check',
       tone: 'olive',
@@ -150,32 +150,32 @@ export const details: { term: string; text: string; slot: PhotoSlot }[] = [
   {
     term: 'Lapel',
     text: 'Notch, peak or shawl; narrow or generous. The lapel sets the character of a jacket more than any other detail.',
-    slot: { alt: 'Close-up of a jacket lapel', brief: 'Lapel, shot from above on the cutting table', weave: 'herringbone', tone: 'charcoal' },
+    slot: { photo: 'render-lapel.webp', alt: 'Illustration close-up of a notch lapel, tie and jacket shoulder', brief: 'Lapel, shot from above on the cutting table', weave: 'herringbone', tone: 'charcoal' },
   },
   {
     term: 'Collar',
     text: 'The frame for your face. Its spread and height should suit your neck and how you wear a tie, or don’t.',
-    slot: { alt: 'Close-up of a shirt collar', brief: 'Collar on a finished shirt, soft side light', weave: 'linen', tone: 'ivory' },
+    slot: { photo: 'render-collar.webp', alt: 'Illustration close-up of a shirt collar and tie under a charcoal jacket', brief: 'Collar on a finished shirt, soft side light', weave: 'linen', tone: 'ivory' },
   },
   {
     term: 'Cuff',
     text: 'Where jacket sleeve meets shirt. A good fit shows a measured line of shirt cuff when your arms are at rest.',
-    slot: { alt: 'Close-up of a sleeve and cuff', brief: 'Sleeve and cuff line, arm at rest', weave: 'pinstripe', tone: 'navy' },
+    slot: { photo: 'render-cuff.webp', alt: 'Illustration close-up of a jacket sleeve showing the shirt cuff', brief: 'Sleeve and cuff line, arm at rest', weave: 'pinstripe', tone: 'navy' },
   },
   {
     term: 'Buttons',
     text: 'Small, but seen all day. Material, colour and finish are chosen to suit the cloth.',
-    slot: { alt: 'Selection of suit buttons on fabric', brief: 'Button selection laid on cloth swatches', weave: 'birdseye', tone: 'sand' },
+    slot: { photo: 'render-buttons.webp', alt: 'Illustration of suit buttons laid on navy cloth', brief: 'Button selection laid on cloth swatches', weave: 'birdseye', tone: 'sand' },
   },
   {
     term: 'Lining',
     text: 'The part only you see. A chance for a quiet flash of colour, or simply something cool and comfortable.',
-    slot: { alt: 'Jacket opened to show the lining', brief: 'Jacket held open to reveal lining', weave: 'twill', tone: 'claret' },
+    slot: { photo: 'render-lining.webp', alt: 'Illustration of navy cloth with a claret lining', brief: 'Jacket held open to reveal lining', weave: 'twill', tone: 'claret' },
   },
   {
     term: 'Trouser break',
     text: 'How the hem meets the shoe. No break, a slight break or a full one, decided at the fitting.',
-    slot: { alt: 'Trouser hem resting on a shoe', brief: 'Trouser hem and shoe, low angle', weave: 'check', tone: 'olive' },
+    slot: { photo: 'render-trousers.webp', alt: 'Illustration of trouser hems resting on polished shoes', brief: 'Trouser hem and shoe, low angle', weave: 'check', tone: 'olive' },
   },
 ];
 
@@ -207,8 +207,8 @@ export const work: (PhotoSlot & { category: WorkCategory; caption: string; shape
  */
 export const testimonials: { quote: string; name: string; source: string }[] = [];
 
-export const studioSlot: PhotoSlot = {
-  alt: 'The Tex N Tailor studio in Al Nahda, Dubai',
+export const studioSlot: PhotoSlot = { photo: 'render-studio.webp',
+  alt: 'Illustration of thread spools, a tape measure and tailor’s chalk',
   brief: 'The studio: shopfront or cutting table, wide shot',
   weave: 'twill',
   tone: 'navy',
@@ -220,3 +220,12 @@ export const heroSlot: PhotoSlot = {
   weave: 'herringbone',
   tone: 'navy',
 };
+
+/** Homepage lookbook: rendered illustrations of the looks we make (not client photographs). */
+export const lookbook: (PhotoSlot & { caption: string })[] = [
+  { photo: 'render-suit.webp', caption: 'The navy suit', alt: 'Illustration of the gentleman in a navy two-piece suit', brief: '', weave: 'pinstripe', tone: 'navy' },
+  { photo: 'render-buttons.webp', caption: 'Buttons', alt: 'Illustration of horn and mother-of-pearl buttons on navy cloth', brief: '', weave: 'herringbone', tone: 'charcoal' },
+  { photo: 'render-wedding.webp', caption: 'The wedding look', alt: 'Illustration of the gentleman in an ivory dinner jacket and bow tie', brief: '', weave: 'birdseye', tone: 'ivory' },
+  { photo: 'render-swatches.webp', caption: 'Cloth', alt: 'Illustration of folded suiting cloth with a tape measure and chalk', brief: '', weave: 'linen', tone: 'sand' },
+  { photo: 'render-trousers.webp', caption: 'The finish', alt: 'Illustration of trouser hems resting on polished shoes', brief: '', weave: 'check', tone: 'olive' },
+];

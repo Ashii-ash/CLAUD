@@ -18,7 +18,7 @@ third-party scripts on page load.
 scale, soft grey surfaces, pill controls and space.
 
 **3D** (`src/scripts/atelier3d.ts`, all procedural, no model files):
-- Hero: navy suiting cloth with a twill weave and fabric sheen, draping on the GPU, with mother-of-pearl and horn suit buttons. It follows the pointer.
+- Hero: "the gentleman" in a navy suit, standing in front of navy suiting cloth (twill weave, fabric sheen, draping on the GPU), with mother-of-pearl and horn buttons. He breathes and blinks, follows the pointer, and waves on arrival and on click.
 - Closing CTA: a turning mother-of-pearl button.
 - three.js (~135 KB gzip) loads only when a scene nears the viewport. Rendering pauses off-screen and in background tabs, shows a single still frame with `prefers-reduced-motion`, and falls back to a soft gradient without WebGL. Page JS outside the 3D is about 8 KB.
 
@@ -49,19 +49,18 @@ value is marked `VERIFY`. Nothing has been invented. Optional values left as `nu
 Also confirm: whether the current site sells products online ("free shipping over $50" appears
 in its search listing). E-commerce was deliberately left out of this build.
 
-## Photography
+## Images
 
-There is no real Tex N Tailor photography in this repository, and none was generated or taken from stock.
-Every image slot shows a labelled **soft grey placeholder** with a shot brief
-("Photograph to come — …") that doubles as a shot list for the photographer.
+The site's images are **3D illustrations rendered for this project**, not photographs and not
+stock or AI imagery. They show "the gentleman" (a stylised client, `src/scripts/character.ts`)
+in a navy suit, wedding and everyday looks, detail crops (lapel, collar, cuff, trouser break), and still lifes
+(buttons, cloth, lining, thread and tape). The homepage calls them a lookbook and says they're illustrations.
+The `/work/` portfolio keeps labelled placeholders for **real client photographs**.
 
-To add a photo:
-
-1. Put the file in `src/assets/photos/` (JPG/PNG, ideally ≥ 2000 px on the long edge).
-2. Set `photo: 'filename.jpg'` on the matching slot in `src/data/content.ts`.
-
-The build converts it to responsive AVIF/WebP automatically. Suggested minimum shoot: the hero (tailor measuring a client),
-one finished piece and one macro detail per service, the studio front, a fitting, and cloth/swatches.
+- Re-render: in `texntailor/` run `npx vite --port 5199`, then `node tools/render/shoot.mjs [scene …]`.
+  Scenes live in `tools/render/studio.ts` and are written to `src/assets/photos/render-*.webp`.
+- Add real photos: drop a file into `src/assets/photos/` and set `photo: 'file.jpg'` on the slot in
+  `src/data/content.ts`. The build makes responsive AVIF/WebP automatically.
 
 ## Enquiry form
 

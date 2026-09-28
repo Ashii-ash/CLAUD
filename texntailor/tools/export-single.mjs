@@ -23,6 +23,20 @@ html = html.replace(/<script type="module" src="\/_astro\/([^"]+)"><\/script>/g,
 });
 html = html.replace('</body>', `<script type="text/plain" id="tnt-3d">${b64(A + chunk)}</script></body>`);
 
+// 2b. Images: each <picture> becomes one <img> holding its ~1200w WebP as a data URI.
+const imgCache = new Map();
+html = html.replace(/<picture>([\s\S]*?)<\/picture>/g, (_, inner) => {
+  const webp = inner.match(/<source srcset="([^"]+)" type="image\/webp"/);
+  const img = inner.match(/<img ([^>]*?)\/?>/);
+  if (!webp || !img) return _;
+  const cands = webp[1].split(',').map((c) => c.trim().split(/\s+/)).map(([u, w]) => ({ u, w: parseInt(w) }));
+  const pick = cands.filter((c) => c.w <= 1200).pop() ?? cands[0];
+  const file = D + pick.u;
+  if (!imgCache.has(file)) imgCache.set(file, `data:image/webp;base64,${b64(file)}`);
+  const attrs = (' ' + img[1]).replace(/\s(src|srcset|sizes)="[^"]*"/g, '');
+  return `<img src="${imgCache.get(file)}" ${attrs}>`;
+});
+
 // 3. Favicon inline.
 html = html.replace('href="/favicon.svg"', `href="data:image/svg+xml;base64,${b64(D + '/favicon.svg')}"`)
            .replace(/<link rel="apple-touch-icon"[^>]*>/, '').replace(/<link rel="sitemap"[^>]*>/, '');
