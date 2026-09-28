@@ -14,9 +14,9 @@ const { kicker, title, lede } = Astro.props;
   </div>
 </section>
 <style>
-  .intro { padding-top: calc(var(--header-h) + clamp(2.5rem, 7vw, 6rem)); padding-bottom: clamp(3rem, 7vw, 6rem); }
+  .intro { padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 7rem)); padding-bottom: clamp(3rem, 7vw, 6rem); }
   .intro__grid { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(1.5rem, 5vw, 5rem); align-items: end; }
-  .intro h1 :global(em) { color: var(--claret); }
+  .intro h1 { max-width: 14ch; }
   .intro .lede { margin: 0; }
   @media (max-width: 900px) { .intro__grid { grid-template-columns: 1fr; } }
 </style>

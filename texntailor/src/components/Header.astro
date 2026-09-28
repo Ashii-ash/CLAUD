@@ -3,14 +3,12 @@ import Wordmark from './Wordmark.astro';
 import Icon from './Icon.astro';
 import { nav, site, telLink, whatsappLink } from '../data/site';
 
-interface Props { tone?: 'light' | 'dark'; }
-const { tone = 'light' } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || path.startsWith(href);
 ---
-<header class:list={['hdr', `hdr--${tone}`]} data-header>
+<header class="hdr" data-header>
   <div class="hdr__inner wrap">
-    <a href="/" class="hdr__brand" aria-label="Tex N Tailor — home"><Wordmark /></a>
+    <a href="/" class="hdr__brand" aria-label="Tex N Tailor, home"><Wordmark /></a>
 
     <nav class="hdr__nav" aria-label="Main">
       <ul>
@@ -22,7 +20,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
 
     <div class="hdr__actions">
       <a class="hdr__call" href={telLink} aria-label={`Call ${site.contact.phoneDisplay}`}><Icon name="phone" size={18} /></a>
-      <a class="hdr__cta" href="/contact/#enquire">Book an appointment</a>
+      <a class="btn hdr__cta" href="/contact/#enquire">Book an appointment</a>
       <button class="hdr__menu" type="button" aria-haspopup="dialog" aria-controls="menu" data-menu-open>
         <span>Menu</span><span class="hdr__bars" aria-hidden="true"></span>
       </button>
@@ -30,9 +28,9 @@ const isActive = (href: string) => path === href || path.startsWith(href);
   </div>
 </header>
 
-<dialog id="menu" class="menu dark" aria-label="Menu" data-menu>
+<dialog id="menu" class="menu" aria-label="Menu" data-menu>
   <div class="menu__top wrap">
-    <a href="/" class="hdr__brand" aria-label="Tex N Tailor — home"><Wordmark /></a>
+    <a href="/" class="hdr__brand" aria-label="Tex N Tailor, home"><Wordmark /></a>
     <button class="menu__close" type="button" data-menu-close><span>Close</span><Icon name="close" size={18} /></button>
   </div>
   <nav class="menu__nav wrap" aria-label="Mobile">
@@ -46,43 +44,36 @@ const isActive = (href: string) => path === href || path.startsWith(href);
   <div class="menu__foot wrap">
     <a class="btn" href="/contact/#enquire">Book an appointment</a>
     <div class="menu__quick">
-      <a class="btn btn--ghost" href={whatsappLink('Hello Tex N Tailor, I would like to enquire about tailoring.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
-      <a class="btn btn--ghost" href={telLink}><Icon name="phone" />Call</a>
+      <a class="btn btn--soft" href={whatsappLink('Hello Tex N Tailor, I would like to enquire about tailoring.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
+      <a class="btn btn--soft" href={telLink}><Icon name="phone" />Call</a>
     </div>
-    <p class="label muted menu__addr">{site.address.area}, {site.address.city}</p>
+    <p class="muted menu__addr">{site.address.area}, {site.address.city}</p>
   </div>
 </dialog>
 
 <style>
   .hdr {
     position: fixed; inset: 0 0 auto; z-index: 50; height: var(--header-h);
-    color: var(--ink);
-    transition: transform 0.5s var(--ease-out), background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
-    border-bottom: 1px solid transparent;
+    transition: transform 0.5s var(--ease-out), background-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
-  .hdr--dark { color: var(--on-dark); }
-  .hdr.is-scrolled { background: color-mix(in srgb, var(--bone) 94%, transparent); color: var(--ink); border-bottom-color: var(--line); backdrop-filter: saturate(1.2) blur(10px); }
+  .hdr.is-scrolled { background: rgba(255, 255, 255, 0.86); backdrop-filter: saturate(1.4) blur(16px); -webkit-backdrop-filter: saturate(1.4) blur(16px); box-shadow: 0 10px 30px -24px rgba(17, 17, 19, 0.35); }
   .hdr.is-hidden { transform: translateY(-100%); }
   .hdr__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-  .hdr__brand { text-decoration: none; display: inline-flex; padding-block: 0.5rem; }
-  .hdr__nav ul { display: flex; gap: clamp(1.25rem, 2.6vw, 2.75rem); }
-  .hdr__nav a, .hdr__cta {
-    font-size: 0.76rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
-    padding-block: 0.5rem; background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
-    transition: background-size 0.45s var(--ease-out);
-  }
-  .hdr__nav a:hover, .hdr__nav a[aria-current='page'] { background-size: 100% 1px; }
+  .hdr__brand { display: inline-flex; padding-block: 0.5rem; }
+  .hdr__nav ul { display: flex; gap: 0.25rem; padding: 0.3rem; border-radius: 999px; background: var(--soft); }
+  .hdr__nav a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 1.05rem; border-radius: 999px; font-size: 0.9rem; font-weight: 400; color: var(--ink-2); transition: background-color 0.3s, color 0.3s; }
+  .hdr__nav a:hover { color: var(--ink); background: rgba(255, 255, 255, 0.7); }
+  .hdr__nav a[aria-current='page'] { background: var(--white); color: var(--ink); font-weight: 500; box-shadow: 0 4px 14px -8px rgba(17, 17, 19, 0.25); }
   .hdr__actions { display: flex; align-items: center; gap: 0.5rem; }
-  .hdr__cta { border: 1px solid currentColor; padding: 0.75rem 1.1rem; background: none; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-  .hdr__cta:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
-  .hdr--dark:not(.is-scrolled) .hdr__cta:hover { background: var(--bone); color: var(--navy); border-color: var(--bone); }
-  .hdr__call { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; }
+  .hdr__cta { min-height: 46px; padding: 0.6rem 1.3rem; font-size: 0.9rem; }
+  .hdr__call { display: none; width: 46px; height: 46px; align-items: center; justify-content: center; border-radius: 50%; background: var(--soft); }
   .hdr__menu {
-    display: none; align-items: center; gap: 0.7rem; min-height: 44px; padding: 0 0.25rem 0 0.5rem;
-    background: none; border: 0; cursor: pointer;
-    font-size: 0.76rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    display: none; align-items: center; gap: 0.6rem; min-height: 46px; padding: 0 1.1rem;
+    background: var(--ink); color: var(--white); border: 0; border-radius: 999px; cursor: pointer; font-size: 0.9rem; font-weight: 500;
   }
-  .hdr__bars { width: 22px; height: 7px; border-block: 1px solid currentColor; }
+  .hdr__bars { width: 16px; height: 6px; position: relative; }
+  .hdr__bars::before, .hdr__bars::after { content: ''; position: absolute; left: 0; right: 0; height: 1.5px; border-radius: 2px; background: currentColor; }
+  .hdr__bars::before { top: 0; } .hdr__bars::after { bottom: 0; }
 
   @media (max-width: 1023px) {
     .hdr__nav, .hdr__cta { display: none; }
@@ -92,34 +83,34 @@ const isActive = (href: string) => path === href || path.startsWith(href);
   /* Mobile menu */
   .menu {
     width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0;
+    background: var(--white); color: var(--ink);
     display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain;
     opacity: 0; transition: opacity 0.35s var(--ease), display 0.35s allow-discrete, overlay 0.35s allow-discrete;
   }
   .menu:not([open]) { display: none; }
   .menu[open] { opacity: 1; }
   @starting-style { .menu[open] { opacity: 0; } }
-  .menu::backdrop { background: var(--navy); }
+  .menu::backdrop { background: var(--white); }
   .menu__top { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; flex: none; }
-  .menu__close { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; background: none; border: 0; cursor: pointer; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+  .menu__close { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 46px; padding: 0 1.1rem; background: var(--soft); border: 0; border-radius: 999px; cursor: pointer; font-size: 0.9rem; font-weight: 500; }
   .menu__nav { flex: 1; display: flex; align-items: center; padding-block: 2rem; }
-  .menu__nav ul { width: 100%; }
-  .menu__nav li { border-bottom: 1px solid var(--line-dark); }
+  .menu__nav ul { width: 100%; display: grid; gap: 0.25rem; }
   .menu__nav a {
-    display: flex; align-items: baseline; gap: 1.25rem; padding: 0.9rem 0; text-decoration: none;
-    font-family: var(--f-display); font-size: clamp(2rem, 8vw, 3rem); line-height: 1.1;
-    transform: translateY(12px); opacity: 0; transition: transform 0.7s var(--ease-out), opacity 0.7s var(--ease-out);
+    display: flex; align-items: baseline; gap: 1rem; padding: 0.55rem 0;
+    font-size: clamp(2rem, 9vw, 3rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.15; color: var(--faint);
+    transform: translateY(12px); opacity: 0; transition: transform 0.7s var(--ease-out), opacity 0.7s var(--ease-out), color 0.3s;
   }
-  .menu__nav a .label { color: var(--on-dark-muted); font-size: 0.7rem; }
-  .menu__nav a[aria-current='page'] { font-style: italic; }
+  .menu__nav a .label { font-size: 0.8rem; font-weight: 400; letter-spacing: 0; color: var(--faint); min-width: 1.6rem; }
+  .menu__nav a:hover, .menu__nav a[aria-current='page'] { color: var(--ink); }
   .menu[open] .menu__nav a { transform: none; opacity: 1; }
   .menu[open] .menu__nav li:nth-child(2) a { transition-delay: 0.04s; }
   .menu[open] .menu__nav li:nth-child(3) a { transition-delay: 0.08s; }
   .menu[open] .menu__nav li:nth-child(4) a { transition-delay: 0.12s; }
   .menu[open] .menu__nav li:nth-child(5) a { transition-delay: 0.16s; }
-  .menu__foot { display: grid; gap: 0.75rem; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); flex: none; }
+  .menu__foot { display: grid; gap: 0.6rem; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); flex: none; }
   .menu__foot > .btn { width: 100%; }
-  .menu__quick { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  .menu__addr { margin: 0.5rem 0 0; text-align: center; }
+  .menu__quick { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .menu__addr { margin: 0.75rem 0 0; text-align: center; font-size: 0.85rem; }
   @media (prefers-reduced-motion: reduce) { .menu, .menu__nav a { transition: none; } }
 </style>
 

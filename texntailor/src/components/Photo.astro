@@ -37,7 +37,7 @@ const light = slot.tone === 'sand' || slot.tone === 'ivory';
     />
   ) : (
     <div class:list={['ph', `tone-${slot.tone}`, `weave-${slot.weave}`, { 'ph--light': light }]} role="img" aria-label={`Photograph coming soon: ${slot.alt}`} data-placeholder>
-      <p class="ph__tag">Photograph to come<span>{slot.brief}</span></p>
+      <p class="ph__tag"><b>Photograph to come</b><span>{slot.brief}</span></p>
     </div>
   )}
 </div>

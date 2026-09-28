@@ -13,15 +13,21 @@ const schema = [{
   name: 'How custom tailoring works at Tex N Tailor',
   step: processSteps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })),
 }];
+const bring = [
+  { t: 'A date', d: 'If the garment is for an event, tell us when it is so we can plan the fittings around it.' },
+  { t: 'A reference', d: 'A photo of something you like, or a garment from your wardrobe that already fits well.' },
+  { t: 'The right shoes', d: 'For trousers and suits, wear or bring the shoes you plan to wear with them.' },
+  { t: 'Time', d: 'Measurements and choosing cloth should not be rushed. Call or message ahead so we can set time aside.' },
+];
 ---
 <Base
-  title="The Process — How Custom Tailoring Works"
+  title="The Process: How Custom Tailoring Works"
   description="From first conversation to final fitting: how a made-to-measure garment comes together at Tex N Tailor in Al Nahda, Dubai, and what to bring to your first visit."
   schema={schema}
 >
   <PageIntro
     kicker="The process"
-    title="Six steps between<br /><em>you and a better fit.</em>"
+    title='Six steps to <span class="soft">a better fit.</span>'
     lede="A made-to-measure garment is built in stages. Here is what to expect, from the first conversation to the day you collect it."
   />
 
@@ -32,7 +38,7 @@ const schema = [{
           <li class:list={['step', { 'step--flip': i % 2 === 1 }]}>
             <div class="step__media"><Photo slot={stepSlots[i]} ratio={i % 3 === 0 ? 'wide' : 'tall'} sizes="(min-width: 1024px) 40vw, 100vw" /></div>
             <div class="step__text" data-reveal>
-              <span class="step__n display" aria-hidden="true">{s.n}</span>
+              <span class="step__n" data-n={s.n} aria-hidden="true"></span>
               <h2 class="display h-md"><span class="sr-only">Step {s.n}: </span>{s.title}</h2>
               <p class="lede">{s.text}</p>
             </div>
@@ -42,18 +48,19 @@ const schema = [{
     </div>
   </section>
 
-  <section class="section linen" aria-labelledby="first-visit">
-    <div class="wrap fv">
-      <div>
-        <Tape label="Your first visit" />
-        <h2 id="first-visit" class="display h-lg" data-reveal>What to <em>bring along.</em></h2>
+  <section class="section" aria-labelledby="first-visit">
+    <div class="wrap">
+      <div class="fv">
+        <div>
+          <Tape label="Your first visit" />
+          <h2 id="first-visit" class="display h-lg" data-reveal>What to <span class="soft">bring along.</span></h2>
+        </div>
+        <ul class="fv__list">
+          {bring.map((b, i) => (
+            <li data-reveal data-reveal-delay={String(i % 2)}><h3>{b.t}</h3><p class="muted">{b.d}</p></li>
+          ))}
+        </ul>
       </div>
-      <ul class="fv__list">
-        <li data-reveal><span class="serif">A date.</span> If the garment is for an event, tell us when it is so we can plan the fittings around it.</li>
-        <li data-reveal><span class="serif">A reference.</span> A photo of something you like, or a garment from your wardrobe that already fits well.</li>
-        <li data-reveal><span class="serif">The right shoes.</span> For trousers and suits, wear or bring the shoes you plan to wear with them.</li>
-        <li data-reveal><span class="serif">Time.</span> Measurements and choosing cloth should not be rushed. Call or message ahead so we can set time aside.</li>
-      </ul>
     </div>
   </section>
 
@@ -62,22 +69,24 @@ const schema = [{
 
 <style>
   .steps { padding-bottom: var(--section); }
-  .steps ol { display: grid; gap: clamp(4rem, 10vw, 9rem); }
+  .steps ol { display: grid; gap: clamp(4rem, 10vw, 8rem); }
   .step { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2.5rem); align-items: center; }
   .step__media { grid-column: 1 / 7; }
   .step__text { grid-column: 8 / 12; }
   .step--flip .step__media { grid-column: 7 / 13; order: 2; }
   .step--flip .step__text { grid-column: 2 / 6; }
-  .step__n { display: block; font-size: clamp(4rem, 9vw, 8rem); line-height: 0.9; color: var(--claret); font-style: italic; margin-bottom: 1.5rem; }
-  .step h2 { margin-bottom: 1.25rem; }
-  .fv { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 7rem); }
-  .fv__list { display: grid; border-top: 1px solid var(--line-strong); }
-  .fv__list li { padding: 1.6rem 0; border-bottom: 1px solid var(--line); color: var(--muted); }
-  .fv__list .serif { display: block; color: var(--ink); font-size: var(--step-2); margin-bottom: 0.4rem; }
+  .step__n { display: block; font-size: clamp(4rem, 9vw, 7.5rem); font-weight: 500; letter-spacing: -0.05em; line-height: 0.9; color: var(--soft-2); margin-bottom: 1.5rem; }
+  .step__n::before { content: attr(data-n); }
+  .step h2 { margin-bottom: 1rem; }
+  .fv { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); padding: clamp(2rem, 6vw, 5rem); background: var(--soft); border-radius: calc(var(--r) * 1.4); }
+  .fv__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .fv__list li { background: var(--white); border-radius: var(--r); padding: clamp(1.3rem, 2.5vw, 1.8rem); }
+  .fv__list h3 { font-size: var(--step-1); margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+  .fv__list p { margin: 0; font-size: 0.95rem; }
   @media (max-width: 900px) {
     .step > * { grid-column: 1 / -1 !important; order: 0 !important; }
     .step__text { margin-top: 1.75rem; }
     .step__n { font-size: 3.5rem; margin-bottom: 0.75rem; }
-    .fv { grid-template-columns: 1fr; }
+    .fv, .fv__list { grid-template-columns: 1fr; }
   }
 </style>

@@ -8,11 +8,10 @@ import { site } from '../data/site';
 interface Props {
   title: string;
   description: string;
-  headerTone?: 'light' | 'dark';
   noindex?: boolean;
   schema?: Record<string, unknown>[];
 }
-const { title, description, headerTone = 'light', noindex = false, schema = [] } = Astro.props;
+const { title, description, noindex = false, schema = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL('/og.png', site.url).href;
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
@@ -50,7 +49,7 @@ const jsonLd = [business, ...schema];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <meta name="theme-color" content="#f3efe7" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -73,7 +72,7 @@ const jsonLd = [business, ...schema];
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header tone={headerTone} />
+    <Header />
     <main id="main">
       <slot />
     </main>

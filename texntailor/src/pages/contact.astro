@@ -7,12 +7,12 @@ import Icon from '../components/Icon.astro';
 import { site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site';
 ---
 <Base
-  title="Visit & Contact — Book a Tailoring Appointment in Al Nahda, Dubai"
+  title="Visit & Contact: Book a Tailoring Appointment in Al Nahda, Dubai"
   description="Book an appointment at Tex N Tailor, Al Nahda 1, Dubai. Send an enquiry, call, or message us on WhatsApp about custom suits, wedding attire and everyday tailoring."
 >
   <PageIntro
     kicker="Visit & contact"
-    title="Book an <em>appointment.</em>"
+    title='Book an <span class="soft">appointment.</span>'
     lede="Tell us a little about what you need and when. We will reply to arrange a time for measurements and a conversation about cloth."
   />
 
@@ -23,7 +23,7 @@ import { site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site
         <EnquiryForm />
       </div>
       <aside class="contact__aside" aria-label="Direct contact">
-        <p class="label muted">Prefer to talk?</p>
+        <p class="contact__h">Prefer to talk?</p>
         <ul class="contact__lines">
           <li><a href={whatsappLink('Hello Tex N Tailor, I would like to book an appointment.')} target="_blank" rel="noopener"><Icon name="whatsapp" /><span><strong>WhatsApp</strong><span class="muted">Usually the quickest way to reach us</span></span></a></li>
           <li><a href={telLink}><Icon name="phone" /><span><strong>{site.contact.phoneDisplay}</strong><span class="muted">Call the studio</span></span></a></li>
@@ -40,15 +40,15 @@ import { site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site
 
 <style>
   .contact { padding-bottom: clamp(3rem, 7vw, 6rem); }
-  .contact__grid { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(3rem, 7vw, 8rem); align-items: start; }
-  .contact__aside { position: sticky; top: calc(var(--header-h) + 1.5rem); padding: clamp(1.5rem, 3vw, 2.25rem); background: var(--linen); }
-  .contact__aside .label { margin-bottom: 1rem; }
-  .contact__lines li + li { border-top: 1px solid var(--line); }
-  .contact__lines a { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 0; text-decoration: none; }
-  .contact__lines a > span { display: grid; gap: 0.15rem; min-width: 0; }
-  .contact__lines strong { font-weight: 500; overflow-wrap: anywhere; }
-  .contact__lines .muted { font-size: 0.88rem; }
-  .contact__lines svg { flex: none; margin-top: 0.15rem; color: var(--claret); }
-  .contact__lines a:hover strong { text-decoration: underline; }
+  .contact__grid { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+  .contact__aside { position: sticky; top: calc(var(--header-h) + 1.5rem); padding: clamp(1.5rem, 3vw, 2rem); background: var(--soft); border-radius: calc(var(--r) * 1.2); }
+  .contact__h { font-weight: 500; margin-bottom: 0.75rem; }
+  .contact__lines { display: grid; gap: 0.4rem; }
+  .contact__lines a { display: flex; gap: 1rem; align-items: center; padding: 0.9rem 1rem; border-radius: var(--r-sm); background: var(--white); transition: transform 0.35s var(--ease-out), box-shadow 0.35s; }
+  .contact__lines a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .contact__lines a > span { display: grid; gap: 0.05rem; min-width: 0; }
+  .contact__lines strong { font-weight: 500; overflow-wrap: anywhere; line-height: 1.4; }
+  .contact__lines .muted { font-size: 0.82rem; line-height: 1.4; }
+  .contact__lines svg { flex: none; width: 40px; height: 40px; padding: 10px; border-radius: 50%; background: var(--soft); color: var(--navy); }
   @media (max-width: 1000px) { .contact__grid { grid-template-columns: 1fr; } .contact__aside { position: static; order: -1; } }
 </style>

@@ -5,8 +5,8 @@ import { nav } from '../data/site';
 <Base title="Page Not Found" description="The page you were looking for could not be found." noindex>
   <section class="nf">
     <div class="wrap">
-      <p class="label muted">404</p>
-      <h1 class="display h-xl">This page <em>doesn’t fit.</em></h1>
+      <p class="eyebrow">404</p>
+      <h1 class="display h-xl">This page <span class="soft">doesn’t fit.</span></h1>
       <p class="lede">It may have moved, or the link may be out of date. Try one of these instead:</p>
       <ul>{[{ href: '/', label: 'Home' }, ...nav].map((n) => <li><a class="link-arrow" href={n.href}>{n.label}</a></li>)}</ul>
     </div>
@@ -14,6 +14,6 @@ import { nav } from '../data/site';
 </Base>
 <style>
   .nf { padding: calc(var(--header-h) + 6rem) 0 8rem; min-height: 80svh; }
-  .nf h1 { margin: 1.5rem 0; } .nf h1 em { color: var(--claret); }
+  .nf h1 { margin: 0 0 1.5rem; }
   .nf ul { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 2rem; }
 </style>

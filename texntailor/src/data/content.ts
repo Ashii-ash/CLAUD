@@ -41,7 +41,7 @@ export const services: Service[] = [
     lede: 'A suit cut to your measurements sits differently from one bought off a rail.',
     body: [
       'Shoulders that follow yours, a jacket length chosen for your height, sleeves that show the right amount of cuff. These are the details a custom suit gets right, because it starts from your measurements instead of a size chart.',
-      'Tell us where the suit will be worn — the boardroom, a client dinner, a week of travel — and we will help you choose a cloth and a cut that suit both you and the occasion.',
+      'Tell us where the suit will be worn, whether that is the boardroom, a client dinner or a week of travel. We will help you choose a cloth and a cut that suit both you and the occasion.',
     ],
     decisions: ['Cloth and colour', 'Single or double-breasted', 'Lapel style and width', 'Buttons and lining', 'Trouser cut and finish'],
     hero: {
@@ -66,7 +66,7 @@ export const services: Service[] = [
     lede: 'Clothes for the day you will look back on in photographs for years.',
     body: [
       'Wedding clothes carry more weight than anything else in a wardrobe. They have to fit perfectly, photograph well and feel comfortable through a long day and a longer evening.',
-      'Start early and bring your plans with you — the date, the setting, the colours. We will talk you through cloth, cut and finishing so the result feels like you, on the one day it matters most.',
+      'Start early and bring your plans with you: the date, the setting, the colours. We will talk you through cloth, cut and finishing so the result feels like you on the day it matters most.',
     ],
     decisions: ['The look for the ceremony and the evening', 'Cloth, colour and texture', 'Cut and silhouette', 'Finishing details', 'Timing of fittings around your date'],
     hero: {
@@ -127,7 +127,7 @@ export const processSteps = [
   {
     n: '03',
     title: 'Cloth & details',
-    text: 'Choose the fabric, then the details — lapels, collars, cuffs, buttons, lining — with guidance where you want it.',
+    text: 'Choose the fabric, then the details: lapels, collars, cuffs, buttons and lining. Guidance is there whenever you want it.',
   },
   {
     n: '04',
@@ -154,7 +154,7 @@ export const details: { term: string; text: string; slot: PhotoSlot }[] = [
   },
   {
     term: 'Collar',
-    text: 'The frame for your face. Its spread and height should suit your neck and how you wear a tie — or don’t.',
+    text: 'The frame for your face. Its spread and height should suit your neck and how you wear a tie, or don’t.',
     slot: { alt: 'Close-up of a shirt collar', brief: 'Collar on a finished shirt, soft side light', weave: 'linen', tone: 'ivory' },
   },
   {
@@ -174,7 +174,7 @@ export const details: { term: string; text: string; slot: PhotoSlot }[] = [
   },
   {
     term: 'Trouser break',
-    text: 'How the hem meets the shoe. No break, a slight break or a full one — decided at the fitting.',
+    text: 'How the hem meets the shoe. No break, a slight break or a full one, decided at the fitting.',
     slot: { alt: 'Trouser hem resting on a shoe', brief: 'Trouser hem and shoe, low angle', weave: 'check', tone: 'olive' },
   },
 ];

@@ -1,0 +1,33 @@
+---
+/** Canvas host for the procedural 3D scenes. three.js is fetched only when the scene nears the viewport. */
+interface Props { kind: 'cloth' | 'button'; label: string; class?: string; }
+const { kind, label, class: cls = '' } = Astro.props;
+---
+<div class:list={['scene', `scene--${kind}`, cls]} role="img" aria-label={label}>
+  <canvas data-scene={kind}></canvas>
+</div>
+<style>
+  .scene { position: relative; width: 100%; height: 100%; }
+  .scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s var(--ease-out); touch-action: pan-y; }
+  .scene.is-ready canvas { opacity: 1; }
+  /* Without WebGL: a quiet tonal backdrop instead of an empty box. */
+  .scene.no-webgl { background: radial-gradient(60% 55% at 55% 45%, #eef0f4, #fff 70%); }
+</style>
+<script>
+  const scenes = document.querySelectorAll<HTMLCanvasElement>('canvas[data-scene]');
+  if (scenes.length) {
+    const start = async (canvas: HTMLCanvasElement) => {
+      const host = canvas.parentElement!;
+      const mod = await import('../scripts/atelier3d');
+      if (!mod.hasWebGL()) { host.classList.add('no-webgl'); return; }
+      try {
+        canvas.dataset.scene === 'cloth' ? mod.mountCloth(canvas) : mod.mountButton(canvas);
+        requestAnimationFrame(() => host.classList.add('is-ready'));
+      } catch { host.classList.add('no-webgl'); }
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { io.unobserve(e.target); start(e.target as HTMLCanvasElement); } });
+    }, { rootMargin: '300px 0px' });
+    scenes.forEach((c) => io.observe(c));
+  }
+</script>

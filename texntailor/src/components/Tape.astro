@@ -1,8 +1,6 @@
 ---
-interface Props { label: string; index?: string; as?: 'p' | 'h2'; }
-const { label, index, as: Tag = 'p' } = Astro.props;
+/* Section eyebrow: a short label with a single cloth-navy dot. */
+interface Props { label: string; as?: 'p' | 'h2'; }
+const { label, as: Tag = 'p' } = Astro.props;
 ---
-<div class="tape" data-reveal>
-  <Tag class="label tape__label">{index && <span aria-hidden="true">{index}&nbsp;&nbsp;—&nbsp;&nbsp;</span>}{label}</Tag>
-  <span class="tape__rule" aria-hidden="true"></span>
-</div>
+<Tag class="eyebrow" data-reveal>{label}</Tag>

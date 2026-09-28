@@ -10,9 +10,17 @@ npm run build     # static output in dist/
 npm run preview   # serve the build
 ```
 
-**Stack:** Astro (static output), hand-written CSS with design tokens, about 7 KB of vanilla JS in total,
-self-hosted variable fonts (Bodoni Moda + Jost), Netlify Forms for enquiries. No frameworks,
-no trackers, no third-party scripts on page load.
+**Stack:** Astro (static output), hand-written CSS with design tokens, self-hosted Poppins,
+three.js for real-time 3D, Netlify Forms for enquiries. No frameworks, no trackers, no
+third-party scripts on page load.
+
+**Design:** an all-white canvas with no rules or borders. Hierarchy comes from Poppins at
+scale, soft grey surfaces, pill controls and space.
+
+**3D** (`src/scripts/atelier3d.ts`, all procedural, no model files):
+- Hero: navy suiting cloth with a twill weave and fabric sheen, draping on the GPU, with mother-of-pearl and horn suit buttons. It follows the pointer.
+- Closing CTA: a turning mother-of-pearl button.
+- three.js (~135 KB gzip) loads only when a scene nears the viewport. Rendering pauses off-screen and in background tabs, shows a single still frame with `prefers-reduced-motion`, and falls back to a soft gradient without WebGL. Page JS outside the 3D is about 8 KB.
 
 ---
 
@@ -33,7 +41,7 @@ value is marked `VERIFY`. Nothing has been invented. Optional values left as `nu
 | Email | — | **Needed** (hidden until added) |
 | Instagram | @tex_n_tailor | Verified |
 | Trade-licence / legal name | — | Optional (footer, privacy policy) |
-| Logo | typographic placeholder (`Wordmark.astro`) | **Supply official logo** (SVG) |
+| Logo | typographic placeholder "TEX (N) TAILOR" (`Wordmark.astro`) | **Supply official logo** (SVG) |
 | Services | Custom suits · Wedding attire · Everyday & casual wear | From texntailor.ae copy. Add others (e.g. shirts, kandura, alterations) **only if offered** |
 | Process steps | 6 generic made-to-measure stages | **Confirm** they match how you work (`src/data/content.ts`) |
 | Testimonials | none | Add **real** reviews only (section hidden while empty) |
@@ -44,7 +52,7 @@ in its search listing). E-commerce was deliberately left out of this build.
 ## Photography
 
 There is no real Tex N Tailor photography in this repository, and none was generated or taken from stock.
-Every image slot shows a labelled **cloth-texture placeholder** with a shot brief
+Every image slot shows a labelled **soft grey placeholder** with a shot brief
 ("Photograph to come — …") that doubles as a shot list for the photographer.
 
 To add a photo:

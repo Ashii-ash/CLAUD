@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Scene3D from './Scene3D.astro';
 import { whatsappLink } from '../data/site';
 interface Props { title?: string; text?: string; }
 const {
@@ -7,23 +8,36 @@ const {
   text = 'Tell us what you have in mind. We will reply to arrange a time to meet, measure and talk through cloth.',
 } = Astro.props;
 ---
-<section class="cta dark" aria-labelledby="cta-title">
-  <div class="wrap cta__inner">
-    <h2 id="cta-title" class="display h-lg" data-reveal set:html={title.replace(/conversation\./, '<em>conversation.</em>')} />
-    <div class="cta__side" data-reveal data-reveal-delay="1">
-      <p class="lede">{text}</p>
-      <div class="btn-row" data-wa-zone>
-        <a class="btn" href="/contact/#enquire">Book an appointment</a>
-        <a class="btn btn--ghost" href={whatsappLink('Hello Tex N Tailor, I would like to book an appointment.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+<section class="cta" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta__card">
+      <div class="cta__text">
+        <h2 id="cta-title" class="display h-lg" data-reveal>{title}</h2>
+        <p class="lede" data-reveal data-reveal-delay="1">{text}</p>
+        <div class="btn-row" data-reveal data-reveal-delay="2" data-wa-zone>
+          <a class="btn" href="/contact/#enquire">Book an appointment</a>
+          <a class="btn btn--light" href={whatsappLink('Hello Tex N Tailor, I would like to book an appointment.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+        </div>
       </div>
+      <div class="cta__3d"><Scene3D kind="button" label="A mother-of-pearl suit button turning in the light" /></div>
     </div>
   </div>
 </section>
 <style>
-  .cta { padding-block: clamp(5rem, 11vw, 9rem); border-bottom: 1px solid var(--line-dark); }
-  .cta__inner { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: end; }
-  .cta h2 { max-width: 14ch; }
-  .cta__side { display: grid; gap: 1.75rem; }
-  .cta__side .lede { margin: 0; }
-  @media (max-width: 900px) { .cta__inner { grid-template-columns: 1fr; } }
+  .cta { padding-block: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem); }
+  .cta__card {
+    display: grid; grid-template-columns: 7fr 5fr; align-items: center; gap: 2rem;
+    background: var(--soft); border-radius: calc(var(--r) * 1.4);
+    padding: clamp(2.25rem, 6vw, 5.5rem); overflow: hidden;
+  }
+  .cta__text { display: grid; gap: 1.5rem; }
+  .cta h2 { max-width: 15ch; }
+  .cta .lede { margin: 0; }
+  .btn--light { --bg: var(--white); --fg: var(--ink); }
+  .btn--light:hover { --bg: var(--white); --fg: var(--navy); }
+  .cta__3d { height: clamp(260px, 32vw, 440px); margin: -2rem -2rem -2rem 0; }
+  @media (max-width: 900px) {
+    .cta__card { grid-template-columns: 1fr; }
+    .cta__3d { order: -1; height: 240px; margin: -1rem 0 -1rem; }
+  }
 </style>

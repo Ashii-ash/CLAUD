@@ -90,61 +90,62 @@ import { services } from '../data/content';
   </div>
 
   <div class="enq__submit">
-    <p class="enq__legal muted">Fields marked <span class="req">*</span> are required. We use your details only to reply to this enquiry — see our <a href="/privacy/">privacy policy</a>.</p>
+    <p class="enq__legal muted">Fields marked <span class="req">*</span> are required. We use your details only to reply to this enquiry. See our <a href="/privacy/">privacy policy</a>.</p>
     <div class="btn-row" data-wa-zone>
       <button class="btn enq__send" type="submit" data-submit>
         <span class="enq__spinner" aria-hidden="true"></span>
         <span data-submit-label>Send enquiry</span>
       </button>
-      <button class="btn btn--ghost" type="button" data-wa-send><Icon name="whatsapp" />Send via WhatsApp instead</button>
+      <button class="btn btn--soft" type="button" data-wa-send><Icon name="whatsapp" />Send via WhatsApp instead</button>
     </div>
     <p class="enq__status" role="status" aria-live="polite" data-status></p>
   </div>
 </form>
 
 <div class="enq__done" hidden tabindex="-1" data-done>
-  <p class="label muted">Enquiry received</p>
-  <p class="display h-md">Thank you, <em data-done-name>we have your details</em>.</p>
+  <p class="eyebrow">Enquiry received</p>
+  <p class="display h-md">Thank you, <span data-done-name>we have your details</span>.</p>
   <p class="lede">We will be in touch shortly to arrange a time. If it is urgent, message us on WhatsApp.</p>
 </div>
 
 <style>
   .enq__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .enq__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem clamp(1.5rem, 3vw, 2.5rem); }
+  .enq__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem clamp(1rem, 2vw, 1.5rem); }
   .enq__full { grid-column: 1 / -1; }
   .enq__radios { border: 0; padding: 0; margin: 0; min-width: 0; }
-  .enq__radios legend { padding: 0; margin-bottom: 0.45rem; }
-  .enq__radios div { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .enq__radios legend { padding: 0; margin-bottom: 0.5rem; }
+  .enq__radios div { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.3rem; background: var(--soft); border-radius: 999px; width: fit-content; max-width: 100%; }
   .enq__radios label { position: relative; cursor: pointer; }
   .enq__radios input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
   .enq__radios span {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem;
-    border: 1px solid var(--line-strong); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.02em; text-transform: none; transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: 999px;
+    font-size: 0.92rem; font-weight: 400; color: var(--muted); transition: background-color 0.25s, color 0.25s, box-shadow 0.25s;
   }
-  .enq__radios input:checked + span { background: var(--ink); color: var(--bone); border-color: var(--ink); }
-  .enq__radios input:focus-visible + span { outline: 2px solid var(--claret); outline-offset: 2px; }
-  .enq__filelabel { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
-  .enq__filelabel .muted { text-transform: none; letter-spacing: 0; font-weight: 400; }
-  .enq__file { display: flex; align-items: center; gap: 1rem; min-height: 56px; padding: 0.5rem 0; border-bottom: 1px dashed var(--line-strong); cursor: pointer; position: relative; }
+  .enq__radios input:checked + span { background: var(--white); color: var(--ink); font-weight: 500; box-shadow: 0 4px 14px -8px rgba(17, 17, 19, 0.3); }
+  .enq__radios input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .enq__filelabel { font-size: 0.85rem; font-weight: 500; color: var(--ink-2); }
+  .enq__filelabel .muted { font-weight: 300; }
+  .enq__file { display: flex; align-items: center; gap: 1rem; min-height: 64px; padding: 0.6rem; background: var(--soft); border-radius: var(--r-sm); cursor: pointer; position: relative; transition: background-color 0.25s; }
+  .enq__file:hover { background: var(--soft-2); }
   .enq__file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
-  .enq__file:focus-within { border-bottom-color: var(--claret); }
-  .enq__file:focus-within .enq__filebtn { outline: 2px solid var(--claret); outline-offset: 2px; }
-  .enq__filebtn { flex: none; padding: 0.55rem 0.9rem; border: 1px solid var(--line-strong); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
-  .enq__filename { color: var(--muted); font-size: 0.95rem; font-weight: 400; letter-spacing: 0; text-transform: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .enq__submit { margin-top: 2.5rem; display: grid; gap: 1.25rem; }
-  .enq__legal { font-size: 0.88rem; margin: 0; max-width: 60ch; }
-  .enq__send { position: relative; min-width: 12rem; }
-  .enq__spinner { display: none; width: 14px; height: 14px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  .enq__file:focus-within { box-shadow: 0 0 0 2px var(--navy); background: var(--white); }
+  .enq__filebtn { flex: none; padding: 0.6rem 1rem; border-radius: 999px; background: var(--white); font-size: 0.88rem; font-weight: 500; box-shadow: 0 4px 14px -8px rgba(17, 17, 19, 0.3); }
+  .enq__filename { color: var(--muted); font-size: 0.92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .enq__submit { margin-top: 2rem; display: grid; gap: 1.1rem; }
+  .enq__legal { font-size: 0.85rem; margin: 0; max-width: 60ch; }
+  .enq__legal a { color: var(--ink); text-decoration: underline; text-underline-offset: 0.2em; }
+  .enq__send { position: relative; min-width: 11rem; }
+  .enq__spinner { display: none; width: 15px; height: 15px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
   .enq[aria-busy='true'] .enq__spinner { display: inline-block; }
   .enq[aria-busy='true'] .enq__send { pointer-events: none; opacity: 0.85; }
   @keyframes spin { to { transform: rotate(1turn); } }
-  .enq__status { margin: 0; font-size: 0.95rem; }
-  .enq__status.is-error { color: #a1262a; }
+  .enq__status { margin: 0; font-size: 0.92rem; }
+  .enq__status.is-error { color: #b3261e; }
   .enq__status:empty { display: none; }
-  .enq__done { display: grid; gap: 1.25rem; padding-block: 2rem; outline: none; }
-  .enq__done .lede, .enq__done p { margin: 0; }
+  .enq__done { display: grid; gap: 1rem; padding: clamp(2rem, 5vw, 3.5rem); background: var(--soft); border-radius: calc(var(--r) * 1.4); outline: none; }
+  .enq__done p { margin: 0; }
   @media (max-width: 700px) {
-    .enq__grid { grid-template-columns: 1fr; gap: 1.6rem; }
+    .enq__grid { grid-template-columns: 1fr; gap: 1.25rem; }
     .enq__submit .btn { width: 100%; }
   }
 </style>
@@ -177,7 +178,7 @@ import { services } from '../data/content';
       name: (el) => (el.value.trim().length < 2 ? 'Please tell us your name.' : ''),
       phone: (el) =>
         !el.value.trim() ? 'Please add a phone number so we can reach you.'
-        : !/^[+]?[0-9\s()-]{7,20}$/.test(el.value.trim()) ? 'That number doesn’t look right — digits, spaces and + only.' : '',
+        : !/^[+]?[0-9\s()-]{7,20}$/.test(el.value.trim()) ? 'That number doesn’t look right. Use digits, spaces and + only.' : '',
       email: (el) => (el.value && !el.validity.valid ? 'Please check the email address.' : ''),
       service: (el) => (!el.value ? 'Please choose what you are interested in.' : ''),
       preferred_date: (el) => (el.value && el.value < el.min ? 'Please choose a date from today onwards.' : ''),
@@ -243,7 +244,7 @@ import { services } from '../data/content';
         done.focus();
         done.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch {
-        status.innerHTML = 'Sorry — your enquiry could not be sent just now. Please try again, or use <strong>Send via WhatsApp</strong> or call us.';
+        status.innerHTML = 'Sorry, your enquiry could not be sent just now. Please try again, or use <strong>Send via WhatsApp</strong> or call us.';
         status.classList.add('is-error');
       } finally {
         form.removeAttribute('aria-busy');
