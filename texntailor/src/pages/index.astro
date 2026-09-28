@@ -39,7 +39,7 @@ const featured = lookbook;
     <div class="wrap hero__foot">
       <nav class="hero__index" aria-label="Tailoring" data-reveal>
         {services.map((s, i) => (
-          <a href={`/tailoring/#${s.id}`}>
+          <a href={`#${s.id}`}>
             <span class="hero__i">0{i + 1}</span>
             <span class="hero__t">{s.title}</span>
             <span class="hero__o">{s.occasion}</span>
@@ -65,7 +65,7 @@ const featured = lookbook;
       <Tape label="What we make" />
       <h2 id="make-title" class="display h-lg make__title" data-reveal>For the meeting, the occasion <span class="soft">and every day in between.</span></h2>
 
-      <article class="svc svc--a" aria-labelledby="svc-suits">
+      <article id="suits" class="svc svc--a" aria-labelledby="svc-suits">
         <div class="svc__media">
           <Photo slot={suits.hero} ratio="tall" sizes="(min-width: 1024px) 55vw, 100vw" />
           <div class="svc__inset"><Photo slot={suits.detail} ratio="square" sizes="(min-width: 1024px) 18vw, 40vw" /></div>
@@ -80,7 +80,7 @@ const featured = lookbook;
         </div>
       </article>
 
-      <article class="svc svc--b" aria-labelledby="svc-wedding">
+      <article id="wedding" class="svc svc--b" aria-labelledby="svc-wedding">
         <div class="svc__text" data-reveal>
           <p class="svc__num">02</p>
           <p class="eyebrow">{wedding.occasion}</p>
@@ -92,7 +92,7 @@ const featured = lookbook;
         <div class="svc__media"><Photo slot={wedding.hero} ratio="portrait" sizes="(min-width: 1024px) 55vw, 100vw" /></div>
       </article>
 
-      <article class="svc svc--c" aria-labelledby="svc-everyday">
+      <article id="everyday" class="svc svc--c" aria-labelledby="svc-everyday">
         <Photo slot={everyday.hero} ratio="pano" sizes="100vw" />
         <div class="svc__cols" data-reveal>
           <div>
