@@ -175,7 +175,7 @@ const action = endpoint && endpoint !== '/' ? endpoint : '/contact/thanks/';
     const today = new Date();
     date.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
-    // Preselect a service from ?service=suits|wedding|everyday.
+    // Preselect a service from ?service=suits|shirts|trousers|linen|alterations.
     const wanted = new URLSearchParams(location.search).get('service');
     if (wanted) {
       const opt = form.querySelector<HTMLOptionElement>(`#f-service option[data-id="${CSS.escape(wanted)}"]`);

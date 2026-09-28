@@ -8,11 +8,11 @@ import { site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site
 ---
 <Base
   title="Visit & Contact: Book a Tailoring Appointment in Al Nahda, Dubai"
-  description="Book an appointment at Tex N Tailor, Al Nahda 1, Dubai. Send an enquiry, call, or message us on WhatsApp about custom suits, wedding attire and everyday tailoring."
+  description="Book a fitting at Tex N Tailor, Shop 16, A. W. Bin Shabib Twin Tower, Al Nahda 1, Dubai. Send an enquiry, call, or message us on WhatsApp about suits, shirts, trousers, linen or alterations."
 >
   <PageIntro
     kicker="Visit & contact"
-    title='Book an <span class="soft">appointment.</span>'
+    title='Book a <span class="soft">fitting.</span>'
     lede="Tell us a little about what you need and when. We will reply to arrange a time for measurements and a conversation about cloth."
   />
 
@@ -25,7 +25,7 @@ import { site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site
       <aside class="contact__aside" aria-label="Direct contact">
         <p class="contact__h">Prefer to talk?</p>
         <ul class="contact__lines">
-          <li><a href={whatsappLink('Hello Tex N Tailor, I would like to book an appointment.')} target="_blank" rel="noopener"><Icon name="whatsapp" /><span><strong>WhatsApp</strong><span class="muted">Usually the quickest way to reach us</span></span></a></li>
+          <li><a href={whatsappLink('Hello Tex N Tailor, I would like to book a fitting.')} target="_blank" rel="noopener"><Icon name="whatsapp" /><span><strong>WhatsApp</strong><span class="muted">Usually the quickest way to reach us</span></span></a></li>
           <li><a href={telLink}><Icon name="phone" /><span><strong>{site.contact.phoneDisplay}</strong><span class="muted">Call the studio</span></span></a></li>
           {site.contact.email && <li><a href={`mailto:${site.contact.email}`}><Icon name="mail" /><span><strong>{site.contact.email}</strong><span class="muted">Email</span></span></a></li>}
           <li><a href={mapsLink} target="_blank" rel="noopener"><Icon name="pin" /><span><strong>{addressLine}</strong><span class="muted">Get directions</span></span></a></li>

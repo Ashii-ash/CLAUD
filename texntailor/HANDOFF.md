@@ -75,16 +75,52 @@ the real copy, photos, testimonials and contact details, and fill in `src/data/s
 7. **Hero service tiles** (01 Custom Suits, 02 Wedding Attire, 03 Everyday) now jump to their own homepage
    sections (`#suits`, `#wedding`, `#everyday`), in both the site and the single-file export.
 
+## 3b. Follow-up session, 2026-09-28 (local)
+
+Run locally, where texntailor.ae **is** reachable. The live site was read and the placeholders filled in:
+
+- Services replaced with the business's own five: Bespoke Suits, Tailor-Made Shirts (from AED 120),
+  Bespoke Trousers (Gurkha from AED 160), Linen Collection, Alterations. The old three
+  (suits / wedding / everyday) are gone; `?service=` values and export anchors follow the new ids.
+- Process replaced with the five steps published as "How It Works" (was six generic stages).
+- Address, opening hours and Instagram handle (`@texntailor`, not `@tex_n_tailor`) filled in;
+  hours now also feed `openingHoursSpecification` in the schema.
+- `Wordmark.astro` and the favicon now use the official woven-T mark; `--claret: #880002` from the logo.
+- `hero-suit.jpg` from the old site is in as `suit-blue-desert.jpg` (suits section + portfolio). It is
+  the only real photograph on the site; the client must confirm it is theirs to use.
+- Verified: build clean, axe-clean and no overflow at 390/820/1366/1920 on every page; all 18 internal
+  links resolve; the form was click-tested in both modes (WhatsApp handoff, and success + failure against
+  a mocked endpoint); the single-file export loads from `file://` with zero network requests.
+
+## 3c. Photography pass, 2026-09-28
+
+Added eight CC0 photographs (StockSnap / rawpixel, found via the Openverse API) so the craft
+sections are real photography rather than renders. Unsplash was rejected as a source: its search
+sits behind a proof-of-work bot wall, and scraping it would breach their API terms.
+
+- "The details" on the homepage is now six real macro shots. Its sixth term changed from
+  **Trouser break** to **Cloth**, because no honest photograph of a trouser break was available
+  and cloth is the bigger decision anyway.
+- The Linen Collection hero is a real linen weave; the Bespoke Suits inset is a real sleeve macro.
+- The process page runs one photographic sequence (swatches → cloth → collar → buttons → cuff),
+  replacing the render that used to sit at step 01.
+- Every file is licensed CC0 (commercial use, no attribution needed) and none shows an
+  identifiable face, so there is no model-release exposure. Provenance and swap-out instructions
+  live in `src/assets/photos/CREDITS.md`.
+- The homepage lookbook deliberately stays as `render-*` illustrations, still labelled as such,
+  and `/work/` still holds placeholders for real client photography.
+
 ## 4. Open items and next steps
 
-- [ ] Client to confirm the phone/WhatsApp number (it's live in every CTA), street address, Google Maps link,
-      opening hours and email. Edit `src/data/site.ts`.
-- [ ] Official logo (SVG) to replace `Wordmark.astro`.
-- [ ] Real photography for `/work/`, and optionally to replace the illustrations. Drop files into `src/assets/photos/`
-      and set `photo:` in `content.ts`.
+- [ ] Client to confirm the exact Google Maps place link, an email address, and whether the two prices
+      (shirts AED 120, Gurkha trousers AED 160) are current. Edit `src/data/site.ts` / `content.ts`.
+- [ ] Client to confirm `suit-blue-desert.jpg` (from the old site) shows their own work.
+- [ ] Original logo **SVG** if available (the mark is currently redrawn as inline paths in `Wordmark.astro`).
+- [ ] Real photography for `/work/`, and to replace the eight `stock-*` stand-ins (see
+      `src/assets/photos/CREDITS.md`). Drop files into `src/assets/photos/` and set `photo:` in `content.ts`.
 - [ ] Real testimonials (e.g. Google reviews, with permission). The section appears automatically.
-- [ ] Confirm services beyond the three (shirts, kandura, alterations?) and whether the six process steps
-      match their workflow.
+- [ ] Ask whether anything is offered beyond the five services on the old site (e.g. kandura, wedding
+      packages), and whether the site should sell online ("free shipping over $50" in its search listing).
 - [ ] Deploy: Vercel (steps above) or Netlify (base dir `texntailor`; Forms then work natively; enable
       form notifications). To send enquiries by email on Vercel, set `PUBLIC_FORM_ENDPOINT`.
 - [ ] Point texntailor.ae DNS at the new host when the client is ready. This replaces the current site.

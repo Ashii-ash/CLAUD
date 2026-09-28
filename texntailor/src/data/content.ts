@@ -1,10 +1,17 @@
 /**
- * Editorial content. Services are limited to what Tex N Tailor publicly offers:
- * "custom suits, wedding attire, and casual outfits … for a business meeting,
- * a special occasion, or everyday refinement" (texntailor.ae).
+ * Editorial content. Services, options, prices and process steps are the ones Tex N Tailor
+ * publishes on the live texntailor.ae (checked 2026-09-28). Nothing here is invented.
  *
  * `photo` values are filenames inside src/assets/photos/. While a file is missing
  * the site shows a labelled fabric placeholder carrying the shot brief below.
+ *
+ * Image provenance, so nothing is passed off as the studio's own work:
+ *   render-*  rendered illustrations made for this project (tools/render).
+ *   stock-*   CC0 stock photographs (StockSnap / rawpixel) standing in for craft and
+ *             cloth details. They are NOT Tex N Tailor garments, clients or premises.
+ *             Replace with the studio's own photography. See README "Images".
+ *   anything else: supplied by the business.
+ * The /work/ portfolio takes real client photographs only, never render-* or stock-*.
  */
 
 export type Weave = 'herringbone' | 'pinstripe' | 'twill' | 'birdseye' | 'linen' | 'check';
@@ -19,14 +26,17 @@ export interface PhotoSlot {
 }
 
 export interface Service {
-  id: 'suits' | 'wedding' | 'everyday';
+  id: 'suits' | 'shirts' | 'trousers' | 'linen' | 'alterations';
   formValue: string;
-  index: string;
+  /** Used in sentences: "Enquire about <term>", "I would like to ask about <term>." */
+  enquiryTerm: string;
   occasion: string;
   title: string;
   lede: string;
   body: string[];
+  optionsLabel: string;
   decisions: string[];
+  price?: string; // only prices the business publishes
   hero: PhotoSlot;
   detail: PhotoSlot;
 }
@@ -34,170 +44,218 @@ export interface Service {
 export const services: Service[] = [
   {
     id: 'suits',
-    formValue: 'Custom suit',
-    index: 'I',
-    occasion: 'For the meeting',
-    title: 'Custom Suits',
+    formValue: 'Bespoke suit',
+    enquiryTerm: 'a bespoke suit',
+    occasion: 'Business, weddings, occasions',
+    title: 'Bespoke Suits',
     lede: 'A suit cut to your measurements sits differently from one bought off a rail.',
     body: [
-      'Shoulders that follow yours, a jacket length chosen for your height, sleeves that show the right amount of cuff. These are the details a custom suit gets right, because it starts from your measurements instead of a size chart.',
-      'Tell us where the suit will be worn, whether that is the boardroom, a client dinner or a week of travel. We will help you choose a cloth and a cut that suit both you and the occasion.',
+      'Suits for business, weddings, special occasions and everyday wear, made to your measurements. Shoulders that follow yours, a jacket length chosen for your height, sleeves that show the right amount of cuff.',
+      'Choose from a wide selection of cloths and colours, then the lapel, lining, buttons and finishing. We will talk you through each decision, or leave you to it.',
     ],
-    decisions: ['Cloth and colour', 'Single or double-breasted', 'Lapel style and width', 'Buttons and lining', 'Trouser cut and finish'],
-    hero: { photo: 'render-suit.webp',
-      alt: 'Illustration of the Tex N Tailor gentleman in a navy two-piece suit with a claret tie',
+    optionsLabel: 'Styles we make',
+    decisions: ['Single-breasted', 'Double-breasted', 'Tuxedos', 'Wedding suits', 'Business suits', 'Linen suits', 'Wool & wool-blend suits'],
+    hero: { photo: 'suit-blue-desert.jpg',
+      alt: 'A man in a tailored mid-blue two-piece suit buttoning his jacket on an open road outside Dubai',
       brief: 'Finished suit on a client, three-quarter length, studio daylight',
       weave: 'pinstripe',
       tone: 'navy',
     },
-    detail: { photo: 'render-buttons.webp',
-      alt: 'Illustration of mother-of-pearl and horn suit buttons on navy twill cloth',
+    detail: { photo: 'stock-suit-buttons.jpg',
+      alt: 'Close-up of the buttons and working buttonholes on the sleeve of a blue suit jacket',
       brief: 'Macro: lapel roll and buttonhole',
       weave: 'herringbone',
+      tone: 'navy',
+    },
+  },
+  {
+    id: 'shirts',
+    formValue: 'Tailor-made shirt',
+    enquiryTerm: 'tailor-made shirts',
+    occasion: 'Worn more than anything else',
+    title: 'Tailor-Made Shirts',
+    lede: 'A properly fitted shirt makes a noticeable difference.',
+    body: [
+      'Collars that sit right with or without a tie, sleeves that end at the wrist, and a body that neither billows nor pulls. You wear shirts more than anything else you own, so the fit shows.',
+      'Choose from premium cotton, Italian shirting, Indian shirting, linen and other selected fabrics.',
+    ],
+    optionsLabel: 'What you choose',
+    decisions: ['Collar', 'Cuffs', 'Fit', 'Buttons', 'Placket', 'Pocket', 'Monogram', 'Sleeve length', 'Shirt length'],
+    price: 'From AED 120',
+    hero: { photo: 'render-collar.webp',
+      alt: 'Illustration close-up of a shirt collar and tie under a charcoal jacket',
+      brief: 'Finished shirt on a client, collar and placket, soft side light',
+      weave: 'linen',
+      tone: 'ivory',
+    },
+    detail: { photo: 'render-cuff.webp',
+      alt: 'Illustration close-up of a jacket sleeve showing the shirt cuff',
+      brief: 'Macro: cuff and button',
+      weave: 'pinstripe',
+      tone: 'navy',
+    },
+  },
+  {
+    id: 'trousers',
+    formValue: 'Bespoke trousers',
+    enquiryTerm: 'bespoke trousers',
+    occasion: 'Formal to Gurkha',
+    title: 'Bespoke Trousers',
+    lede: 'Trousers made around your measurements and the fit you prefer.',
+    body: [
+      'From formal business trousers to contemporary pleated styles, Gurkha trousers and linen trousers. The rise, the seat and the hem are cut for you, not averaged across a size range.',
+    ],
+    optionsLabel: 'What you choose',
+    decisions: ['Waistband', 'Pleats', 'Side adjusters', 'Pockets', 'Finishing'],
+    price: 'Gurkha from AED 160',
+    hero: { photo: 'render-trousers.webp',
+      alt: 'Illustration of trouser hems resting on polished shoes',
+      brief: 'Tailored trousers on a client, full length, low angle',
+      weave: 'check',
+      tone: 'olive',
+    },
+    detail: { photo: 'render-swatches.webp',
+      alt: 'Illustration of folded suiting cloth with a tape measure and chalk',
+      brief: 'Macro: waistband and side adjuster',
+      weave: 'twill',
       tone: 'charcoal',
     },
   },
   {
-    id: 'wedding',
-    formValue: 'Wedding attire',
-    index: 'II',
-    occasion: 'For the occasion',
-    title: 'Wedding Attire',
-    lede: 'Clothes for the day you will look back on in photographs for years.',
+    id: 'linen',
+    formValue: 'Linen wear',
+    enquiryTerm: 'the linen collection',
+    occasion: 'Made for the UAE climate',
+    title: 'Linen Collection',
+    lede: 'Comfort, breathability and relaxed elegance for Dubai weather.',
     body: [
-      'Wedding clothes carry more weight than anything else in a wardrobe. They have to fit perfectly, photograph well and feel comfortable through a long day and a longer evening.',
-      'Start early and bring your plans with you: the date, the setting, the colours. We will talk you through cloth, cut and finishing so the result feels like you on the day it matters most.',
+      'Linen breathes in the heat and softens with every wear. We make it in classic neutrals, pastels and deeper contemporary colours.',
+      'Order a single piece or a full set: shirts, trousers, jackets and suits, or a matching outfit for smart-casual days.',
     ],
-    decisions: ['The look for the ceremony and the evening', 'Cloth, colour and texture', 'Cut and silhouette', 'Finishing details', 'Timing of fittings around your date'],
-    hero: { photo: 'render-wedding.webp',
-      alt: 'Illustration of the gentleman in an ivory dinner jacket, black trousers and bow tie',
-      brief: 'Groom in finished wedding attire, full length, warm light',
-      weave: 'birdseye',
-      tone: 'ivory',
-    },
-    detail: { photo: 'render-lining.webp',
-      alt: 'Illustration of navy cloth draped to show a claret lining',
-      brief: 'Detail: cloth texture and finishing on the wedding garment',
-      weave: 'twill',
-      tone: 'claret',
-    },
-  },
-  {
-    id: 'everyday',
-    formValue: 'Everyday & casual wear',
-    index: 'III',
-    occasion: 'For every day',
-    title: 'Everyday & Casual Wear',
-    lede: 'The clothes you wear most deserve to fit best.',
-    body: [
-      'Tailoring is not only for formal occasions. The pieces you reach for every week are the ones where a good fit makes the biggest difference.',
-      'Bring a favourite garment, a photo of something you like, or simply an idea. We will measure you and make it to fit.',
-    ],
-    decisions: ['Relaxed or structured fit', 'Cloth for Dubai weather', 'Collars, cuffs and pockets', 'Length and proportion'],
-    hero: { photo: 'render-everyday.webp',
-      alt: 'Illustration of the gentleman in a tailored shirt and chinos beside folded cloth',
-      brief: 'Client in relaxed tailored clothing, outdoors, natural light',
+    optionsLabel: 'Available in',
+    decisions: ['Linen shirts', 'Linen trousers', 'Linen suits', 'Linen jackets', 'Matching linen sets', 'Smart-casual outfits'],
+    hero: { photo: 'stock-linen.jpg',
+      alt: 'Close-up of charcoal linen cloth showing the open weave of the fibre',
+      brief: 'Client in a linen outfit, outdoors, natural light',
       weave: 'linen',
       tone: 'sand',
     },
     detail: { photo: 'render-swatches.webp',
-      alt: 'Illustration of folded suiting and shirting cloth with a tape measure',
-      brief: 'Macro: collar and cuff on a casual garment',
-      weave: 'check',
-      tone: 'olive',
+      alt: 'Illustration of folded cloth with a tape measure and chalk',
+      brief: 'Macro: linen texture in three colours',
+      weave: 'linen',
+      tone: 'ivory',
+    },
+  },
+  {
+    id: 'alterations',
+    formValue: 'Alterations',
+    enquiryTerm: 'alterations',
+    occasion: 'For clothes you already own',
+    title: 'Alterations',
+    lede: 'Already own a garment that doesn’t fit quite right?',
+    body: [
+      'We improve the fit of suits, jackets, shirts, trousers and formalwear while keeping the original balance and structure of the garment.',
+    ],
+    optionsLabel: 'We alter',
+    decisions: ['Suits', 'Jackets', 'Shirts', 'Trousers', 'Formalwear'],
+    hero: { photo: 'render-studio.webp',
+      alt: 'Illustration of thread spools, a tape measure and tailor’s chalk on the work table',
+      brief: 'Tailor pinning a jacket on a client at a fitting',
+      weave: 'twill',
+      tone: 'navy',
+    },
+    detail: { photo: 'render-lining.webp',
+      alt: 'Illustration of navy cloth draped to show a claret lining',
+      brief: 'Macro: chalk marks on a sleeve',
+      weave: 'twill',
+      tone: 'claret',
     },
   },
 ];
 
-/**
- * VERIFY with the business: the stages below describe how made-to-measure tailoring
- * usually works. Adjust wording/number of stages to match Tex N Tailor's actual workflow.
- */
+/** The business's own five steps, as published on texntailor.ae ("How It Works"). */
 export const processSteps = [
   {
     n: '01',
-    title: 'Conversation',
-    text: 'What is the garment for, when do you need it, and how do you like your clothes to feel? Everything starts here.',
+    title: 'Visit us',
+    text: 'Come to the boutique in Al Nahda 1, or start the conversation on WhatsApp. Tell us what the garment is for and when you need it.',
   },
   {
     n: '02',
-    title: 'Measurements',
-    text: 'Your measurements are taken in person, along with notes on posture and how you like things to sit.',
+    title: 'Choose your fabric',
+    text: 'Browse the collection and choose the material, colour and pattern that suit you.',
   },
   {
     n: '03',
-    title: 'Cloth & details',
-    text: 'Choose the fabric, then the details: lapels, collars, cuffs, buttons and lining. Guidance is there whenever you want it.',
+    title: 'Get measured',
+    text: 'Our tailoring team takes your measurements and talks through the fit you prefer.',
   },
   {
     n: '04',
-    title: 'Cutting & making',
-    text: 'The garment is cut to your measurements and sewn by our tailors.',
+    title: 'Customise',
+    text: 'Collars, lapels, cuffs, buttons, pockets and finishing. Decide as much or as little as you like.',
   },
   {
     n: '05',
-    title: 'Fitting',
-    text: 'You try it on. Anything that is not right is marked and adjusted.',
-  },
-  {
-    n: '06',
-    title: 'Collection',
-    text: 'A final check before it is yours to wear.',
+    title: 'Fitting & finishing',
+    text: 'You try the garment on. It is adjusted where needed before it is handed over.',
   },
 ];
 
 export const details: { term: string; text: string; slot: PhotoSlot }[] = [
   {
+    term: 'Cloth',
+    text: 'The first decision, and the one you feel all day. Weight, weave and colour are chosen for the climate and the occasion.',
+    slot: { photo: 'stock-cloth-stripe.jpg', alt: 'Close-up of black and grey striped wool suiting cloth', brief: 'Cloth from your own swatch books, raking light', weave: 'pinstripe', tone: 'charcoal' },
+  },
+  {
     term: 'Lapel',
     text: 'Notch, peak or shawl; narrow or generous. The lapel sets the character of a jacket more than any other detail.',
-    slot: { photo: 'render-lapel.webp', alt: 'Illustration close-up of a notch lapel, tie and jacket shoulder', brief: 'Lapel, shot from above on the cutting table', weave: 'herringbone', tone: 'charcoal' },
+    slot: { photo: 'stock-lapel-pocket.jpg', alt: 'Close-up of a blue jacket lapel and breast pocket holding a patterned pocket square, with stitching along the edge', brief: 'Lapel, shot from above on the cutting table', weave: 'herringbone', tone: 'navy' },
   },
   {
     term: 'Collar',
     text: 'The frame for your face. Its spread and height should suit your neck and how you wear a tie, or don’t.',
-    slot: { photo: 'render-collar.webp', alt: 'Illustration close-up of a shirt collar and tie under a charcoal jacket', brief: 'Collar on a finished shirt, soft side light', weave: 'linen', tone: 'ivory' },
+    slot: { photo: 'stock-collar.jpg', alt: 'Close-up of hands fastening the top button of a white shirt collar', brief: 'Collar on a finished shirt, soft side light', weave: 'linen', tone: 'ivory' },
   },
   {
     term: 'Cuff',
     text: 'Where jacket sleeve meets shirt. A good fit shows a measured line of shirt cuff when your arms are at rest.',
-    slot: { photo: 'render-cuff.webp', alt: 'Illustration close-up of a jacket sleeve showing the shirt cuff', brief: 'Sleeve and cuff line, arm at rest', weave: 'pinstripe', tone: 'navy' },
+    slot: { photo: 'stock-cuff.jpg', alt: 'Close-up of a hand adjusting the cuff of a black dinner jacket worn over a white shirt', brief: 'Sleeve and cuff line, arm at rest', weave: 'twill', tone: 'charcoal' },
   },
   {
     term: 'Buttons',
     text: 'Small, but seen all day. Material, colour and finish are chosen to suit the cloth.',
-    slot: { photo: 'render-buttons.webp', alt: 'Illustration of suit buttons laid on navy cloth', brief: 'Button selection laid on cloth swatches', weave: 'birdseye', tone: 'sand' },
+    slot: { photo: 'stock-buttons.jpg', alt: 'Close-up of four dark buttons stitched along the sleeve of a black jacket', brief: 'Button selection laid on cloth swatches', weave: 'twill', tone: 'charcoal' },
   },
   {
     term: 'Lining',
-    text: 'The part only you see. A chance for a quiet flash of colour, or simply something cool and comfortable.',
-    slot: { photo: 'render-lining.webp', alt: 'Illustration of navy cloth with a claret lining', brief: 'Jacket held open to reveal lining', weave: 'twill', tone: 'claret' },
-  },
-  {
-    term: 'Trouser break',
-    text: 'How the hem meets the shoe. No break, a slight break or a full one, decided at the fitting.',
-    slot: { photo: 'render-trousers.webp', alt: 'Illustration of trouser hems resting on polished shoes', brief: 'Trouser hem and shoe, low angle', weave: 'check', tone: 'olive' },
+    text: 'The part only you see. A chance for a quiet flash of pattern, or simply something cool and comfortable.',
+    slot: { photo: 'stock-lining-paisley.jpg', alt: 'Close-up of black and cream paisley-patterned lining cloth', brief: 'Jacket held open to reveal lining', weave: 'twill', tone: 'charcoal' },
   },
 ];
 
-export type WorkCategory = 'suits' | 'wedding' | 'everyday' | 'details';
+export type WorkCategory = 'suits' | 'wedding' | 'shirts' | 'details';
 
 export const workCategories: { id: WorkCategory; label: string }[] = [
   { id: 'suits', label: 'Suits' },
   { id: 'wedding', label: 'Wedding' },
-  { id: 'everyday', label: 'Everyday' },
+  { id: 'shirts', label: 'Shirts & linen' },
   { id: 'details', label: 'Details' },
 ];
 
 /** Portfolio. Replace placeholders with real client work (with client permission). */
 export const work: (PhotoSlot & { category: WorkCategory; caption: string; shape: 'tall' | 'wide' | 'square' })[] = [
-  { category: 'suits', caption: 'Two-piece suit', shape: 'tall', alt: 'Two-piece custom suit', brief: 'Finished two-piece suit, full length', weave: 'pinstripe', tone: 'navy' },
+  // From texntailor.ae. VERIFY that it shows a Tex N Tailor garment before launch.
+  { photo: 'suit-blue-desert.jpg', category: 'suits', caption: 'Two-piece suit', shape: 'tall', alt: 'A man in a tailored mid-blue two-piece suit buttoning his jacket on an open road outside Dubai', brief: 'Finished two-piece suit, full length', weave: 'pinstripe', tone: 'navy' },
   { category: 'details', caption: 'Lapel and buttonhole', shape: 'square', alt: 'Lapel and buttonhole detail', brief: 'Macro: lapel and buttonhole', weave: 'herringbone', tone: 'charcoal' },
-  { category: 'wedding', caption: 'Wedding attire', shape: 'tall', alt: 'Wedding attire worn by a groom', brief: 'Groom, full length, on the day', weave: 'birdseye', tone: 'ivory' },
-  { category: 'everyday', caption: 'Everyday tailoring', shape: 'wide', alt: 'Casual tailored outfit', brief: 'Casual outfit, half length, outdoors', weave: 'linen', tone: 'sand' },
+  { category: 'wedding', caption: 'Wedding suit', shape: 'tall', alt: 'Wedding suit worn by a groom', brief: 'Groom, full length, on the day', weave: 'birdseye', tone: 'ivory' },
+  { category: 'shirts', caption: 'Linen outfit', shape: 'wide', alt: 'Tailored linen outfit', brief: 'Linen outfit, half length, outdoors', weave: 'linen', tone: 'sand' },
   { category: 'details', caption: 'Cloth selection', shape: 'square', alt: 'Fabric swatches on the studio table', brief: 'Swatch books open on the studio table', weave: 'check', tone: 'olive' },
   { category: 'suits', caption: 'Fitting', shape: 'wide', alt: 'A client at a fitting', brief: 'Fitting in progress, tailor marking with chalk', weave: 'twill', tone: 'charcoal' },
-  { category: 'wedding', caption: 'Ceremony detail', shape: 'square', alt: 'Detail of wedding attire', brief: 'Detail of embroidery / finishing', weave: 'twill', tone: 'claret' },
-  { category: 'everyday', caption: 'Collar and cuff', shape: 'tall', alt: 'Shirt collar and cuff detail', brief: 'Shirt collar and cuff, close crop', weave: 'linen', tone: 'ivory' },
+  { category: 'wedding', caption: 'Ceremony detail', shape: 'square', alt: 'Detail of a wedding suit', brief: 'Detail of embroidery / finishing', weave: 'twill', tone: 'claret' },
+  { category: 'shirts', caption: 'Collar and cuff', shape: 'tall', alt: 'Shirt collar and cuff detail', brief: 'Shirt collar and cuff, close crop', weave: 'linen', tone: 'ivory' },
   { category: 'suits', caption: 'Double-breasted jacket', shape: 'square', alt: 'Double-breasted jacket', brief: 'Double-breasted jacket on a client', weave: 'pinstripe', tone: 'charcoal' },
 ];
 
@@ -206,6 +264,14 @@ export const work: (PhotoSlot & { category: WorkCategory; caption: string; shape
  * permission). The section is hidden while this list is empty. Never invent entries.
  */
 export const testimonials: { quote: string; name: string; source: string }[] = [];
+
+export const swatchSlot: PhotoSlot = {
+  photo: 'stock-swatches.jpg',
+  alt: 'Close-up of stacked cloth swatches in checks, houndstooth and plain weaves',
+  brief: 'The boutique: cloth on the shelves, or the shopfront in Al Nahda 1',
+  weave: 'check',
+  tone: 'sand',
+};
 
 export const studioSlot: PhotoSlot = { photo: 'render-studio.webp',
   alt: 'Illustration of thread spools, a tape measure and tailor’s chalk',

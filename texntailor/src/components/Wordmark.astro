@@ -1,11 +1,18 @@
 ---
-/* Typographic wordmark. Replace with the official Tex N Tailor logo file when supplied. */
+/* The Tex N Tailor woven-T mark (from the official logo on texntailor.ae) with the name set in Poppins. */
 interface Props { size?: 'sm' | 'lg'; }
 const { size = 'sm' } = Astro.props;
 ---
-<span class:list={['wordmark', `wordmark--${size}`]}>TEX<span class="wordmark__n">N</span>TAILOR</span>
+<span class:list={['wordmark', `wordmark--${size}`]}>
+  <svg class="wordmark__mark" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <g fill="var(--claret)"><rect x="0" y="50" width="117" height="25" /><rect x="155" y="50" width="42" height="25" /><rect x="51" y="80" width="24" height="118" /></g>
+    <g fill="var(--ink)"><rect x="125" y="0" width="23" height="118" /><rect x="80" y="123" width="118" height="25" /><rect x="3" y="123" width="42" height="25" /></g>
+  </svg>
+  <span class="wordmark__name">TEX<span class="wordmark__n">N</span>TAILOR</span>
+</span>
 <style>
-  .wordmark { font-family: var(--f); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.22em; line-height: 1; white-space: nowrap; }
-  .wordmark__n { display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin: 0 0.45em 0 0.2em; border-radius: 50%; background: var(--ink); color: var(--white); font-size: 0.62em; letter-spacing: 0; vertical-align: 0.12em; }
+  .wordmark { display: inline-flex; align-items: center; gap: 0.7em; font-family: var(--f); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.22em; line-height: 1; white-space: nowrap; }
+  .wordmark__mark { width: 1.75em; height: 1.75em; flex: none; }
+  .wordmark__n { color: var(--claret); margin: 0 0.4em; }
   .wordmark--lg { font-size: clamp(1.35rem, 3vw, 1.8rem); }
 </style>

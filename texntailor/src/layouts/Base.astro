@@ -29,11 +29,12 @@ const business = {
   address: {
     '@type': 'PostalAddress',
     ...(site.address.street ? { streetAddress: site.address.street } : {}),
-    addressLocality: `${site.address.area}, ${site.address.district}`,
+    addressLocality: [site.address.area, site.address.district].filter(Boolean).join(', '),
     addressRegion: site.address.city,
     addressCountry: site.address.countryCode,
   },
   ...(site.address.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.address.geo.lat, longitude: site.address.geo.lng } } : {}),
+  openingHoursSpecification: site.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.schemaDays, opens: h.opens, closes: h.closes })),
   areaServed: { '@type': 'City', name: 'Dubai' },
   sameAs: [site.social.instagram.url, site.social.facebook, site.social.tiktok].filter(Boolean),
 };

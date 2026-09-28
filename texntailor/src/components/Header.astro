@@ -20,7 +20,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
 
     <div class="hdr__actions">
       <a class="hdr__call" href={telLink} aria-label={`Call ${site.contact.phoneDisplay}`}><Icon name="phone" size={18} /></a>
-      <a class="btn hdr__cta" href="/contact/#enquire">Book an appointment</a>
+      <a class="btn hdr__cta" href="/contact/#enquire">Book a fitting</a>
       <button class="hdr__menu" type="button" aria-haspopup="dialog" aria-controls="menu" data-menu-open>
         <span>Menu</span><span class="hdr__bars" aria-hidden="true"></span>
       </button>
@@ -42,7 +42,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
     </ul>
   </nav>
   <div class="menu__foot wrap">
-    <a class="btn" href="/contact/#enquire">Book an appointment</a>
+    <a class="btn" href="/contact/#enquire">Book a fitting</a>
     <div class="menu__quick">
       <a class="btn btn--soft" href={whatsappLink('Hello Tex N Tailor, I would like to enquire about tailoring.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
       <a class="btn btn--soft" href={telLink}><Icon name="phone" />Call</a>

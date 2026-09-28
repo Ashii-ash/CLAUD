@@ -2,7 +2,7 @@
  * Single source of truth for Tex N Tailor business information.
  *
  * RULE: nothing in this file may be invented. Every value is either
- *   - verified (found in a public source about Tex N Tailor), or
+ *   - verified (published by the business on the live texntailor.ae, checked 2026-09-28), or
  *   - explicitly marked `VERIFY` and listed in README.md → "Information to confirm".
  * Optional values left as `null` are hidden across the site until filled in.
  */
@@ -13,41 +13,41 @@ export const site = {
   url: 'https://texntailor.ae',
   locale: 'en_AE',
 
-  // From texntailor.ae (public search index): "custom suits, wedding attire, and casual outfits…"
+  // Paraphrases the live texntailor.ae: suits, shirts, trousers, linen wear and alterations.
   descriptionShort:
-    'Custom suits, wedding attire and everyday clothing, measured and made for you in Al Nahda, Dubai.',
+    'Tailor-made suits, shirts, trousers and linen wear, cut to your measurements in Al Nahda 1, Dubai. Alterations too.',
 
   contact: {
-    // VERIFY: sourced from a public directory listing; not yet confirmed by the business.
+    // Published on texntailor.ae as the phone and WhatsApp number.
     phoneDisplay: '+971 56 723 7172',
     phoneE164: '+971567237172',
-    // VERIFY: assumed to be the same number as the phone line. Change here if different.
     whatsappE164: '971567237172',
     email: null as string | null, // VERIFY: add the business email to show it site-wide
   },
 
   address: {
-    // Verified area: "Deira, Al Nahda 1, Dubai" (public listings).
-    // VERIFY: building / street / shop number for the full street address.
-    street: null as string | null,
+    // From the schema.org data on texntailor.ae.
+    street: 'Shop 16, A. W. Bin Shabib Twin Tower, 3rd Street' as string | null,
     area: 'Al Nahda 1',
-    district: 'Deira',
+    district: null as string | null,
     city: 'Dubai',
     country: 'United Arab Emirates',
     countryCode: 'AE',
     // Used for the "Directions" link + map. Replace with the exact Google Maps
     // place link once confirmed (open the listing in Google Maps → Share → Copy link).
-    mapsQuery: 'Tex N Tailor, Al Nahda 1, Dubai',
+    mapsQuery: 'Tex N Tailor, A. W. Bin Shabib Twin Tower, Al Nahda 1, Dubai',
     mapsUrl: null as string | null, // VERIFY: exact Google Maps share link
     geo: null as { lat: number; lng: number } | null, // VERIFY: for schema.org
   },
 
-  // VERIFY: opening hours. Leave empty to hide hours everywhere.
-  // Example format: { days: 'Saturday – Thursday', hours: '10:00 – 22:00' }
-  hours: [] as { days: string; hours: string }[],
+  // Published on texntailor.ae. `schemaDays`/`opens`/`closes` feed schema.org.
+  hours: [
+    { days: 'Saturday – Thursday', hours: '9:00 am – 10:00 pm', schemaDays: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '09:00', closes: '22:00' },
+    { days: 'Friday', hours: '4:00 pm – 10:00 pm', schemaDays: ['Friday'], opens: '16:00', closes: '22:00' },
+  ] as { days: string; hours: string; schemaDays: string[]; opens: string; closes: string }[],
 
   social: {
-    instagram: { handle: '@tex_n_tailor', url: 'https://www.instagram.com/tex_n_tailor/' },
+    instagram: { handle: '@texntailor', url: 'https://www.instagram.com/texntailor/' },
     facebook: null as string | null,
     tiktok: null as string | null,
   },

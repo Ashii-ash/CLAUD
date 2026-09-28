@@ -46,7 +46,7 @@ html = html.replace('<section class="hero"', '<section id="top" class="hero"')
   .replace('<section class="make"', '<section id="make" class="make"')
   .replace('<section class="proc section"', '<section id="process" class="proc section"')
   .replace('<section class="work section"', '<section id="work" class="work section"');
-const map = [[/href="\/tailoring\/#(suits|wedding|everyday)"/g, 'href="#$1"'], [/href="\/tailoring\/[^"]*"/g, 'href="#make"'], [/href="\/process\/"/g, 'href="#process"'],
+const map = [[/href="\/tailoring\/#(suits|shirts|trousers|linen|alterations)"/g, 'href="#$1"'], [/href="\/tailoring\/[^"]*"/g, 'href="#make"'], [/href="\/process\/"/g, 'href="#process"'],
   [/href="\/work\/"/g, 'href="#work"'], [/href="\/contact\/[^"]*"/g, 'href="#visit"'], [/href="\/"/g, 'href="#top"']];
 for (const [re, to] of map) html = html.replace(re, to);
 html = html.replace(/<li[^>]*><a href="\/privacy\/"[^>]*>Privacy Policy<\/a><\/li>/g, "").replace(/<li[^>]*><a href="\/sitemap-index.xml"[^>]*>Sitemap<\/a><\/li>/g, "");

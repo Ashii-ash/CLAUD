@@ -20,6 +20,7 @@
   --muted: #6b6b72;
   --faint: #75757c;
   --navy: #1b2640;           /* the cloth colour, used sparingly */
+  --claret: #880002;         /* from the official logo; used only in the logo */
   --focus: #1b2640;
 
   --f: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;

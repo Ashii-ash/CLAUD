@@ -22,14 +22,14 @@ const schema = [{
 }];
 ---
 <Base
-  title="Tailoring: Custom Suits, Wedding Attire & Everyday Wear in Dubai"
-  description="Custom suits, wedding attire and everyday clothing made to your measurements at Tex N Tailor, Al Nahda 1, Dubai. See what we make and how to start."
+  title="Bespoke Suits, Shirts, Trousers & Linen in Dubai"
+  description="Tailor-made suits, shirts, trousers and linen wear cut to your measurements at Tex N Tailor, Al Nahda 1, Dubai, plus alterations. Styles, options and prices."
   schema={schema}
 >
   <PageIntro
     kicker="Tailoring"
     title='Made for the life <span class="soft">you actually lead.</span>'
-    lede="Three kinds of work, one principle: every piece is made to your measurements, in the cloth and details you choose."
+    lede="Five kinds of work, one principle: every piece is made to your measurements, in the cloth and details you choose."
   >
     <nav class="toc" aria-label="On this page">
       {services.map((s, i) => (
@@ -51,13 +51,14 @@ const schema = [{
           {s.body.map((p) => <p class="muted svcp__p" data-reveal>{p}</p>)}
 
           <div class="svcp__decide" data-reveal>
-            <p class="svcp__h">What you decide</p>
+            <p class="svcp__h">{s.optionsLabel}</p>
             <ul>{s.decisions.map((d) => <li>{d}</li>)}</ul>
+            {s.price && <p class="svcp__price">{s.price}</p>}
           </div>
 
           <div class="btn-row" data-reveal>
-            <a class="btn" href={`/contact/?service=${s.id}#enquire`}>Enquire about {s.title.toLowerCase()}</a>
-            <a class="btn btn--soft" href={whatsappLink(`Hello Tex N Tailor, I would like to ask about ${s.title.toLowerCase()}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
+            <a class="btn" href={`/contact/?service=${s.id}#enquire`}>Enquire about {s.enquiryTerm}</a>
+            <a class="btn btn--soft" href={whatsappLink(`Hello Tex N Tailor, I would like to ask about ${s.enquiryTerm}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
           </div>
         </div>
       </div>
@@ -81,6 +82,7 @@ const schema = [{
   .svcp__decide { margin: 2.25rem 0; padding: clamp(1.4rem, 3vw, 2rem); background: var(--soft); border-radius: var(--r); }
   .svcp__h { font-size: 0.85rem; font-weight: 500; margin-bottom: 1rem; }
   .svcp__decide ul { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .svcp__price { margin: 1.25rem 0 0; font-weight: 500; }
   .svcp__decide li { padding: 0.55rem 1rem; border-radius: 999px; background: var(--white); font-size: 0.9rem; }
   @media (max-width: 900px) {
     .svcp__grid { grid-template-columns: 1fr; }

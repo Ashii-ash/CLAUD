@@ -20,10 +20,16 @@ Form backend is chosen at build time: `PUBLIC_FORM_ENDPOINT=<formspree url>`, or
 ## Non-negotiable rules from the client
 
 - **Never invent business facts**: reviews, names, stats, years, awards, partners, hours, prices.
-  All facts live in `src/data/site.ts`; unconfirmed ones are marked `VERIFY`, and `null` hides them.
+  All facts live in `src/data/site.ts` and `src/data/content.ts`, taken from the live texntailor.ae
+  (read 2026-09-28); unconfirmed ones are marked `VERIFY`, and `null` hides them. The five services,
+  the two prices and the five process steps are the business's own — do not add, rename or reorder them.
 - **No fake functionality.** Every button and link does something real. There is no fake form success.
-- **Rendered illustrations are not client work.** The `/work/` portfolio is for real photos only.
-  Alt text calls renders "Illustration of …", and the homepage lookbook says they're illustrations.
+- **Nothing is passed off as the studio's own work.** Filenames carry the provenance:
+  `render-*` are illustrations made here, `stock-*` are CC0 photographs standing in for craft
+  and cloth close-ups, anything else came from the business. The `/work/` portfolio is for real
+  client photos only — never `render-*` or `stock-*`. Alt text calls renders "Illustration of …",
+  the homepage lookbook says they're illustrations, and `src/assets/photos/CREDITS.md` lists every
+  image with its licence. New stock must be CC0/commercial-use and show no identifiable face.
 - **Visual language the client chose:** all-white canvas, **no lines, rules or borders**, **Poppins
   only** (no serif or italic display type), soft grey surfaces (`--soft`), pill buttons, navy
   `#1b2640` as the only accent. It must not look "AI-made": avoid em-dash-heavy copy, gradients,

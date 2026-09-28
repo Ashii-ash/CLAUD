@@ -26,36 +26,52 @@ scale, soft grey surfaces, pill controls and space.
 
 ## ⚠️ Before launch: information to confirm
 
-The live site and directory listings could not be read directly from the build environment,
-so **every business fact lives in [`src/data/site.ts`](src/data/site.ts)** and each unconfirmed
-value is marked `VERIFY`. Nothing has been invented. Optional values left as `null` are hidden across the site.
+On 2026-09-28 the live **texntailor.ae was read directly**, and the content, services, prices,
+opening hours and address below were taken from it. **Every business fact lives in
+[`src/data/site.ts`](src/data/site.ts)** and [`src/data/content.ts`](src/data/content.ts);
+anything still unconfirmed is marked `VERIFY`. Nothing has been invented, and optional values
+left as `null` are hidden across the site.
 
 | Item | Current value | Status |
 |---|---|---|
-| Phone | +971 56 723 7172 | From a public directory listing — **confirm** |
-| WhatsApp | same as phone | **Confirm** it is the WhatsApp number |
-| Area | Al Nahda 1, Deira, Dubai | From public listings |
-| Street / building / shop no. | — | **Needed** |
-| Google Maps link / coordinates | search query fallback | **Needed** (exact place link) |
-| Opening hours | — | **Needed** (hidden until added) |
+| Phone / WhatsApp | +971 56 723 7172 | From texntailor.ae (shown there as phone **and** WhatsApp) |
+| Address | Shop 16, A. W. Bin Shabib Twin Tower, 3rd Street, Al Nahda 1, Dubai | From texntailor.ae schema data |
+| Opening hours | Sat–Thu 9:00–22:00 · Fri 16:00–22:00 | From texntailor.ae |
+| Google Maps link / coordinates | search query fallback | **Needed** (exact place link, for the map + schema) |
 | Email | — | **Needed** (hidden until added) |
-| Instagram | @tex_n_tailor | Verified |
+| Instagram | @texntailor | From texntailor.ae |
 | Trade-licence / legal name | — | Optional (footer, privacy policy) |
-| Logo | typographic placeholder "TEX (N) TAILOR" (`Wordmark.astro`) | **Supply official logo** (SVG) |
-| Services | Custom suits · Wedding attire · Everyday & casual wear | From texntailor.ae copy. Add others (e.g. shirts, kandura, alterations) **only if offered** |
-| Process steps | 6 generic made-to-measure stages | **Confirm** they match how you work (`src/data/content.ts`) |
+| Logo | official woven-T mark, name set in Poppins (`Wordmark.astro`) | Supply the original **SVG** if you have it |
+| Services | Suits · Shirts · Trousers · Linen · Alterations | From texntailor.ae |
+| Prices | Shirts from AED 120 · Gurkha trousers from AED 160 | From texntailor.ae — **confirm still current** |
+| Process steps | the 5 steps published as "How It Works" | From texntailor.ae |
 | Testimonials | none | Add **real** reviews only (section hidden while empty) |
 
-Also confirm: whether the current site sells products online ("free shipping over $50" appears
+Two photographs on the old site (`hero-suit.jpg`, `bespoke-suit.jpg`) are the only real imagery
+available. `hero-suit.jpg` is used as `suit-blue-desert.jpg` in the Bespoke Suits section and the
+portfolio. **Confirm it shows a Tex N Tailor garment** and that you have the right to use it;
+otherwise remove it from `src/data/content.ts`.
+
+Also confirm: whether the business sells products online ("free shipping over $50" appears
 in its search listing). E-commerce was deliberately left out of this build.
 
 ## Images
 
-The site's images are **3D illustrations rendered for this project**, not photographs and not
-stock or AI imagery. They show "the gentleman" (a stylised client, `src/scripts/character.ts`)
-in a navy suit, wedding and everyday looks, detail crops (lapel, collar, cuff, trouser break), and still lifes
-(buttons, cloth, lining, thread and tape). The homepage calls them a lookbook and says they're illustrations.
-The `/work/` portfolio keeps labelled placeholders for **real client photographs**.
+Images come from three places, and none of them is AI-generated. Full table in
+[`src/assets/photos/CREDITS.md`](src/assets/photos/CREDITS.md).
+
+- **`render-*`** — 3D illustrations rendered for this project: "the gentleman"
+  (`src/scripts/character.ts`) in a navy suit, wedding and everyday looks, plus still lifes
+  (buttons, cloth, lining, thread and tape). The homepage lookbook says they are illustrations.
+- **`stock-*`** — CC0 (public domain) photographs from StockSnap and rawpixel, found through
+  Openverse. They carry the craft close-ups in "The details" and the Linen hero. Free for
+  commercial use with no attribution required, and none shows an identifiable face.
+  **They are stand-ins, not Tex N Tailor's garments or studio** — swap them for the studio's
+  own photography when it exists.
+- **Business-supplied** — `suit-blue-desert.jpg`, carried over from the old texntailor.ae.
+
+The `/work/` portfolio keeps labelled placeholders for **real client photographs** only; never
+put a `render-*` or `stock-*` file there.
 
 - Re-render: in `texntailor/` run `npx vite --port 5199`, then `node tools/render/shoot.mjs [scene …]`.
   Scenes live in `tools/render/studio.ts` and are written to `src/assets/photos/render-*.webp`.

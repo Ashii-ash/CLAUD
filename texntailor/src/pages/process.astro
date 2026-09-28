@@ -4,9 +4,10 @@ import PageIntro from '../components/PageIntro.astro';
 import Photo from '../components/Photo.astro';
 import Tape from '../components/Tape.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { processSteps, details, studioSlot } from '../data/content';
+import { processSteps, details, swatchSlot } from '../data/content';
 
-const stepSlots = [studioSlot, details[2].slot, details[3].slot, details[4].slot, details[5].slot, details[0].slot];
+// 01 browse the cloth · 02 the cloth itself · 03 measured · 04 details chosen · 05 fitted
+const stepSlots = [swatchSlot, details[0].slot, details[2].slot, details[4].slot, details[3].slot];
 const schema = [{
   '@context': 'https://schema.org',
   '@type': 'HowTo',
@@ -27,8 +28,8 @@ const bring = [
 >
   <PageIntro
     kicker="The process"
-    title='Six steps to <span class="soft">a better fit.</span>'
-    lede="A made-to-measure garment is built in stages. Here is what to expect, from the first conversation to the day you collect it."
+    title='Five steps to <span class="soft">a better fit.</span>'
+    lede="A made-to-measure garment is built in stages. Here is what to expect, from your first visit to the final fitting."
   />
 
   <section class="steps" aria-label="Steps">
