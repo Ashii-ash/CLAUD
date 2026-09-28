@@ -29,6 +29,7 @@ const light = slot.tone === 'sand' || slot.tone === 'ivory';
       src={image}
       alt={slot.alt}
       formats={['avif', 'webp']}
+      fallbackFormat="webp"
       widths={[480, 800, 1200, 1600, 2000].filter((w) => w <= image.width)}
       sizes={sizes}
       loading={eager ? 'eager' : 'lazy'}
