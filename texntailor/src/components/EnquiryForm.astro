@@ -1,20 +1,27 @@
 ---
 /**
  * Appointment / enquiry form.
- * Submission: Netlify Forms (form name "enquiry"). Netlify detects this form at deploy
- * time; submissions appear in Netlify → Forms and can be emailed to the business
- * (Forms → Form notifications). Works without JavaScript via a normal POST that
- * redirects to /contact/thanks/. With JavaScript it submits in place.
- * Spam: honeypot field + Netlify's built-in Akismet filtering.
+ * Submission backend is chosen at build time:
+ *  - PUBLIC_FORM_ENDPOINT set (e.g. a Formspree URL): posts there, file included.
+ *  - Built on Netlify: Netlify Forms (form name "enquiry"); set up email alerts in
+ *    Netlify → Forms → Notifications. Works without JavaScript too.
+ *  - Neither (e.g. Vercel with no endpoint yet): "Send enquiry" opens WhatsApp with the
+ *    details prefilled, so every enquiry still reaches the business.
+ * Spam: honeypot field (+ the provider's own filtering).
  */
 import Icon from './Icon.astro';
 import { services } from '../data/content';
+
+const endpoint: string | null =
+  import.meta.env.PUBLIC_FORM_ENDPOINT || (process.env.NETLIFY === 'true' ? '/' : null);
+const action = endpoint && endpoint !== '/' ? endpoint : '/contact/thanks/';
 ---
 <form
   class="enq"
   name="enquiry"
   method="POST"
-  action="/contact/thanks/"
+  action={action}
+  data-endpoint={endpoint ?? ''}
   enctype="multipart/form-data"
   data-netlify="true"
   netlify-honeypot="company"
@@ -94,9 +101,9 @@ import { services } from '../data/content';
     <div class="btn-row" data-wa-zone>
       <button class="btn enq__send" type="submit" data-submit>
         <span class="enq__spinner" aria-hidden="true"></span>
-        <span data-submit-label>Send enquiry</span>
+        <span data-submit-label>{endpoint ? 'Send enquiry' : 'Send via WhatsApp'}</span>
       </button>
-      <button class="btn btn--soft" type="button" data-wa-send><Icon name="whatsapp" />Send via WhatsApp instead</button>
+      {endpoint && <button class="btn btn--soft" type="button" data-wa-send><Icon name="whatsapp" />Send via WhatsApp instead</button>}
     </div>
     <p class="enq__status" role="status" aria-live="polite" data-status></p>
   </div>
@@ -162,6 +169,7 @@ import { services } from '../data/content';
     const fileName = form.querySelector<HTMLElement>('[data-filename]')!;
     const date = form.querySelector<HTMLInputElement>('#f-date')!;
     const MAX = 5 * 1024 * 1024;
+    const endpoint = form.dataset.endpoint || null;
 
     // Dates: no past appointments.
     const today = new Date();
@@ -231,10 +239,19 @@ import { services } from '../data/content';
         status.classList.add('is-error');
         return;
       }
+      if (!endpoint) {
+        openWhatsApp();
+        status.textContent = 'WhatsApp has opened with your details. Press send there to reach us.';
+        return;
+      }
       form.setAttribute('aria-busy', 'true');
       label.textContent = 'Sending…';
       try {
-        const res = await fetch('/', { method: 'POST', body: new FormData(form) });
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: endpoint === '/' ? undefined : { Accept: 'application/json' },
+        });
         if (!res.ok) throw new Error(String(res.status));
         const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim().split(' ')[0];
         const nameEl = done.querySelector('[data-done-name]');
@@ -253,7 +270,7 @@ import { services } from '../data/content';
     });
 
     // Compose the same enquiry as a WhatsApp message (a real, instant alternative).
-    form.querySelector('[data-wa-send]')?.addEventListener('click', () => {
+    function openWhatsApp() {
       const v = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
       const lines = [
         'Hello Tex N Tailor, I would like to make an enquiry.',
@@ -263,6 +280,7 @@ import { services } from '../data/content';
         v('message') && `\n${v('message')}`,
       ].filter(Boolean);
       window.open(whatsappLink(lines.join('\n')), '_blank', 'noopener');
-    });
+    }
+    form.querySelector('[data-wa-send]')?.addEventListener('click', openWhatsApp);
   }
 </script>
