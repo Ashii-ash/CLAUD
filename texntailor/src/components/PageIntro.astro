@@ -1,0 +1,22 @@
+---
+import Tape from './Tape.astro';
+interface Props { kicker: string; title: string; lede?: string; }
+const { kicker, title, lede } = Astro.props;
+---
+<section class="intro">
+  <div class="wrap">
+    <Tape label={kicker} />
+    <div class="intro__grid">
+      <h1 class="display h-xl" data-reveal set:html={title} />
+      {lede && <p class="lede" data-reveal data-reveal-delay="1">{lede}</p>}
+    </div>
+    <slot />
+  </div>
+</section>
+<style>
+  .intro { padding-top: calc(var(--header-h) + clamp(2.5rem, 7vw, 6rem)); padding-bottom: clamp(3rem, 7vw, 6rem); }
+  .intro__grid { display: grid; grid-template-columns: 7fr 4fr; gap: clamp(1.5rem, 5vw, 5rem); align-items: end; }
+  .intro h1 :global(em) { color: var(--claret); }
+  .intro .lede { margin: 0; }
+  @media (max-width: 900px) { .intro__grid { grid-template-columns: 1fr; } }
+</style>

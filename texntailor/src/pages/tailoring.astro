@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { services } from '../data/content';
+import { site, whatsappLink } from '../data/site';
+
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Tailoring at Tex N Tailor',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: s.title,
+      description: s.lede,
+      serviceType: 'Tailoring',
+      areaServed: 'Dubai',
+      provider: { '@id': `${site.url}/#business` },
+      url: `${site.url}/tailoring/#${s.id}`,
+    },
+  })),
+}];
+---
+<Base
+  title="Tailoring — Custom Suits, Wedding Attire & Everyday Wear in Dubai"
+  description="Custom suits, wedding attire and everyday clothing made to your measurements at Tex N Tailor, Al Nahda 1, Dubai. See what we make and how to start."
+  schema={schema}
+>
+  <PageIntro
+    kicker="Tailoring"
+    title="Made for the life<br /><em>you actually lead.</em>"
+    lede="Three kinds of work, one principle: every piece is made to your measurements, in the cloth and details you choose."
+  >
+    <nav class="toc" aria-label="On this page">
+      {services.map((s) => (
+        <a href={`#${s.id}`}><span class="serif">{s.index}</span>{s.title}</a>
+      ))}
+    </nav>
+  </PageIntro>
+
+  {services.map((s, i) => (
+    <section id={s.id} class:list={['svcp section', { linen: i % 2 === 0 }]} aria-labelledby={`h-${s.id}`}>
+      <div class:list={['wrap svcp__grid', { 'svcp__grid--flip': i % 2 === 1 }]}>
+        <div class="svcp__media">
+          <Photo slot={s.hero} ratio="portrait" sizes="(min-width: 1024px) 45vw, 100vw" />
+        </div>
+        <div class="svcp__text">
+          <p class="label muted" data-reveal><span class="svcp__idx serif">{s.index}</span>{s.occasion}</p>
+          <h2 id={`h-${s.id}`} class="display h-lg" data-reveal>{s.title}</h2>
+          <p class="lede svcp__lede" data-reveal>{s.lede}</p>
+          {s.body.map((p) => <p class="svcp__p" data-reveal>{p}</p>)}
+
+          <div class="svcp__decide" data-reveal>
+            <p class="label">What you decide</p>
+            <ul>{s.decisions.map((d) => <li>{d}</li>)}</ul>
+          </div>
+
+          <div class="btn-row" data-reveal>
+            <a class="btn" href={`/contact/?service=${s.id}#enquire`}>Enquire about {s.title.toLowerCase()}</a>
+            <a class="btn btn--ghost" href={whatsappLink(`Hello Tex N Tailor, I would like to ask about ${s.title.toLowerCase()}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
+          </div>
+          <div class="svcp__detail"><Photo slot={s.detail} ratio="wide" sizes="(min-width: 1024px) 30vw, 100vw" /></div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBand title="Not sure where to start? Start with a conversation." text="Bring an idea, a photo or a garment you love. We will help you work out the rest." />
+</Base>
+
+<style>
+  .toc { display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.25rem; border-top: 1px solid var(--line-strong); }
+  .toc a { display: inline-flex; gap: 0.75rem; align-items: baseline; min-height: 44px; padding-block: 0.6rem; text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+  .toc a .serif { color: var(--claret); font-size: 1.1rem; letter-spacing: 0; }
+  .toc a:hover { color: var(--claret); }
+  .svcp__grid { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(2rem, 7vw, 8rem); align-items: start; }
+  .svcp__grid--flip .svcp__media { order: 2; }
+  .svcp__media { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  .svcp__idx { color: var(--claret); font-size: 1.1rem; letter-spacing: 0; margin-right: 0.9rem; }
+  .svcp__text h2 { margin: 1rem 0 1.5rem; }
+  .svcp__lede { color: var(--ink); margin-bottom: 1.5rem; }
+  .svcp__p { color: var(--muted); max-width: 52ch; }
+  .svcp__decide { margin: 2.5rem 0; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); }
+  .svcp__decide .label { margin-bottom: 1rem; }
+  .svcp__decide ul { display: grid; }
+  .svcp__decide li { font-family: var(--f-display); font-variation-settings: 'opsz' 28; font-size: var(--step-1); padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+  .svcp__detail { margin-top: 3.5rem; }
+  @media (max-width: 900px) {
+    .svcp__grid { grid-template-columns: 1fr; }
+    .svcp__grid--flip .svcp__media { order: 0; }
+    .svcp__media { position: static; }
+    .svcp__detail { display: none; }
+    .btn-row .btn { flex: 1 1 auto; }
+  }
+</style>

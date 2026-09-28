@@ -1,0 +1,267 @@
+---
+/**
+ * Appointment / enquiry form.
+ * Submission: Netlify Forms (form name "enquiry"). Netlify detects this form at deploy
+ * time; submissions appear in Netlify → Forms and can be emailed to the business
+ * (Forms → Form notifications). Works without JavaScript via a normal POST that
+ * redirects to /contact/thanks/. With JavaScript it submits in place.
+ * Spam: honeypot field + Netlify's built-in Akismet filtering.
+ */
+import Icon from './Icon.astro';
+import { services } from '../data/content';
+---
+<form
+  class="enq"
+  name="enquiry"
+  method="POST"
+  action="/contact/thanks/"
+  enctype="multipart/form-data"
+  data-netlify="true"
+  netlify-honeypot="company"
+  novalidate
+  data-enquiry
+>
+  <input type="hidden" name="form-name" value="enquiry" />
+  <p class="enq__hp" aria-hidden="true">
+    <label>Leave this field empty <input name="company" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="enq__grid">
+    <div class="field">
+      <label for="f-name">Name<span class="req" aria-hidden="true">*</span></label>
+      <input class="input" id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="e-name" />
+      <p class="error" id="e-name" aria-live="polite"></p>
+    </div>
+
+    <div class="field">
+      <label for="f-phone">Phone / WhatsApp<span class="req" aria-hidden="true">*</span></label>
+      <input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+971 5X XXX XXXX" pattern="^[+]?[0-9\s()-]{7,20}$" aria-describedby="e-phone" />
+      <p class="error" id="e-phone" aria-live="polite"></p>
+    </div>
+
+    <div class="field">
+      <label for="f-email">Email</label>
+      <input class="input" id="f-email" name="email" type="email" autocomplete="email" maxlength="160" aria-describedby="e-email" />
+      <p class="error" id="e-email" aria-live="polite"></p>
+    </div>
+
+    <div class="field">
+      <label for="f-service">I am interested in<span class="req" aria-hidden="true">*</span></label>
+      <select class="input" id="f-service" name="service" required aria-describedby="e-service">
+        <option value="">Please choose</option>
+        {services.map((s) => <option value={s.formValue} data-id={s.id}>{s.title}</option>)}
+        <option value="Something else">Something else</option>
+      </select>
+      <p class="error" id="e-service" aria-live="polite"></p>
+    </div>
+
+    <div class="field">
+      <label for="f-date">Preferred date</label>
+      <input class="input" id="f-date" name="preferred_date" type="date" aria-describedby="h-date e-date" />
+      <p class="hint" id="h-date">We will confirm a time with you.</p>
+      <p class="error" id="e-date" aria-live="polite"></p>
+    </div>
+
+    <fieldset class="field enq__radios">
+      <legend>Best way to reach you</legend>
+      <div>
+        <label><input type="radio" name="contact_method" value="WhatsApp" checked /> <span>WhatsApp</span></label>
+        <label><input type="radio" name="contact_method" value="Phone call" /> <span>Call</span></label>
+        <label><input type="radio" name="contact_method" value="Email" /> <span>Email</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field enq__full">
+      <label for="f-message">Tell us about it</label>
+      <textarea class="input" id="f-message" name="message" rows="4" maxlength="2000" placeholder="The occasion, the date you need it by, anything you have in mind." aria-describedby="e-message"></textarea>
+      <p class="error" id="e-message" aria-live="polite"></p>
+    </div>
+
+    <div class="field enq__full">
+      <span class="enq__filelabel" id="l-file">Reference image <span class="muted">(optional)</span></span>
+      <label class="enq__file" for="f-file">
+        <input id="f-file" name="reference_image" type="file" accept="image/jpeg,image/png,image/webp,image/heic" aria-describedby="l-file h-file e-file" />
+        <span class="enq__filebtn">Choose a photo</span>
+        <span class="enq__filename" data-filename>No file chosen</span>
+      </label>
+      <p class="hint" id="h-file">A garment or look you like. JPG, PNG, WebP or HEIC, up to 5&nbsp;MB.</p>
+      <p class="error" id="e-file" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="enq__submit">
+    <p class="enq__legal muted">Fields marked <span class="req">*</span> are required. We use your details only to reply to this enquiry — see our <a href="/privacy/">privacy policy</a>.</p>
+    <div class="btn-row" data-wa-zone>
+      <button class="btn enq__send" type="submit" data-submit>
+        <span class="enq__spinner" aria-hidden="true"></span>
+        <span data-submit-label>Send enquiry</span>
+      </button>
+      <button class="btn btn--ghost" type="button" data-wa-send><Icon name="whatsapp" />Send via WhatsApp instead</button>
+    </div>
+    <p class="enq__status" role="status" aria-live="polite" data-status></p>
+  </div>
+</form>
+
+<div class="enq__done" hidden tabindex="-1" data-done>
+  <p class="label muted">Enquiry received</p>
+  <p class="display h-md">Thank you, <em data-done-name>we have your details</em>.</p>
+  <p class="lede">We will be in touch shortly to arrange a time. If it is urgent, message us on WhatsApp.</p>
+</div>
+
+<style>
+  .enq__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .enq__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem clamp(1.5rem, 3vw, 2.5rem); }
+  .enq__full { grid-column: 1 / -1; }
+  .enq__radios { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .enq__radios legend { padding: 0; margin-bottom: 0.45rem; }
+  .enq__radios div { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .enq__radios label { position: relative; cursor: pointer; }
+  .enq__radios input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .enq__radios span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem;
+    border: 1px solid var(--line-strong); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.02em; text-transform: none; transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .enq__radios input:checked + span { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+  .enq__radios input:focus-visible + span { outline: 2px solid var(--claret); outline-offset: 2px; }
+  .enq__filelabel { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+  .enq__filelabel .muted { text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .enq__file { display: flex; align-items: center; gap: 1rem; min-height: 56px; padding: 0.5rem 0; border-bottom: 1px dashed var(--line-strong); cursor: pointer; position: relative; }
+  .enq__file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+  .enq__file:focus-within { border-bottom-color: var(--claret); }
+  .enq__file:focus-within .enq__filebtn { outline: 2px solid var(--claret); outline-offset: 2px; }
+  .enq__filebtn { flex: none; padding: 0.55rem 0.9rem; border: 1px solid var(--line-strong); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+  .enq__filename { color: var(--muted); font-size: 0.95rem; font-weight: 400; letter-spacing: 0; text-transform: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .enq__submit { margin-top: 2.5rem; display: grid; gap: 1.25rem; }
+  .enq__legal { font-size: 0.88rem; margin: 0; max-width: 60ch; }
+  .enq__send { position: relative; min-width: 12rem; }
+  .enq__spinner { display: none; width: 14px; height: 14px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  .enq[aria-busy='true'] .enq__spinner { display: inline-block; }
+  .enq[aria-busy='true'] .enq__send { pointer-events: none; opacity: 0.85; }
+  @keyframes spin { to { transform: rotate(1turn); } }
+  .enq__status { margin: 0; font-size: 0.95rem; }
+  .enq__status.is-error { color: #a1262a; }
+  .enq__status:empty { display: none; }
+  .enq__done { display: grid; gap: 1.25rem; padding-block: 2rem; outline: none; }
+  .enq__done .lede, .enq__done p { margin: 0; }
+  @media (max-width: 700px) {
+    .enq__grid { grid-template-columns: 1fr; gap: 1.6rem; }
+    .enq__submit .btn { width: 100%; }
+  }
+</style>
+
+<script>
+  import { whatsappLink } from '../data/site';
+
+  const form = document.querySelector<HTMLFormElement>('[data-enquiry]');
+  if (form) {
+    const done = document.querySelector<HTMLElement>('[data-done]')!;
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const label = form.querySelector<HTMLElement>('[data-submit-label]')!;
+    const file = form.querySelector<HTMLInputElement>('#f-file')!;
+    const fileName = form.querySelector<HTMLElement>('[data-filename]')!;
+    const date = form.querySelector<HTMLInputElement>('#f-date')!;
+    const MAX = 5 * 1024 * 1024;
+
+    // Dates: no past appointments.
+    const today = new Date();
+    date.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+    // Preselect a service from ?service=suits|wedding|everyday.
+    const wanted = new URLSearchParams(location.search).get('service');
+    if (wanted) {
+      const opt = form.querySelector<HTMLOptionElement>(`#f-service option[data-id="${CSS.escape(wanted)}"]`);
+      if (opt) opt.selected = true;
+    }
+
+    const messages: Record<string, (el: HTMLInputElement) => string> = {
+      name: (el) => (el.value.trim().length < 2 ? 'Please tell us your name.' : ''),
+      phone: (el) =>
+        !el.value.trim() ? 'Please add a phone number so we can reach you.'
+        : !/^[+]?[0-9\s()-]{7,20}$/.test(el.value.trim()) ? 'That number doesn’t look right — digits, spaces and + only.' : '',
+      email: (el) => (el.value && !el.validity.valid ? 'Please check the email address.' : ''),
+      service: (el) => (!el.value ? 'Please choose what you are interested in.' : ''),
+      preferred_date: (el) => (el.value && el.value < el.min ? 'Please choose a date from today onwards.' : ''),
+      reference_image: (el) => {
+        const f = el.files?.[0];
+        if (!f) return '';
+        if (f.size > MAX) return 'That image is larger than 5 MB. Please choose a smaller one.';
+        if (f.type && !/^image\//.test(f.type)) return 'Please choose an image file.';
+        return '';
+      },
+    };
+
+    const check = (el: HTMLInputElement) => {
+      const rule = messages[el.name];
+      if (!rule) return true;
+      const msg = rule(el);
+      const field = el.closest('.field');
+      const err = form.querySelector<HTMLElement>(`#${el.getAttribute('aria-describedby')?.split(' ').find((id) => id.startsWith('e-'))}`);
+      field?.classList.toggle('has-error', !!msg);
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (err) err.textContent = msg;
+      return !msg;
+    };
+
+    form.querySelectorAll<HTMLInputElement>('input, select, textarea').forEach((el) => {
+      el.addEventListener('blur', () => { if (el.value) check(el); });
+      el.addEventListener('input', () => { if (el.closest('.has-error')) check(el); });
+      el.addEventListener('change', () => { if (el.closest('.has-error')) check(el); });
+    });
+
+    file.addEventListener('change', () => {
+      fileName.textContent = file.files?.[0]?.name ?? 'No file chosen';
+      check(file);
+    });
+
+    const validateAll = () => {
+      const fields = Array.from(form.querySelectorAll<HTMLInputElement>('input[name], select[name], textarea[name]'))
+        .filter((el) => messages[el.name]);
+      const bad = fields.filter((el) => !check(el));
+      bad[0]?.focus();
+      return bad.length === 0;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.classList.remove('is-error');
+      if (!validateAll()) {
+        status.textContent = 'Please check the highlighted fields.';
+        status.classList.add('is-error');
+        return;
+      }
+      form.setAttribute('aria-busy', 'true');
+      label.textContent = 'Sending…';
+      try {
+        const res = await fetch('/', { method: 'POST', body: new FormData(form) });
+        if (!res.ok) throw new Error(String(res.status));
+        const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim().split(' ')[0];
+        const nameEl = done.querySelector('[data-done-name]');
+        if (nameEl && name) nameEl.textContent = name;
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch {
+        status.innerHTML = 'Sorry — your enquiry could not be sent just now. Please try again, or use <strong>Send via WhatsApp</strong> or call us.';
+        status.classList.add('is-error');
+      } finally {
+        form.removeAttribute('aria-busy');
+        label.textContent = 'Send enquiry';
+      }
+    });
+
+    // Compose the same enquiry as a WhatsApp message (a real, instant alternative).
+    form.querySelector('[data-wa-send]')?.addEventListener('click', () => {
+      const v = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
+      const lines = [
+        'Hello Tex N Tailor, I would like to make an enquiry.',
+        v('name') && `Name: ${v('name')}`,
+        v('service') && `Interested in: ${v('service')}`,
+        v('preferred_date') && `Preferred date: ${v('preferred_date')}`,
+        v('message') && `\n${v('message')}`,
+      ].filter(Boolean);
+      window.open(whatsappLink(lines.join('\n')), '_blank', 'noopener');
+    });
+  }
+</script>

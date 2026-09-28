@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { whatsappLink } from '../../data/site';
+---
+<Base title="Thank You" description="Your enquiry has been sent to Tex N Tailor." noindex>
+  <section class="thanks">
+    <div class="wrap">
+      <p class="label muted">Enquiry received</p>
+      <h1 class="display h-xl">Thank <em>you.</em></h1>
+      <p class="lede">We have your details and will be in touch shortly to arrange a time. If it is urgent, message us on WhatsApp.</p>
+      <div class="btn-row">
+        <a class="btn" href="/">Back to home</a>
+        <a class="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .thanks { padding: calc(var(--header-h) + 6rem) 0 8rem; min-height: 80svh; }
+  .thanks h1 { margin: 1.5rem 0; } .thanks h1 em { color: var(--claret); }
+  .thanks .lede { margin-bottom: 2.5rem; }
+</style>

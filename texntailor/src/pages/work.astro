@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { work, workCategories } from '../data/content';
+import { site } from '../data/site';
+---
+<Base
+  title="Our Work — Tailoring Portfolio"
+  description="Suits, wedding attire, everyday tailoring and close-up details from the Tex N Tailor studio in Al Nahda, Dubai."
+>
+  <PageIntro kicker="Portfolio" title="Our <em>work.</em>" lede="Finished garments and the details that make them. For the latest pieces, follow the studio on Instagram.">
+    <div class="filters" role="group" aria-label="Filter work">
+      <button type="button" class="filters__btn" aria-pressed="true" data-filter="all">All</button>
+      {workCategories.map((c) => <button type="button" class="filters__btn" aria-pressed="false" data-filter={c.id}>{c.label}</button>)}
+    </div>
+  </PageIntro>
+
+  <section class="gallery-wrap" aria-label="Gallery">
+    <div class="wrap">
+      <ul class="gallery" data-gallery>
+        {work.map((w) => (
+          <li class={`gallery__item gallery__item--${w.shape}`} data-cat={w.category}>
+            <figure>
+              <Photo slot={w} ratio="fill" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+              <figcaption><span class="serif">{w.caption}</span><span class="label muted">{workCategories.find((c) => c.id === w.category)?.label}</span></figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <p class="gallery__empty muted" hidden data-empty>Nothing in this category yet.</p>
+      <div class="gallery__more">
+        <a class="btn btn--ghost" href={site.social.instagram.url} target="_blank" rel="noopener"><Icon name="instagram" />More on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: clamp(2rem, 5vw, 3.5rem); }
+  .filters__btn {
+    min-height: 44px; padding: 0 1.1rem; background: transparent; border: 1px solid var(--line-strong); cursor: pointer;
+    font-size: 0.76rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .filters__btn:hover { border-color: var(--ink); }
+  .filters__btn[aria-pressed='true'] { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+  .gallery-wrap { padding-bottom: var(--section); }
+  .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(180px, 18vw, 280px); grid-auto-flow: dense; gap: clamp(0.75rem, 2vw, 1.75rem); }
+  .gallery__item figure { margin: 0; height: 100%; display: grid; grid-template-rows: 1fr auto; gap: 0.7rem; }
+  .gallery__item--tall { grid-row: span 2; }
+  .gallery__item--wide { grid-column: span 2; grid-row: span 2; }
+  .gallery__item--square { grid-row: span 2; }
+  .gallery__item[hidden] { display: none; }
+  .gallery figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .gallery figcaption .serif { font-size: 1.1rem; }
+  .gallery figcaption .label { font-size: 0.66rem; }
+  .gallery__empty { padding: 3rem 0; }
+  .gallery__more { display: flex; justify-content: center; margin-top: clamp(3rem, 6vw, 5rem); }
+  @media (max-width: 900px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 42vw; } .gallery__item--wide { grid-column: span 2; } }
+  @media (max-width: 560px) { .gallery { grid-template-columns: 1fr; grid-auto-rows: auto; } .gallery__item { grid-column: auto !important; grid-row: auto !important; } .gallery__item :global(.frame) { aspect-ratio: 4 / 5; height: auto; } .gallery__item--wide :global(.frame) { aspect-ratio: 4 / 3; } }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('[data-gallery] > li');
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter;
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    let shown = 0;
+    items.forEach((it) => {
+      const show = f === 'all' || it.dataset.cat === f;
+      it.hidden = !show;
+      if (show) { shown++; it.querySelector('[data-reveal]')?.classList.add('is-in'); }
+    });
+    if (empty) empty.hidden = shown > 0;
+  }));
+</script>

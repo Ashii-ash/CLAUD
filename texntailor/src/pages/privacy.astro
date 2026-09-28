@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, telLink } from '../data/site';
+const updated = '28 September 2026';
+---
+<Base title="Privacy Policy" description="How Tex N Tailor collects and uses the information you share through this website.">
+  <article class="legal">
+    <div class="wrap legal__inner">
+      <p class="label muted">Last updated {updated}</p>
+      <h1 class="display h-lg">Privacy <em>policy.</em></h1>
+
+      <h2 class="serif">Who we are</h2>
+      <p>This website is operated by {site.legalName ?? site.name}, a tailoring business in {site.address.area}, {site.address.city}, {site.address.country}. You can contact us on <a href={telLink}>{site.contact.phoneDisplay}</a>{site.contact.email && <> or <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></>}.</p>
+
+      <h2 class="serif">What we collect</h2>
+      <p>When you send an enquiry we receive the details you enter: your name, phone number, and optionally your email address, preferred date, message and a reference image. We do not use analytics or advertising cookies on this website.</p>
+
+      <h2 class="serif">How we use it</h2>
+      <p>We use your details only to respond to your enquiry and arrange appointments. We do not sell your information or use it for unrelated marketing.</p>
+
+      <h2 class="serif">Services we rely on</h2>
+      <ul>
+        <li><strong>Netlify</strong> hosts this website and receives enquiry form submissions on our behalf.</li>
+        <li><strong>WhatsApp</strong> (Meta) handles any conversation you start with us through WhatsApp links, under WhatsApp’s own privacy policy.</li>
+        <li><strong>Google Maps</strong> is loaded only if you choose “Show map”, at which point Google may set cookies under its own policy.</li>
+      </ul>
+
+      <h2 class="serif">How long we keep it</h2>
+      <p>Enquiries are kept only as long as needed to handle your request and any resulting order, and then deleted.</p>
+
+      <h2 class="serif">Your choices</h2>
+      <p>You can ask us at any time to see, correct or delete the information we hold about you by contacting us using the details above.</p>
+    </div>
+  </article>
+</Base>
+<style>
+  .legal { padding: calc(var(--header-h) + clamp(3rem, 7vw, 6rem)) 0 var(--section); }
+  .legal__inner { max-width: 50rem; }
+  .legal h1 { margin: 1.25rem 0 3rem; } .legal h1 em { color: var(--claret); }
+  .legal h2 { font-size: var(--step-2); margin: 2.5rem 0 0.9rem; }
+  .legal p, .legal li { color: var(--muted); }
+  .legal ul { display: grid; gap: 0.6rem; padding-left: 1.1rem; list-style: disc; }
+</style>

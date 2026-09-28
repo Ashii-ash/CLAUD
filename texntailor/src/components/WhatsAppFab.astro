@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import { whatsappLink } from '../data/site';
+const href = whatsappLink('Hello Tex N Tailor, I would like to enquire about tailoring.');
+---
+<aside aria-label="Quick contact">
+<a class="wa" href={href} target="_blank" rel="noopener" aria-label="Chat with Tex N Tailor on WhatsApp (opens in a new tab)" data-wa>
+  <Icon name="whatsapp" size={24} />
+  <span class="wa__label" aria-hidden="true">WhatsApp us</span>
+</a>
+</aside>
+<style>
+  .wa {
+    position: fixed; z-index: 40;
+    right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));
+    display: inline-flex; align-items: center; height: 54px; min-width: 54px; padding: 0 15px;
+    background: var(--navy); color: var(--on-dark); text-decoration: none; border-radius: 27px;
+    border: 1px solid rgba(239, 233, 222, 0.16);
+    box-shadow: 0 10px 30px -12px rgba(15, 18, 26, 0.55);
+    transition: transform 0.45s var(--ease-out), opacity 0.35s var(--ease), background-color 0.3s;
+  }
+  .wa:hover { background: var(--claret); }
+  .wa__label {
+    max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    transition: max-width 0.5s var(--ease-out), opacity 0.3s, margin 0.5s var(--ease-out);
+  }
+  @media (hover: hover) {
+    .wa:hover .wa__label, .wa:focus-visible .wa__label { max-width: 9rem; opacity: 1; margin-left: 0.65rem; }
+  }
+  .wa.is-away { transform: translateY(140%); opacity: 0; pointer-events: none; }
+  :global(.menu-open) .wa { opacity: 0; pointer-events: none; }
+</style>
+<script>
+  // Step aside where the page already offers WhatsApp prominently (e.g. footer, contact form actions).
+  const fab = document.querySelector<HTMLElement>('[data-wa]');
+  const zones = document.querySelectorAll('[data-wa-zone]');
+  if (fab && zones.length && 'IntersectionObserver' in window) {
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+      fab.classList.toggle('is-away', visible.size > 0);
+    }, { threshold: 0.35 });
+    zones.forEach((z) => io.observe(z));
+  }
+</script>

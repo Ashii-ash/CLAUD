@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import { whatsappLink } from '../data/site';
+interface Props { title?: string; text?: string; }
+const {
+  title = 'Every garment starts with a conversation.',
+  text = 'Tell us what you have in mind. We will reply to arrange a time to meet, measure and talk through cloth.',
+} = Astro.props;
+---
+<section class="cta dark" aria-labelledby="cta-title">
+  <div class="wrap cta__inner">
+    <h2 id="cta-title" class="display h-lg" data-reveal set:html={title.replace(/conversation\./, '<em>conversation.</em>')} />
+    <div class="cta__side" data-reveal data-reveal-delay="1">
+      <p class="lede">{text}</p>
+      <div class="btn-row" data-wa-zone>
+        <a class="btn" href="/contact/#enquire">Book an appointment</a>
+        <a class="btn btn--ghost" href={whatsappLink('Hello Tex N Tailor, I would like to book an appointment.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .cta { padding-block: clamp(5rem, 11vw, 9rem); border-bottom: 1px solid var(--line-dark); }
+  .cta__inner { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: end; }
+  .cta h2 { max-width: 14ch; }
+  .cta__side { display: grid; gap: 1.75rem; }
+  .cta__side .lede { margin: 0; }
+  @media (max-width: 900px) { .cta__inner { grid-template-columns: 1fr; } }
+</style>

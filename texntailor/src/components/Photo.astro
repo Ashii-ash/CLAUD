@@ -1,0 +1,43 @@
+---
+/**
+ * Renders a real photograph from src/assets/photos when `slot.photo` is set and the
+ * file exists (optimised to AVIF/WebP, responsive, lazy). Otherwise renders a clearly
+ * labelled cloth-texture placeholder with the art-direction brief.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { PhotoSlot } from '../data/content';
+
+interface Props {
+  slot: PhotoSlot;
+  ratio?: 'tall' | 'portrait' | 'square' | 'wide' | 'pano' | 'fill';
+  sizes?: string;
+  eager?: boolean;
+  reveal?: boolean;
+  class?: string;
+}
+const { slot, ratio = 'tall', sizes = '(min-width: 1024px) 50vw, 100vw', eager = false, reveal = true, class: cls = '' } = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/photos/*.{jpg,jpeg,png,webp,avif}');
+const key = slot.photo ? `/src/assets/photos/${slot.photo}` : null;
+const image = key && files[key] ? (await files[key]()).default : null;
+const light = slot.tone === 'sand' || slot.tone === 'ivory';
+---
+<div class:list={['frame', `frame--${ratio}`, cls]} data-reveal={reveal ? 'img' : undefined}>
+  {image ? (
+    <Picture
+      src={image}
+      alt={slot.alt}
+      formats={['avif', 'webp']}
+      widths={[480, 800, 1200, 1600, 2000].filter((w) => w <= image.width)}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      decoding="async"
+    />
+  ) : (
+    <div class:list={['ph', `tone-${slot.tone}`, `weave-${slot.weave}`, { 'ph--light': light }]} role="img" aria-label={`Photograph coming soon: ${slot.alt}`} data-placeholder>
+      <p class="ph__tag">Photograph to come<span>{slot.brief}</span></p>
+    </div>
+  )}
+</div>

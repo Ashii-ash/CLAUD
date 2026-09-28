@@ -1,0 +1,12 @@
+---
+/* Typographic wordmark. Replace with the official Tex N Tailor logo file when supplied. */
+interface Props { size?: 'sm' | 'lg'; }
+const { size = 'sm' } = Astro.props;
+---
+<span class:list={['wordmark', `wordmark--${size}`]}>Tex<em>n</em>Tailor</span>
+<style>
+  .wordmark { font-family: var(--f-display); font-variation-settings: 'opsz' 40; font-size: 1.45rem; letter-spacing: 0.02em; line-height: 1; white-space: nowrap; }
+  .wordmark em { font-style: italic; font-size: 0.8em; margin: 0 0.14em 0 0.1em; color: var(--claret); }
+  :global(.dark) .wordmark em, :global(.on-dark) .wordmark em { color: #d9a9a0; }
+  .wordmark--lg { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+</style>

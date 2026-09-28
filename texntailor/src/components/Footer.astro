@@ -1,0 +1,82 @@
+---
+import Wordmark from './Wordmark.astro';
+import { nav, site, telLink, whatsappLink, mapsLink, addressLine } from '../data/site';
+import { services } from '../data/content';
+const year = new Date().getFullYear();
+---
+<footer class="ftr dark">
+  <div class="wrap">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <a href="/" aria-label="Tex N Tailor — home" class="ftr__logo"><Wordmark size="lg" /></a>
+        <p class="serif ftr__statement">Custom suits, wedding attire and everyday clothing, made to measure in Al&nbsp;Nahda, Dubai.</p>
+        <a class="btn" href="/contact/#enquire">Book an appointment</a>
+      </div>
+
+      <nav class="ftr__col" aria-label="Footer">
+        <p class="label muted">Explore</p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div class="ftr__col">
+        <p class="label muted">Tailoring</p>
+        <ul>{services.map((s) => <li><a href={`/tailoring/#${s.id}`}>{s.title}</a></li>)}</ul>
+      </div>
+
+      <div class="ftr__col" data-wa-zone>
+        <p class="label muted">Contact</p>
+        <ul>
+          <li><a href={telLink}>{site.contact.phoneDisplay}</a></li>
+          <li><a href={whatsappLink()} target="_blank" rel="noopener">WhatsApp</a></li>
+          {site.contact.email && <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>}
+          <li><a href={site.social.instagram.url} target="_blank" rel="noopener">Instagram {site.social.instagram.handle}</a></li>
+        </ul>
+      </div>
+
+      <div class="ftr__col">
+        <p class="label muted">Studio</p>
+        <address>
+          <a href={mapsLink} target="_blank" rel="noopener">{addressLine}<br />{site.address.country}</a>
+        </address>
+        {site.hours.length > 0 && (
+          <dl class="ftr__hours">
+            {site.hours.map((h) => (<><dt>{h.days}</dt><dd>{h.hours}</dd></>))}
+          </dl>
+        )}
+      </div>
+    </div>
+
+    <div class="ftr__base">
+      <p>© {year} {site.legalName ?? site.name}. All rights reserved.</p>
+      <ul>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/sitemap-index.xml">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<style>
+  .ftr { padding-block: clamp(4rem, 9vw, 7rem) 2rem; padding-bottom: max(2rem, calc(env(safe-area-inset-bottom) + 5rem)); }
+  .ftr__top { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: clamp(2rem, 4vw, 3.5rem); }
+  .ftr__brand { display: grid; gap: 1.5rem; align-content: start; justify-items: start; padding-right: 2rem; }
+  .ftr__logo { text-decoration: none; }
+  .ftr__statement { font-size: var(--step-1); line-height: 1.45; color: var(--on-dark-muted); max-width: 26ch; margin: 0; }
+  .ftr__col .label { margin-bottom: 1.1rem; }
+  .ftr__col ul { display: grid; gap: 0.55rem; }
+  .ftr__col a { text-decoration: none; color: var(--on-dark); display: inline-block; padding-block: 0.15rem; overflow-wrap: anywhere; }
+  .ftr__col a:hover { text-decoration: underline; }
+  .ftr__hours { display: grid; grid-template-columns: auto auto; gap: 0.25rem 1rem; margin-top: 1rem; color: var(--on-dark-muted); font-size: 0.92rem; }
+  .ftr__base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+    margin-top: clamp(3rem, 7vw, 5.5rem); padding-top: 1.5rem; border-top: 1px solid var(--line-dark);
+    font-size: 0.85rem; color: var(--on-dark-muted);
+  }
+  .ftr__base p { margin: 0; }
+  .ftr__base ul { display: flex; gap: 1.5rem; }
+  .ftr__base a { color: inherit; }
+  @media (max-width: 1100px) { .ftr__top { grid-template-columns: repeat(2, 1fr); } .ftr__brand { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .ftr__top { grid-template-columns: 1fr 1fr; gap: 2.5rem 1.5rem; } }
+</style>

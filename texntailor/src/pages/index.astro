@@ -1,0 +1,376 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Tape from '../components/Tape.astro';
+import Icon from '../components/Icon.astro';
+import Visit from '../components/Visit.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { services, processSteps, details, work, testimonials, heroSlot } from '../data/content';
+import { site, whatsappLink } from '../data/site';
+
+const [suits, wedding, everyday] = services;
+const featured = [work[0], work[1], work[2], work[3], work[4]];
+---
+<Base
+  title="Tex N Tailor | Bespoke Tailor in Al Nahda, Dubai — Custom Suits & Wedding Attire"
+  description="Tex N Tailor is a tailoring studio in Al Nahda 1, Dubai, making custom suits, wedding attire and everyday clothing to your measurements. Book an appointment or message us on WhatsApp."
+>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <p class="label hero__kicker" data-reveal>Bespoke tailoring&nbsp;&nbsp;·&nbsp;&nbsp;Al&nbsp;Nahda, Dubai</p>
+        <h1 id="hero-title" class="display h-xl hero__title" data-reveal data-reveal-delay="1">
+          Cut for you,<br /><em>and no one else.</em>
+        </h1>
+        <p class="lede hero__lede" data-reveal data-reveal-delay="2">
+          Custom suits, wedding attire and everyday clothing — measured, cut and made for you by the tailors at Tex&nbsp;N&nbsp;Tailor in Al&nbsp;Nahda&nbsp;1, Dubai.
+        </p>
+        <div class="btn-row" data-reveal data-reveal-delay="3">
+          <a class="btn" href="/contact/#enquire">Book an appointment</a>
+          <a class="btn btn--ghost" href={whatsappLink('Hello Tex N Tailor, I would like to enquire about tailoring.')} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+        </div>
+      </div>
+      <div class="hero__media">
+        <Photo slot={heroSlot} ratio="portrait" eager sizes="(min-width: 1024px) 40vw, 100vw" />
+      </div>
+    </div>
+    <div class="wrap">
+      <nav class="hero__index" aria-label="Tailoring">
+        {services.map((s) => (
+          <a href={`/tailoring/#${s.id}`}><span class="serif">{s.index}</span><span class="label">{s.title}</span></a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement section" aria-label="Our approach">
+    <div class="wrap statement__grid">
+      <p class="display statement__text" data-reveal>
+        A good tailor listens before reaching for the tape.{' '}
+        <span class="statement__muted">Every garment we make begins with you — how you stand, how you move, and where you are going to wear it. Then come the measurements, the cloth and the cut.</span>
+      </p>
+      <div class="statement__img">
+        <Photo slot={details[0].slot} ratio="tall" sizes="(min-width: 1024px) 22vw, 60vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE MAKE -->
+  <section class="make section linen" aria-labelledby="make-title">
+    <div class="wrap">
+      <Tape label="What we make" />
+      <h2 id="make-title" class="display h-lg make__title" data-reveal>For the meeting, the occasion,<br /><em>and every day in between.</em></h2>
+
+      <!-- I. Suits: large image left, text right, detail overlapping -->
+      <article class="svc svc--a" aria-labelledby="svc-suits">
+        <div class="svc__media">
+          <Photo slot={suits.hero} ratio="tall" sizes="(min-width: 1024px) 55vw, 100vw" />
+          <div class="svc__inset"><Photo slot={suits.detail} ratio="square" sizes="(min-width: 1024px) 18vw, 40vw" /></div>
+        </div>
+        <div class="svc__text" data-reveal>
+          <p class="svc__num serif" aria-hidden="true">{suits.index}</p>
+          <p class="label muted">{suits.occasion}</p>
+          <h3 id="svc-suits" class="display h-md">{suits.title}</h3>
+          <p class="lede">{suits.lede}</p>
+          <p>{suits.body[0]}</p>
+          <a class="link-arrow" href={`/tailoring/#${suits.id}`}>Custom suits</a>
+        </div>
+      </article>
+
+      <!-- II. Wedding: text left, image right, detail below text -->
+      <article class="svc svc--b" aria-labelledby="svc-wedding">
+        <div class="svc__text" data-reveal>
+          <p class="svc__num serif" aria-hidden="true">{wedding.index}</p>
+          <p class="label muted">{wedding.occasion}</p>
+          <h3 id="svc-wedding" class="display h-md">{wedding.title}</h3>
+          <p class="lede">{wedding.lede}</p>
+          <p>{wedding.body[1]}</p>
+          <a class="link-arrow" href={`/tailoring/#${wedding.id}`}>Wedding attire</a>
+          <div class="svc__detail"><Photo slot={wedding.detail} ratio="wide" sizes="(min-width: 1024px) 30vw, 100vw" /></div>
+        </div>
+        <div class="svc__media"><Photo slot={wedding.hero} ratio="portrait" sizes="(min-width: 1024px) 55vw, 100vw" /></div>
+      </article>
+
+      <!-- III. Everyday: wide image, text beneath in two columns -->
+      <article class="svc svc--c" aria-labelledby="svc-everyday">
+        <Photo slot={everyday.hero} ratio="pano" sizes="100vw" />
+        <div class="svc__cols" data-reveal>
+          <div>
+            <p class="svc__num serif" aria-hidden="true">{everyday.index}</p>
+            <p class="label muted">{everyday.occasion}</p>
+            <h3 id="svc-everyday" class="display h-md">{everyday.title}</h3>
+          </div>
+          <div>
+            <p class="lede">{everyday.lede}</p>
+            <p>{everyday.body[1]}</p>
+            <a class="link-arrow" href={`/tailoring/#${everyday.id}`}>Everyday tailoring</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="proc section dark" aria-labelledby="proc-title">
+    <div class="wrap">
+      <Tape label="How it works" />
+      <div class="proc__head">
+        <h2 id="proc-title" class="display h-lg" data-reveal>From first conversation<br /><em>to final fitting.</em></h2>
+        <a class="link-arrow" href="/process/" data-reveal>The full process</a>
+      </div>
+      <ol class="proc__track">
+        {processSteps.map((s, i) => (
+          <li class="proc__step" data-reveal data-reveal-delay={String(Math.min(i % 3, 3))}>
+            <span class="proc__n serif">{s.n}</span>
+            <h3 class="proc__t serif">{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="dets section" aria-labelledby="dets-title">
+    <div class="wrap dets__grid">
+      <div class="dets__stage" aria-hidden="true">
+        <div class="dets__sticky">
+          {details.map((d, i) => (
+            <div class:list={['dets__img', { 'is-active': i === 0 }]} data-detail-img={i}>
+              <Photo slot={d.slot} ratio="tall" reveal={false} sizes="(min-width: 1024px) 38vw, 1px" />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="dets__body">
+        <Tape label="The details" />
+        <h2 id="dets-title" class="display h-lg" data-reveal>Small decisions,<br /><em>seen every day.</em></h2>
+        <p class="lede dets__lede" data-reveal>Custom tailoring means choosing. These are some of the details you will decide on with us — with as much or as little guidance as you like.</p>
+        <dl class="dets__list">
+          {details.map((d, i) => (
+            <div class="dets__item" data-detail={i} data-reveal>
+              <dt class="serif">{d.term}</dt>
+              <dd class="muted">{d.text}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work section chalk" aria-labelledby="work-title">
+    <div class="wrap">
+      <Tape label="From the studio" />
+      <div class="work__head">
+        <h2 id="work-title" class="display h-lg" data-reveal>Our work</h2>
+        <a class="link-arrow" href="/work/" data-reveal>See the portfolio</a>
+      </div>
+      <div class="work__grid">
+        {featured.map((w, i) => (
+          <figure class={`work__item work__item--${i + 1}`}>
+            <Photo slot={w} ratio="fill" sizes="(min-width: 1024px) 33vw, 50vw" />
+            <figcaption class="label muted">{w.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {testimonials.length > 0 ? (
+    <section class="voices section" aria-labelledby="voices-title">
+      <div class="wrap">
+        <Tape label="Clients" />
+        <h2 id="voices-title" class="sr-only">What clients say</h2>
+        <ul class="voices__list">
+          {testimonials.map((t) => (
+            <li data-reveal>
+              <blockquote class="display h-sm">“{t.quote}”</blockquote>
+              <p class="label muted">{t.name} — {t.source}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ) : (
+    <section class="insta" aria-label="Instagram">
+      <div class="wrap insta__inner">
+        <p class="display h-sm" data-reveal>New work, cloth and fittings — follow the studio on Instagram.</p>
+        <a class="btn btn--ghost" href={site.social.instagram.url} target="_blank" rel="noopener" data-reveal><Icon name="instagram" />{site.social.instagram.handle}</a>
+      </div>
+    </section>
+  )}
+
+  <Visit />
+  <CtaBand />
+</Base>
+
+<style>
+  /* HERO */
+  .hero { padding-top: calc(var(--header-h) + clamp(1.5rem, 5vw, 4rem)); }
+  .hero__grid { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 5vw, 5rem); align-items: end; }
+  .hero__text { padding-bottom: clamp(0rem, 3vw, 3rem); }
+  .hero__kicker { margin-bottom: clamp(1.5rem, 4vw, 3rem); color: var(--muted); }
+  .hero__title { margin-bottom: clamp(1.5rem, 3vw, 2.5rem); font-size: clamp(2.9rem, 1.8rem + 4.6vw, 6rem); }
+  .hero__title em { color: var(--claret); }
+  .hero__lede { max-width: 34ch; margin-bottom: 2.25rem; }
+  .hero__media { max-height: calc(100svh - var(--header-h) - 7rem); }
+  .hero__media :global(.frame) { height: 100%; max-height: inherit; aspect-ratio: 3 / 4; margin-left: auto; }
+  .hero__index { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line-strong); }
+  .hero__index a {
+    display: flex; align-items: baseline; gap: 1rem; padding: 1.25rem 1rem 1.25rem 0; text-decoration: none;
+    border-right: 1px solid var(--line); transition: color 0.3s;
+  }
+  .hero__index a + a { padding-left: 1.25rem; }
+  .hero__index a:last-child { border-right: 0; }
+  .hero__index a .serif { font-size: 1.25rem; color: var(--claret); min-width: 1.6rem; }
+  .hero__index a:hover { color: var(--claret); }
+  @media (max-width: 560px) { .hero .btn-row .btn { flex: 1 1 100%; } }
+  @media (max-width: 900px) {
+    .hero__grid { grid-template-columns: 1fr; }
+    .hero__media { max-height: none; }
+    .hero__media :global(.frame) { aspect-ratio: 4 / 5; max-height: 78svh; width: 100%; }
+    .hero__index { grid-template-columns: 1fr; }
+    .hero__index a { border-right: 0; border-bottom: 1px solid var(--line); padding-left: 0 !important; min-height: 56px; align-items: center; }
+  }
+
+  /* STATEMENT */
+  .statement__grid { display: grid; grid-template-columns: 8fr 3fr; gap: clamp(2rem, 6vw, 7rem); align-items: end; }
+  .statement__text { font-size: var(--step-3); line-height: 1.2; margin: 0; max-width: 24ch; }
+  .statement__muted { color: var(--taupe); }
+  @media (max-width: 900px) {
+    .statement__grid { grid-template-columns: 1fr; }
+    .statement__img { width: 62%; margin-left: auto; }
+  }
+
+  /* WHAT WE MAKE */
+  .make__title { margin-bottom: clamp(3.5rem, 8vw, 7rem); }
+  .svc { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2.5rem); row-gap: 2rem; margin-bottom: clamp(5rem, 11vw, 10rem); }
+  .svc:last-child { margin-bottom: 0; }
+  .svc__num { font-size: 1.5rem; color: var(--claret); margin-bottom: 0.75rem; }
+  .svc__text h3 { margin: 0.5rem 0 1.25rem; }
+  .svc__text .lede { color: var(--ink); margin-bottom: 1rem; }
+  .svc__text > p:not(.lede):not(.label):not(.svc__num) { color: var(--muted); max-width: 46ch; margin-bottom: 1.75rem; }
+  .svc--a .svc__media { grid-column: 1 / 8; position: relative; }
+  .svc--a .svc__inset { position: absolute; width: 38%; right: -18%; bottom: -3rem; border: 8px solid var(--linen); }
+  .svc--a .svc__text { grid-column: 9 / 13; align-self: center; padding-top: 6rem; }
+  .svc--b .svc__text { grid-column: 1 / 6; align-self: start; padding-top: 2rem; }
+  .svc--b .svc__media { grid-column: 7 / 13; }
+  .svc__detail { margin-top: 3rem; width: 80%; }
+  .svc--c { row-gap: 2.5rem; }
+  .svc--c > :global(.frame) { grid-column: 1 / -1; }
+  .svc__cols { grid-column: 1 / -1; display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 5rem); }
+  .svc__cols h3 { margin-top: 0.5rem; }
+  .svc__cols .lede { color: var(--ink); }
+  .svc__cols p:not(.lede) { color: var(--muted); max-width: 52ch; }
+  @media (max-width: 900px) {
+    .svc > * { grid-column: 1 / -1 !important; }
+    .svc--a .svc__inset { width: 42%; right: 0.75rem; bottom: -2rem; border-width: 6px; }
+    .svc--a .svc__text { padding-top: 2rem; }
+    .svc--b .svc__media { order: -1; }
+    .svc--b .svc__text { padding-top: 0; }
+    .svc__detail { display: none; }
+    .svc--c > :global(.frame) { aspect-ratio: 4 / 3; }
+    .svc__cols { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  /* PROCESS */
+  .proc__head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(3rem, 7vw, 5.5rem); }
+  .proc__track {
+    display: grid; grid-template-columns: repeat(6, 1fr); counter-reset: s;
+    border-top: 1px solid var(--line-dark); position: relative;
+  }
+  .proc__track::before {
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; opacity: 0.35;
+    background: repeating-linear-gradient(90deg, var(--on-dark) 0 1px, transparent 1px 16px);
+  }
+  .proc__step { position: relative; padding: 2.25rem 1.5rem 0 0; }
+  .proc__step::before { content: ''; position: absolute; top: -1px; left: 0; width: 1px; height: 22px; background: var(--on-dark); }
+  .proc__n { display: block; font-size: 0.95rem; color: #d9a9a0; margin-bottom: 1.5rem; font-style: italic; }
+  .proc__t { font-size: clamp(1.3rem, 0.9rem + 0.9vw, 1.75rem); line-height: 1.12; margin-bottom: 0.9rem; hyphens: manual; }
+  .proc__step p { font-size: 0.95rem; line-height: 1.6; margin: 0; }
+  @media (max-width: 1100px) { .proc__track { grid-template-columns: repeat(3, 1fr); row-gap: 3rem; } }
+  @media (max-width: 640px) {
+    .proc__track { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--line-dark); row-gap: 0; }
+    .proc__track::before { left: 0; top: 0; bottom: 0; right: auto; width: 8px; height: auto; background: repeating-linear-gradient(0deg, var(--on-dark) 0 1px, transparent 1px 16px); }
+    .proc__step { padding: 0 0 2.25rem 1.75rem; display: grid; grid-template-columns: 3rem 1fr; column-gap: 0.5rem; }
+    .proc__step::before { top: 0.35rem; left: -1px; width: 18px; height: 1px; }
+    .proc__n { grid-row: span 2; margin: 0.3rem 0 0; }
+  }
+
+  /* DETAILS */
+  .dets__grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 7rem); }
+  .dets__sticky { position: sticky; top: calc(var(--header-h) + 2rem); display: grid; }
+  .dets__img { grid-area: 1 / 1; opacity: 0; transition: opacity 0.7s var(--ease); }
+  .dets__img.is-active { opacity: 1; }
+  .dets__lede { margin: 1.5rem 0 3rem; }
+  .dets__list { border-top: 1px solid var(--line-strong); }
+  .dets__item {
+    display: grid; grid-template-columns: 12rem 1fr; gap: 1.5rem; padding: 1.6rem 0; border-bottom: 1px solid var(--line);
+    cursor: default;
+  }
+  .dets__item dt { font-size: var(--step-2); line-height: 1.1; transition: color 0.3s, transform 0.5s var(--ease-out); }
+  .dets__item dd { margin: 0; max-width: 44ch; }
+  .dets__item.is-active dt { transform: translateX(0.75rem); }
+  .dets__item.is-active dt { color: var(--claret); font-style: italic; }
+  .dets__item:focus-visible { outline-offset: -2px; }
+  @media (max-width: 900px) {
+    .dets__grid { grid-template-columns: 1fr; }
+    .dets__stage { display: none; }
+    .dets__item { grid-template-columns: 1fr; gap: 0.4rem; }
+    .dets__item.is-active dt { color: inherit; font-style: normal; transform: none; }
+  }
+
+  /* WORK */
+  .work__head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .work__grid {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(0.75rem, 2vw, 1.75rem);
+    grid-template-rows: repeat(2, clamp(240px, 32vw, 460px));
+  }
+  .work__item { margin: 0; display: grid; grid-template-rows: 1fr auto; gap: 0.75rem; min-height: 0; }
+  .work__item figcaption { font-size: 0.7rem; }
+  .work__item--1 { grid-column: 1 / 6; grid-row: 1 / 3; }
+  .work__item--2 { grid-column: 6 / 9; grid-row: 1; }
+  .work__item--3 { grid-column: 9 / 13; grid-row: 1; }
+  .work__item--4 { grid-column: 6 / 10; grid-row: 2; }
+  .work__item--5 { grid-column: 10 / 13; grid-row: 2; }
+  @media (max-width: 900px) {
+    .work__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .work__item { grid-column: auto !important; grid-row: auto !important; }
+    .work__item :global(.frame) { aspect-ratio: 4 / 5; height: auto; }
+    .work__item--1 { grid-column: 1 / -1 !important; }
+    .work__item--1 :global(.frame) { aspect-ratio: 4 / 3; }
+  }
+
+  /* VOICES / INSTAGRAM */
+  .voices__list { display: grid; gap: 4rem; }
+  .voices blockquote { margin: 0 0 1rem; max-width: 30ch; }
+  .insta { border-block: 1px solid var(--line); padding-block: clamp(3rem, 6vw, 4.5rem); }
+  .insta__inner { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .insta p { margin: 0; max-width: 28ch; }
+</style>
+
+<script>
+  // Details: the stage image follows the item under the pointer / keyboard focus / scroll.
+  const items = document.querySelectorAll<HTMLElement>('[data-detail]');
+  const imgs = document.querySelectorAll<HTMLElement>('[data-detail-img]');
+  const activate = (i: string) => {
+    items.forEach((el) => el.classList.toggle('is-active', el.dataset.detail === i));
+    imgs.forEach((el) => el.classList.toggle('is-active', el.dataset.detailImg === i));
+  };
+  if (items.length) {
+    activate('0');
+    items.forEach((el) => {
+      el.addEventListener('pointerenter', () => activate(el.dataset.detail!));
+      el.addEventListener('focus', () => activate(el.dataset.detail!));
+    });
+    if ('IntersectionObserver' in window && matchMedia('(min-width: 901px)').matches) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) activate((e.target as HTMLElement).dataset.detail!); });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      items.forEach((el) => io.observe(el));
+    }
+  }
+</script>
